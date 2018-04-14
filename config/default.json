@@ -1,0 +1,7 @@
+{
+  "gameWidth": 900,
+  "gameHeight": 900,
+  "gameSpeed": 5,
+  "gridSpacing": 300,
+  "playerRadius": 20
+}
