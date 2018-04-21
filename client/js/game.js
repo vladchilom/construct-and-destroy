@@ -19,6 +19,7 @@ var players
 var trees = []
 var bushes = []
 var rocks = []
+var attackAngle
 var map
 var position
 var gameSpecs
@@ -91,6 +92,7 @@ function setupKeyListeners() {
   })
   window.addEventListener('resize', resize)
   window.addEventListener('click', attack)
+  window.addEventListener('mousemove', updateAttackAngle)
 }
 
 
@@ -280,7 +282,7 @@ function writeCoordinates() {
   context.fillRect(canvas.width - 250, 0, canvas.width, 30)
   context.fillStyle = "black"
 
-  context.fillText("x: " + position.currentx + ", y: " + position.currenty, canvas.width - 240, 15)
+  context.fillText("x: " + position.currentx + ", y: " + position.currenty + " angle: " + attackAngle, canvas.width - 240, 15)
   context.fill()
 }
 
@@ -414,19 +416,17 @@ function attack(event) {
   if (!socket) {
     return
   }
-  angle = getAttackAngle(event)
-  socket.emit('attack', { angle: angle })
+  socket.emit('attack', { angle: attackAngle })
 }
 
-function getAttackAngle(event) {
+function updateAttackAngle(event) {
   xdiff = (event.clientX - halfScreenWidth)
   ydiff = (halfScreenHeight - event.clientY)
   radians = Math.atan2(ydiff, xdiff)
   if (radians < 0) {
     radians += 2 * Math.PI
   }
-  degrees = radians * (180 / Math.PI)
-  return degrees
+  attackAngle = radians * (180 / Math.PI)
 }
 
 function gameSpecsLoaded() {
