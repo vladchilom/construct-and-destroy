@@ -6,6 +6,8 @@ class Position {
     this.currenty = window.innerHeight / 2
     this.newx = 0
     this.newy = 0
+    this.currentAttackAngle = 0
+    this.newAttackAngle = 0
   }
 
 }

@@ -51,6 +51,8 @@ class Position {
     this.currenty = window.innerHeight / 2
     this.newx = 0
     this.newy = 0
+    this.currentAttackAngle = 0
+    this.newAttackAngle = 0
   }
 
 }
@@ -75,13 +77,16 @@ $(() => {
 var socket
 var canvas
 var context
+
 var players
 var trees = []
 var bushes = []
 var rocks = []
-var attackAngle
-var map
+
+var weapon = 'melee'
 var position
+
+var map
 var gameSpecs
 var halfScreenWidth
 var halfScreenHeight
@@ -160,10 +165,14 @@ function processPlayerInput() {
   if (!gameSpecsLoaded()) {
     return
   }
-  var addObject = false
+  checkIfMoved()
+  checkIfAttackAngleChanged()
+  checkIfAttacked()
+}
+
+function checkIfMoved() {
   var xspeed = 0
   var yspeed = 0
-
   if (map.keys && (map.keys[37] || map.keys[65])) {
     xspeed = -1 * gameSpecs.gameSpeed
   }
@@ -176,23 +185,14 @@ function processPlayerInput() {
   if (map.keys && (map.keys[40] || map.keys[83])) {
     yspeed = 1 * gameSpecs.gameSpeed
   }
-
-  if (map.keys && map.keys[32]) {
-    socket.emit('Create Object', socket.id)
-  }
-
-  if (playerInputShouldBeSent(xspeed, yspeed)) {
+  if (playerPositionIsNew(xspeed, yspeed)) {
     x = players[socket.id].x + xspeed
     y = players[socket.id].y + yspeed
-    socket.emit('update position', { id: socket.id, x: x, y: y })
-
+    socket.emit('update position', socket.id, x, y)
   }
-  if (addObject) {
-  }
-
 }
 
-function playerInputShouldBeSent(xspeed, yspeed) {
+function playerPositionIsNew(xspeed, yspeed) {
   if (xspeed === 0 && yspeed === 0) {
     return false
   }
@@ -210,6 +210,19 @@ function playerInputShouldBeSent(xspeed, yspeed) {
   }
 }
 
+function checkIfAttackAngleChanged() {
+  if (position.currentAttackAngle != position.newAttackAngle) {
+    socket.emit('update attack angle', socket.id, position.newAttackAngle)
+  }
+
+}
+
+function checkIfAttacked() {
+  if (map.keys && map.keys[32]) {
+    socket.emit('Create Object', socket.id)
+  }
+}
+
 function updateMap() {
   requestAnimationFrame(updateMap)
   processPlayerInput()
@@ -223,7 +236,8 @@ function updateMap() {
       if (id == socket.id) {
         position.currentx = players[id].x
         position.currenty = players[id].y
-        drawPlayer()
+        position.currentAttackAngle = players[id].attackAngle
+        drawPlayer(players[id])
       } else {
         drawEnemy(players[id])
       }
@@ -235,7 +249,58 @@ function updateMap() {
   context.closePath()
 }
 
-function drawPlayer() {
+function writeCoordinates() {
+  context.beginPath()
+  context.fillStyle = "white"
+  context.fillRect(canvas.width - 250, 0, canvas.width, 30)
+  context.fillStyle = "black"
+
+  context.fillText("x: " + position.currentx + ", y: " + position.currenty + " angle: " + position.currentAttackAngle, canvas.width - 240, 15)
+  context.fill()
+}
+
+
+function resize() {
+  if (!socket) {
+    return
+  }
+  canvas.width = window.innerWidth
+  canvas.height = window.innerHeight
+  halfScreenWidth = window.innerWidth / 2
+  halfScreenHeight = window.innerHeight / 2
+}
+
+function attack(event) {
+  if (!socket) {
+    return
+  }
+  socket.emit('attack', { angle: position.currentAttackAngle })
+}
+
+function updateAttackAngle(event) {
+  xdiff = (event.clientX - halfScreenWidth)
+  ydiff = (halfScreenHeight - event.clientY)
+  newAttackAngle = Math.atan2(ydiff, xdiff)
+  if (newAttackAngle < 0) {
+    newAttackAngle += 2 * Math.PI
+  }
+  if (position.currentAttackAngle != newAttackAngle) {
+    position.newAttackAngle = newAttackAngle
+  }
+}
+
+function gameSpecsLoaded() {
+  if (gameSpecs) {
+    return true
+  }
+  return false
+}
+
+
+
+// Draw Functions
+
+function drawPlayer(player) {
   if (!gameSpecsLoaded()) {
     return
   }
@@ -249,6 +314,7 @@ function drawPlayer() {
   context.stroke()
   context.fill()
   context.lineWidth = 1
+  drawWeapon(player, x, y)
 }
 
 function drawEnemy(player) {
@@ -256,12 +322,39 @@ function drawEnemy(player) {
   ydiff = players[socket.id].y - player.y
   x = halfScreenWidth - xdiff
   y = halfScreenHeight - ydiff
+  context.lineWidth = 5
   context.fillStyle = 'black'
   context.beginPath()
-  context.arc(x, y, 20, 0, 2 * Math.PI)
+  context.arc(x, y, gameSpecs.playerRadius, 0, 2 * Math.PI)
   context.closePath()
   context.stroke()
   context.fill()
+  context.lineWidth = 1
+  drawWeapon(player, x, y)
+}
+
+function drawWeapon(player, x, y) {
+  radius = gameSpecs.playerRadius + 5
+  leftx = x + radius * Math.cos(player.attackAngle + 0.6)
+  lefty = y - radius * Math.sin(player.attackAngle + 0.6)
+  rightx = x + radius * Math.cos(player.attackAngle - 0.6)
+  righty = y - radius * Math.sin(player.attackAngle - 0.6)
+  context.lineWidth = 5
+  context.fillStyle = 'red'
+
+  context.beginPath()
+  context.arc(leftx, lefty, 6, 0, 2 * Math.PI)
+  context.closePath()
+  context.stroke()
+  context.fill()
+
+  context.beginPath()
+  context.arc(rightx, righty, 6, 0, 2 * Math.PI)
+  context.closePath()
+  context.stroke()
+  context.fill()
+
+  context.lineWidth = 1
 }
 
 function drawRock(rock) {
@@ -335,17 +428,6 @@ function drawBackground() {
   context.fillRect(0,0,canvas.width,canvas.height)
   context.fill()
 }
-
-function writeCoordinates() {
-  context.beginPath()
-  context.fillStyle = "white"
-  context.fillRect(canvas.width - 250, 0, canvas.width, 30)
-  context.fillStyle = "black"
-
-  context.fillText("x: " + position.currentx + ", y: " + position.currenty + " angle: " + attackAngle, canvas.width - 240, 15)
-  context.fill()
-}
-
 
 function drawCoordinateGrid() {
   if (!gameSpecsLoaded()) {
@@ -459,41 +541,6 @@ function drawCoordinateGrid() {
   context.stroke()
   context.lineWidth = 1
   context.globalAlpha = 1
-}
-
-function resize() {
-  if (!socket) {
-    return
-  }
-  canvas.width = window.innerWidth
-  canvas.height = window.innerHeight
-  halfScreenWidth = window.innerWidth / 2
-  halfScreenHeight = window.innerHeight / 2
-  socket.emit('window resized', { width: window.innerWidth, height: window.innerHeight });
-}
-
-function attack(event) {
-  if (!socket) {
-    return
-  }
-  socket.emit('attack', { angle: attackAngle })
-}
-
-function updateAttackAngle(event) {
-  xdiff = (event.clientX - halfScreenWidth)
-  ydiff = (halfScreenHeight - event.clientY)
-  radians = Math.atan2(ydiff, xdiff)
-  if (radians < 0) {
-    radians += 2 * Math.PI
-  }
-  attackAngle = radians * (180 / Math.PI)
-}
-
-function gameSpecsLoaded() {
-  if (gameSpecs) {
-    return true
-  }
-  return false
 }
 
 },{"./Map":1,"./Player":2,"./Position":3}]},{},[4]);

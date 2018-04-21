@@ -145,20 +145,33 @@ app.get('/', function(req, res) {
 io.on('connection', function(socket) {
   console.log(socket.id + ' connected')
 
-  players[socket.id] = { id: socket.id, x: 450, y: 450 }
+  players[socket.id] = {
+    id: socket.id,
+    x: 450,
+    y: 450,
+    attackAngle: 0,
+    equippedWeapon: 'melee'
+  }
 
-  socket.on('update position', function(position) {
-    if (!isLegalMovement(position)) {
+  socket.on('update position', function(id, x, y) {
+    if (!isLegalMovement(id, x, y)) {
       return
     }
-    if (!isWithinArenaBounds(position)) {
+    if (!isWithinArenaBounds(id, x, y)) {
       return
     }
-    players[position.id] = position
+    players[id].x = x
+    players[id].y = y
   })
+
+  socket.on('update attack angle', function(id, attackAngle) {
+    if (id && attackAngle) {
+      players[id].attackAngle = attackAngle
+    }
+  })
+
   socket.on('Create Object', function() {
     var randomVar = util.randomInRange(1, 4)
-    console.log(randomVar)
     for (var i = 0; i < trees.length; i++) {
       if ((trees[i].x <= players[socket.id].x + 100 && trees[i].x >= players[socket.id].x - 100) && (trees[i].y <= players[socket.id].y + 100 && trees[i].y >= players[socket.id].y - 100)) {
         return
@@ -186,11 +199,11 @@ io.on('connection', function(socket) {
   })
 
   socket.on('window resized', function(data) {
-    //console.log(data)
+    
   })
 
   socket.on('attack', function(data) {
-    console.log(data)
+    
   })
 
   socket.on('disconnect', function() {
@@ -212,28 +225,28 @@ var setupGame = function(socket) {
   socket.emit('setup game', specs)
 }
 
-var isLegalMovement = function(position) {
-  if (Math.abs(players[position.id].x - position.x) > config.get('gameSpeed')) {
+var isLegalMovement = function(id, x, y) {
+  if (Math.abs(players[id].x - x) > config.get('gameSpeed')) {
     return false
   }
-  if (Math.abs(players[position.id].y - position.y) > config.get('gameSpeed')) {
+  if (Math.abs(players[id].y - y) > config.get('gameSpeed')) {
     return false
   }
   return true
 }
-var isWithinArenaBounds = function(position) {
-  var oldPos = {x: position.x, y: position.y} 
-  if ((position.x - config.get('playerRadius')) <= 0) {
-    position.x = config.get('playerRadius')
+var isWithinArenaBounds = function(id, x, y) {
+  var oldPos = {x: x, y: y} 
+  if ((x - config.get('playerRadius')) <= 0) {
+    x = config.get('playerRadius')
   }
-  if ((position.x + config.get('playerRadius')) >= (0 + config.get('gameWidth'))) {
-    position.x = config.get('gameWidth') - config.get('playerRadius')
+  if ((x + config.get('playerRadius')) >= (0 + config.get('gameWidth'))) {
+    x = config.get('gameWidth') - config.get('playerRadius')
   }
-  if ((position.y - config.get('playerRadius')) <= 0) {
-    position.y = config.get('playerRadius')
+  if ((y - config.get('playerRadius')) <= 0) {
+    y = config.get('playerRadius')
   }
-  if ((position.y + config.get('playerRadius')) >= (0 + config.get('gameHeight'))) {
-    position.y = config.get('gameHeight') - config.get('playerRadius')
+  if ((y + config.get('playerRadius')) >= (0 + config.get('gameHeight'))) {
+    y = config.get('gameHeight') - config.get('playerRadius')
   }
   return true
 }
