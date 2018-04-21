@@ -150,7 +150,10 @@ io.on('connection', function(socket) {
     x: 450,
     y: 450,
     attackAngle: 0,
-    equippedWeapon: 'melee'
+    equippedWeapon: 'melee',
+    lastAttack: new Date(1),
+    lastAttackWeapon: '',
+    lastAttackDuration: 0
   }
 
   socket.on('update position', function(id, x, y) {
@@ -199,8 +202,10 @@ io.on('connection', function(socket) {
     
   })
 
-  socket.on('attack', function(data) {
-    
+  socket.on('attack', function(id) {
+    if (players[id].equippedWeapon == 'melee') {
+      processMeleeAttack(id)
+    }
   })
 
   socket.on('disconnect', function() {
@@ -210,6 +215,17 @@ io.on('connection', function(socket) {
 
   setupGame(socket)
 })
+
+var processMeleeAttack = function(id) {
+  var now = new Date()
+  if (now <= (players[id].lastAttack + players[id].lastAttackDuration)) {
+    return
+  }
+  players[id].lastAttack = now
+  players[id].lastAttackWeapon = 'melee'
+  players[id].lastAttackDuration = config.get('attackAnimationDuration.melee')
+  console.log(players)
+}
 
 var setupGame = function(socket) {
   var specs = {
@@ -257,7 +273,6 @@ var sendGameUpdates = function() {
 }
 
 var sendMapInfo = function() {
-  // all trees will be rendered by the client.
   io.emit('trees', trees)
   io.emit('bushes', bushes)
   io.emit('rocks', rocks)

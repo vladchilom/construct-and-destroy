@@ -56,7 +56,19 @@ function setupClientServerCommunication() {
   socket.on('players', function(data) {
     for (id in data) {
       if (id !== 'undefined') {
-        players[id] = data[id]
+        if (players[id]) {
+          currentAttackState = players[id].inAttackState
+          currentRandomVariable = players[id].attackStateRandomVariable
+          players[id] = data[id]
+          if (currentAttackState) {
+            players[id].inAttackState = currentAttackState
+            players[id].attackStateRandomVariable = currentRandomVariable
+          } else {
+            players[id].attackStateRandomVariable = 0
+          }
+        } else {
+          players[id] = data[id]
+        }
       }
     }
   })
@@ -212,7 +224,7 @@ function attack(event) {
   if (!socket) {
     return
   }
-  socket.emit('attack', { angle: position.currentAttackAngle })
+  socket.emit('attack', socket.id)
 }
 
 function updateAttackAngle(event) {
@@ -234,6 +246,9 @@ function gameSpecsLoaded() {
   return false
 }
 
+function getRandomInt(max) {
+  return Math.floor(Math.random() * Math.floor(max)) + 1
+}
 
 
 // Draw Functions
@@ -252,7 +267,11 @@ function drawPlayer(player) {
   context.stroke()
   context.fill()
   context.lineWidth = 1
-  drawWeapon(player, x, y)
+  if (isInAttackState(player)) {
+    animateAttack(player, x, y)
+  } else {
+    drawWeapon(player, x, y)
+  }
 }
 
 function drawEnemy(player) {
@@ -268,15 +287,89 @@ function drawEnemy(player) {
   context.stroke()
   context.fill()
   context.lineWidth = 1
-  drawWeapon(player, x, y)
+  if (isInAttackState(player)) {
+    animateAttack(player, x, y)
+  } else {
+    drawWeapon(player, x, y)
+  }
+}
+
+function isInAttackState(player) {
+  var now = new Date()
+  var attackTime = new Date(player.lastAttack)
+  var animationWindow = new Date(attackTime.getTime() + player.lastAttackDuration)
+  if (now <= animationWindow) {
+    player.inAttackState = true
+    if (!player.attackStateRandomVariable) {
+      player.attackStateRandomVariable = getRandomInt(2)
+    }
+    return true
+  } else {
+    player.inAttackState = false
+    return false
+  }
 }
 
 function drawWeapon(player, x, y) {
+  if (player.equippedWeapon == 'melee') {
+    drawMeleeWeapon(player, x, y)
+  }
+}
+
+function drawMeleeWeapon(player, x, y) {
   radius = gameSpecs.playerRadius + 5
   leftx = x + radius * Math.cos(player.attackAngle + 0.6)
   lefty = y - radius * Math.sin(player.attackAngle + 0.6)
   rightx = x + radius * Math.cos(player.attackAngle - 0.6)
   righty = y - radius * Math.sin(player.attackAngle - 0.6)
+  context.lineWidth = 5
+  context.fillStyle = 'red'
+
+  context.beginPath()
+  context.arc(leftx, lefty, 6, 0, 2 * Math.PI)
+  context.closePath()
+  context.stroke()
+  context.fill()
+
+  context.beginPath()
+  context.arc(rightx, righty, 6, 0, 2 * Math.PI)
+  context.closePath()
+  context.stroke()
+  context.fill()
+
+  context.lineWidth = 1
+}
+
+function animateAttack(player, x, y) {
+  if (player.lastAttackWeapon == 'melee') {
+    animateMeleeAttack(player, x, y)
+  }
+}
+
+function animateMeleeAttack(player, x, y) {
+  var now = new Date()
+  var attackTime = new Date(player.lastAttack)
+  var frame = (now - attackTime) / 10
+  if (frame > 17) {
+    frame = 30 - frame
+  }
+  radius = gameSpecs.playerRadius + 5
+  largeRadius = gameSpecs.playerRadius + 5 + frame
+  angleDifference = frame * 0.035
+
+  if (player.attackStateRandomVariable == 1) {
+    leftx = x + largeRadius * Math.cos(player.attackAngle + 0.6 - angleDifference)
+    lefty = y - largeRadius * Math.sin(player.attackAngle + 0.6 - angleDifference)
+    rightx = x + radius * Math.cos(player.attackAngle - 0.6)
+    righty = y - radius * Math.sin(player.attackAngle - 0.6)
+  }
+  else {
+    leftx = x + radius * Math.cos(player.attackAngle + 0.6)
+    lefty = y - radius * Math.sin(player.attackAngle + 0.6)
+    rightx = x + largeRadius * Math.cos(player.attackAngle - 0.6 + angleDifference)
+    righty = y - largeRadius * Math.sin(player.attackAngle - 0.6 + angleDifference)
+  }
+
   context.lineWidth = 5
   context.fillStyle = 'red'
 

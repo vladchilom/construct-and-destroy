@@ -1,7 +1,10 @@
 {
   "gameWidth": 4500,
   "gameHeight": 4500,
-  "gameSpeed": 10,
+  "gameSpeed": 5,
   "gridSpacing": 200,
-  "playerRadius": 20
+  "playerRadius": 20,
+  "attackAnimationDuration": {
+    "melee": 300
+  }
 }
