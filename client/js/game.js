@@ -90,6 +90,7 @@ function setupKeyListeners() {
     map.keys[e.keyCode] = (e.type == 'keydown')  
   })
   window.addEventListener('resize', resize)
+  window.addEventListener('click', attack)
 }
 
 
@@ -101,30 +102,20 @@ function processPlayerInput() {
   var xspeed = 0
   var yspeed = 0
 
-  if (map.keys && map.keys[37]) {
+  if (map.keys && (map.keys[37] || map.keys[65])) {
     xspeed = -1 * gameSpecs.gameSpeed
-    console.log("yea it did emit one")
-
   }
-  if (map.keys && map.keys[39]) {
+  if (map.keys && (map.keys[39] || map.keys[68])) {
     xspeed = 1 * gameSpecs.gameSpeed
-    console.log("yea it did emit one")
-
   }
-  if (map.keys && map.keys[38]) {
+  if (map.keys && (map.keys[38] || map.keys[87])) {
     yspeed = -1 * gameSpecs.gameSpeed
-    console.log("yea it did emit one")
-
   }
-  if (map.keys && map.keys[40]) {
+  if (map.keys && (map.keys[40] || map.keys[83])) {
     yspeed = 1 * gameSpecs.gameSpeed
-        console.log("yea it did emit one")
-
   }
 
   if (map.keys && map.keys[32]) {
-    console.log("yea it did emit one")
-
     socket.emit('Create Object', socket.id)
   }
 
@@ -235,7 +226,6 @@ function drawBush(bush) {
   drawStar(newX, newY, bush.oRadius/2, bush.iRadius/2, bush.sides, "lightgreen", "lightgreen")
 
 }
-
 
 function drawStar(cx, cy, oRadius, iRadius, sides, strokeStyle, fillStyle) {
   var rot=Math.PI/2*3;
@@ -418,6 +408,25 @@ function resize() {
   halfScreenWidth = window.innerWidth / 2
   halfScreenHeight = window.innerHeight / 2
   socket.emit('window resized', { width: window.innerWidth, height: window.innerHeight });
+}
+
+function attack(event) {
+  if (!socket) {
+    return
+  }
+  angle = getAttackAngle(event)
+  socket.emit('attack', { angle: angle })
+}
+
+function getAttackAngle(event) {
+  xdiff = (event.clientX - halfScreenWidth)
+  ydiff = (halfScreenHeight - event.clientY)
+  radians = Math.atan2(ydiff, xdiff)
+  if (radians < 0) {
+    radians += 2 * Math.PI
+  }
+  degrees = radians * (180 / Math.PI)
+  return degrees
 }
 
 function gameSpecsLoaded() {

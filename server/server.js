@@ -182,12 +182,15 @@ io.on('connection', function(socket) {
     }
     else if (randomVar == 3) {
       addBush({x: players[socket.id].x, y: players[socket.id].y})
-
     }
   })
 
   socket.on('window resized', function(data) {
     //console.log(data)
+  })
+
+  socket.on('attack', function(data) {
+    console.log(data)
   })
 
   socket.on('disconnect', function() {
