@@ -92,29 +92,51 @@ function setupKeyListeners() {
   window.addEventListener('resize', resize)
 }
 
+
 function processPlayerInput() {
   if (!gameSpecsLoaded()) {
     return
   }
+  var addObject = false
   var xspeed = 0
   var yspeed = 0
+
   if (map.keys && map.keys[37]) {
     xspeed = -1 * gameSpecs.gameSpeed
+    console.log("yea it did emit one")
+
   }
   if (map.keys && map.keys[39]) {
     xspeed = 1 * gameSpecs.gameSpeed
+    console.log("yea it did emit one")
+
   }
   if (map.keys && map.keys[38]) {
     yspeed = -1 * gameSpecs.gameSpeed
+    console.log("yea it did emit one")
+
   }
   if (map.keys && map.keys[40]) {
     yspeed = 1 * gameSpecs.gameSpeed
+        console.log("yea it did emit one")
+
   }
+
+  if (map.keys && map.keys[32]) {
+    console.log("yea it did emit one")
+
+    socket.emit('Create Object', socket.id)
+  }
+
   if (playerInputShouldBeSent(xspeed, yspeed)) {
     x = players[socket.id].x + xspeed
     y = players[socket.id].y + yspeed
     socket.emit('update position', { id: socket.id, x: x, y: y })
+
   }
+  if (addObject) {
+  }
+
 }
 
 function playerInputShouldBeSent(xspeed, yspeed) {
@@ -141,7 +163,7 @@ function updateMap() {
   map.clear()
   drawBackground()
   drawCoordinateGrid()
-
+  writeCoordinates()
   context.beginPath()
   for (id in players) {
     if (id !== 'undefined') {
@@ -194,7 +216,7 @@ function drawRock(rock) {
   ydiff = players[socket.id].y - rock.y
   newX = halfScreenWidth - xdiff
   newY = halfScreenHeight - ydiff
-  context.fillStyle = "gray"
+  context.fillStyle = "lightgray"
   context.strokeStyle = "black"
   context.beginPath();
   context.arc(newX, newY, 50, 0 , 2*Math.PI)
@@ -261,6 +283,17 @@ function drawBackground() {
   context.fillRect(0,0,canvas.width,canvas.height)
   context.fill()
 }
+
+function writeCoordinates() {
+  context.beginPath()
+  context.fillStyle = "white"
+  context.fillRect(canvas.width - 250, 0, canvas.width, 30)
+  context.fillStyle = "black"
+
+  context.fillText("x: " + position.currentx + ", y: " + position.currenty, canvas.width - 240, 15)
+  context.fill()
+}
+
 
 function drawCoordinateGrid() {
   if (!gameSpecsLoaded()) {

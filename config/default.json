@@ -1,7 +1,7 @@
 {
-  "gameWidth": 900,
-  "gameHeight": 900,
-  "gameSpeed": 5,
-  "gridSpacing": 300,
+  "gameWidth": 4500,
+  "gameHeight": 4500,
+  "gameSpeed": 15,
+  "gridSpacing": 50,
   "playerRadius": 20
 }
