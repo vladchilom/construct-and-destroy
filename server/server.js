@@ -157,11 +157,8 @@ io.on('connection', function(socket) {
     if (!isLegalMovement(id, x, y)) {
       return
     }
-    if (!isWithinArenaBounds(id, x, y)) {
-      return
-    }
-    players[id].x = x
-    players[id].y = y
+    players[id].x = isWithinArenaBoundsX(id, x)
+    players[id].y = isWithinArenaBoundsY(id, y)
   })
 
   socket.on('update attack angle', function(id, attackAngle) {
@@ -234,21 +231,25 @@ var isLegalMovement = function(id, x, y) {
   }
   return true
 }
-var isWithinArenaBounds = function(id, x, y) {
-  var oldPos = {x: x, y: y} 
+
+var isWithinArenaBoundsX = function(id, x) {
   if ((x - config.get('playerRadius')) <= 0) {
-    x = config.get('playerRadius')
+    return config.get('playerRadius')
   }
   if ((x + config.get('playerRadius')) >= (0 + config.get('gameWidth'))) {
-    x = config.get('gameWidth') - config.get('playerRadius')
+    return (config.get('gameWidth') - config.get('playerRadius'))
   }
+  return x
+}
+
+var isWithinArenaBoundsY = function(id, y) {
   if ((y - config.get('playerRadius')) <= 0) {
-    y = config.get('playerRadius')
+    return config.get('playerRadius')
   }
   if ((y + config.get('playerRadius')) >= (0 + config.get('gameHeight'))) {
-    y = config.get('gameHeight') - config.get('playerRadius')
+    return (config.get('gameHeight') - config.get('playerRadius'))
   }
-  return true
+  return y
 }
 
 var sendGameUpdates = function() {
