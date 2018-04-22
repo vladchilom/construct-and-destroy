@@ -73,16 +73,21 @@ function setupClientServerCommunication() {
     }
   })
 
-  socket.on('trees', function(data) {
-    trees = data
-  })
-
-  socket.on('bushes', function(data) {
-    bushes = data
-  })
-
-  socket.on('rocks', function(data) {
-    rocks = data
+  socket.on('map objects', function(data) {
+    trees = []
+    bushes = []
+    rocks = []
+    for (var i = 0; i < data.length; i++) {
+      if (data[i].type == 'tree') {
+        trees.push(data[i])
+      }
+      else if (data[i].type == 'bush') {
+        bushes.push(data[i])
+      }
+      else if (data[i].type == 'rock') {
+        rocks.push(data[i])
+      }
+    }
   })
 
   socket.on('player disconnected', function(data) {
@@ -224,7 +229,9 @@ function attack(event) {
   if (!socket) {
     return
   }
-  socket.emit('attack', socket.id)
+  if (!players[socket.id].inAttackState) {
+    socket.emit('attack', socket.id)
+  }
 }
 
 function updateAttackAngle(event) {
@@ -396,7 +403,7 @@ function drawRock(rock) {
   context.fillStyle = "lightgray"
   context.strokeStyle = "black"
   context.beginPath();
-  context.arc(newX, newY, 50, 0 , 2*Math.PI)
+  context.arc(newX, newY, rock.radius, 0 , 2*Math.PI)
   context.closePath()
   context.stroke();
   context.fill();
