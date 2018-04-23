@@ -1,7 +1,7 @@
 {
   "gameWidth": 4500,
   "gameHeight": 4500,
-  "gameSpeed": 4,
+  "gameSpeed": 8,
   "gridSpacing": 200,
   "playerRadius": 20,
   "attackAnimationDuration": {

@@ -1,0 +1,970 @@
+{
+    "mapObjects": [
+        {
+            "id": "c769bab8-5c3b-4ca5-93be-34a2625eff34",
+            "type": "tree",
+            "x": 250,
+            "y": 400,
+            "oRadius": 72,
+            "iRadius": 82,
+            "sides": 13,
+            "boundary": 48.33333333333333
+        },
+        {
+            "id": "46a21499-8b33-43e7-ba4b-0cf48b9988ac",
+            "type": "tree",
+            "x": 500,
+            "y": 600,
+            "oRadius": 88,
+            "iRadius": 98,
+            "sides": 13,
+            "boundary": 53.666666666666664
+        },
+        {
+            "id": "daf40a62-2b6d-4cb9-998e-a34618a939c1",
+            "type": "tree",
+            "x": 100,
+            "y": 200,
+            "oRadius": 76,
+            "iRadius": 86,
+            "sides": 10,
+            "boundary": 49.66666666666667
+        },
+        {
+            "id": "0000e659-7f3d-4f35-a6a4-a3f267732019",
+            "type": "tree",
+            "x": 400,
+            "y": 180,
+            "oRadius": 70,
+            "iRadius": 80,
+            "sides": 10,
+            "boundary": 47.66666666666667
+        },
+        {
+            "id": "e0f56cc1-9e38-4673-b4fc-b806e3197d71",
+            "type": "tree",
+            "x": 600,
+            "y": 900,
+            "oRadius": 84,
+            "iRadius": 94,
+            "sides": 10,
+            "boundary": 52.33333333333333
+        },
+        {
+            "id": "75edd285-bfb6-454c-bdb4-cff6dbba4259",
+            "type": "tree",
+            "x": 1300,
+            "y": 300,
+            "oRadius": 95,
+            "iRadius": 105,
+            "sides": 13,
+            "boundary": 56
+        },
+        {
+            "id": "53a388c3-9541-41db-86fe-a86e1f33d660",
+            "type": "tree",
+            "x": 950,
+            "y": 320,
+            "oRadius": 85,
+            "iRadius": 95,
+            "sides": 11,
+            "boundary": 52.66666666666667
+        },
+        {
+            "id": "644b6920-8642-4a51-b6a4-1aedf2eb2491",
+            "type": "tree",
+            "x": 1400,
+            "y": 3600,
+            "oRadius": 80,
+            "iRadius": 90,
+            "sides": 13,
+            "boundary": 51
+        },
+        {
+            "id": "4484a167-6469-4278-bff9-dd6efd333068",
+            "type": "tree",
+            "x": 1650,
+            "y": 1000,
+            "oRadius": 86,
+            "iRadius": 96,
+            "sides": 11,
+            "boundary": 53
+        },
+        {
+            "id": "f6b72673-7b8e-443b-b916-525357e5a501",
+            "type": "tree",
+            "x": 3500,
+            "y": 2500,
+            "oRadius": 96,
+            "iRadius": 106,
+            "sides": 12,
+            "boundary": 56.333333333333336
+        },
+        {
+            "id": "f69bc35b-f210-4f0f-b041-f063f2530110",
+            "type": "bush",
+            "x": 350,
+            "y": 1500,
+            "oRadius": 40,
+            "iRadius": 42,
+            "sides": 19,
+            "boundary": 64
+        },
+        {
+            "id": "122c863e-d4b4-463f-a88d-87e886fa74a9",
+            "type": "bush",
+            "x": 350,
+            "y": 4000,
+            "oRadius": 40,
+            "iRadius": 42,
+            "sides": 16,
+            "boundary": 64
+        },
+        {
+            "id": "fd1da172-ee65-4d13-84ad-c62677717ca3",
+            "type": "bush",
+            "x": 600,
+            "y": 3500,
+            "oRadius": 40,
+            "iRadius": 42,
+            "sides": 16,
+            "boundary": 64
+        },
+        {
+            "id": "0976822c-9d36-4dc6-9375-2f86f2c3f601",
+            "type": "bush",
+            "x": 4000,
+            "y": 1500,
+            "oRadius": 40,
+            "iRadius": 42,
+            "sides": 18,
+            "boundary": 64
+        },
+        {
+            "id": "5ae26678-5efc-4f64-8382-4fb71a6ceb77",
+            "type": "bush",
+            "x": 3000,
+            "y": 1000,
+            "oRadius": 40,
+            "iRadius": 42,
+            "sides": 18,
+            "boundary": 64
+        },
+        {
+            "id": "79229a97-efe3-4384-9301-5766dd392c38",
+            "type": "bush",
+            "x": 4000,
+            "y": 700,
+            "oRadius": 40,
+            "iRadius": 42,
+            "sides": 18,
+            "boundary": 64
+        },
+        {
+            "id": "5d84dbd0-1da0-4285-984d-72ac436a88ae",
+            "type": "bush",
+            "x": 1500,
+            "y": 2250,
+            "oRadius": 40,
+            "iRadius": 42,
+            "sides": 18,
+            "boundary": 64
+        },
+        {
+            "id": "e51752d9-a833-4fc9-b1c9-8b0e89376b81",
+            "type": "bush",
+            "x": 3500,
+            "y": 730,
+            "oRadius": 40,
+            "iRadius": 42,
+            "sides": 17,
+            "boundary": 64
+        },
+        {
+            "id": "e5b62c06-7810-430d-8f10-da4c5e2aeb75",
+            "type": "bush",
+            "x": 530,
+            "y": 3600,
+            "oRadius": 40,
+            "iRadius": 42,
+            "sides": 16,
+            "boundary": 64
+        },
+        {
+            "id": "fdce106f-2bee-4a45-9335-379226d64ad1",
+            "type": "rock",
+            "x": 700,
+            "y": 400,
+            "radius": 137,
+            "boundary": 159
+        },
+        {
+            "id": "f5400fa4-7c59-49cd-9837-73e3b1b57ee5",
+            "type": "rock",
+            "x": 2500,
+            "y": 455,
+            "radius": 139,
+            "boundary": 161
+        },
+        {
+            "id": "9a77d99c-1f42-47ae-9342-91dd0010b1d4",
+            "type": "rock",
+            "x": 1500,
+            "y": 360,
+            "radius": 133,
+            "boundary": 155
+        },
+        {
+            "id": "ebdd3d00-f09d-4f65-8b0c-20d0e9725670",
+            "type": "rock",
+            "x": 600,
+            "y": 1650,
+            "radius": 149,
+            "boundary": 171
+        },
+        {
+            "id": "081899bb-46b9-476b-a37e-ed6cdf50d0db",
+            "type": "rock",
+            "x": 600,
+            "y": 3200,
+            "radius": 146,
+            "boundary": 168
+        },
+        {
+            "id": "bfaf9a66-f1b9-41f1-876d-84f5d5f6118e",
+            "type": "rock",
+            "x": 2500,
+            "y": 1600,
+            "radius": 149,
+            "boundary": 171
+        },
+        {
+            "id": "647aa0d7-c6bf-4d4c-a186-6da0f34ea6ec",
+            "type": "rock",
+            "x": 2000,
+            "y": 2000,
+            "radius": 129,
+            "boundary": 151
+        },
+        {
+            "id": "63e63512-7883-430d-8538-5e0c3a92cd28",
+            "type": "bush",
+            "x": 990,
+            "y": 735,
+            "oRadius": 40,
+            "iRadius": 42,
+            "sides": 16,
+            "boundary": 64
+        },
+        {
+            "id": "31a467c4-5149-47e3-90a5-3eab5c1d796b",
+            "type": "tree",
+            "x": 1230,
+            "y": 990,
+            "oRadius": 83,
+            "iRadius": 93,
+            "sides": 11,
+            "boundary": 52
+        },
+        {
+            "id": "0087cebf-49f1-4833-8699-ef7d7cf6401f",
+            "type": "tree",
+            "x": 1005,
+            "y": 1425,
+            "oRadius": 79,
+            "iRadius": 89,
+            "sides": 12,
+            "boundary": 50.66666666666667
+        },
+        {
+            "id": "10de6a82-93bc-49ea-a997-5ea22ab61e33",
+            "type": "rock",
+            "x": 1380,
+            "y": 1440,
+            "radius": 149,
+            "boundary": 171
+        },
+        {
+            "id": "50288cf2-3c79-48f2-aa38-7da0f313446d",
+            "type": "tree",
+            "x": 1980,
+            "y": 945,
+            "oRadius": 85,
+            "iRadius": 95,
+            "sides": 13,
+            "boundary": 52.66666666666667
+        },
+        {
+            "id": "17bf734b-2784-4d56-94fd-eca37a1eaace",
+            "type": "tree",
+            "x": 1965,
+            "y": 675,
+            "oRadius": 72,
+            "iRadius": 82,
+            "sides": 11,
+            "boundary": 48.33333333333333
+        },
+        {
+            "id": "0c5f79f2-6942-4a87-a09b-c5b8f4140110",
+            "type": "rock",
+            "x": 2250,
+            "y": 240,
+            "radius": 147,
+            "boundary": 169
+        },
+        {
+            "id": "0093b18c-8e3a-4d94-9403-bd223ae93daf",
+            "type": "bush",
+            "x": 2925,
+            "y": 705,
+            "oRadius": 40,
+            "iRadius": 42,
+            "sides": 17,
+            "boundary": 64
+        },
+        {
+            "id": "4319efa1-fa88-448c-83d0-8849b9139692",
+            "type": "bush",
+            "x": 3225,
+            "y": 510,
+            "oRadius": 40,
+            "iRadius": 42,
+            "sides": 15,
+            "boundary": 64
+        },
+        {
+            "id": "7de36010-4dc7-462c-abb1-8c9fcb1770d9",
+            "type": "tree",
+            "x": 3615,
+            "y": 360,
+            "oRadius": 88,
+            "iRadius": 98,
+            "sides": 11,
+            "boundary": 53.666666666666664
+        },
+        {
+            "id": "ee8ab11e-0d3d-4054-8350-5b83560ada75",
+            "type": "tree",
+            "x": 3990,
+            "y": 390,
+            "oRadius": 71,
+            "iRadius": 81,
+            "sides": 13,
+            "boundary": 48
+        },
+        {
+            "id": "c373b07e-c9cd-4554-8248-ea58284d5671",
+            "type": "tree",
+            "x": 4290,
+            "y": 360,
+            "oRadius": 79,
+            "iRadius": 89,
+            "sides": 13,
+            "boundary": 50.66666666666667
+        },
+        {
+            "id": "af5f74b0-dab7-40ad-8f19-e4255bf46d6a",
+            "type": "bush",
+            "x": 3975,
+            "y": 1065,
+            "oRadius": 40,
+            "iRadius": 42,
+            "sides": 15,
+            "boundary": 64
+        },
+        {
+            "id": "af056c59-b039-45cc-849d-4c78b588243e",
+            "type": "tree",
+            "x": 3660,
+            "y": 1290,
+            "oRadius": 93,
+            "iRadius": 103,
+            "sides": 10,
+            "boundary": 55.333333333333336
+        },
+        {
+            "id": "da8609ab-b495-49e3-b763-262231121b54",
+            "type": "tree",
+            "x": 3435,
+            "y": 1005,
+            "oRadius": 96,
+            "iRadius": 106,
+            "sides": 11,
+            "boundary": 56.333333333333336
+        },
+        {
+            "id": "ab4dbcdf-ece1-49e3-bce7-4989123ac338",
+            "type": "rock",
+            "x": 3180,
+            "y": 1485,
+            "radius": 136,
+            "boundary": 158
+        },
+        {
+            "id": "37d9ecba-7805-4ec0-a79b-4738a777a622",
+            "type": "tree",
+            "x": 2730,
+            "y": 1275,
+            "oRadius": 79,
+            "iRadius": 89,
+            "sides": 12,
+            "boundary": 50.66666666666667
+        },
+        {
+            "id": "48c07f34-618e-4f61-95e8-c1065841bc2b",
+            "type": "rock",
+            "x": 2490,
+            "y": 1020,
+            "radius": 149,
+            "boundary": 171
+        },
+        {
+            "id": "f82b0372-9a11-4ba7-82ab-b51b35a93282",
+            "type": "rock",
+            "x": 2100,
+            "y": 1470,
+            "radius": 146,
+            "boundary": 168
+        },
+        {
+            "id": "99b7c51d-9e67-4491-930d-b4f32443fdd7",
+            "type": "tree",
+            "x": 1350,
+            "y": 1965,
+            "oRadius": 95,
+            "iRadius": 105,
+            "sides": 11,
+            "boundary": 56
+        },
+        {
+            "id": "9028b390-eb3a-411f-8593-00f07cd6f261",
+            "type": "bush",
+            "x": 1095,
+            "y": 1785,
+            "oRadius": 40,
+            "iRadius": 42,
+            "sides": 16,
+            "boundary": 64
+        },
+        {
+            "id": "32465c81-2501-4bbb-b6e1-d42fc1c98d66",
+            "type": "bush",
+            "x": 1710,
+            "y": 1380,
+            "oRadius": 40,
+            "iRadius": 42,
+            "sides": 18,
+            "boundary": 64
+        },
+        {
+            "id": "e8fe83f6-8fba-47af-834e-e1644bbbf627",
+            "type": "tree",
+            "x": 2145,
+            "y": 1200,
+            "oRadius": 89,
+            "iRadius": 99,
+            "sides": 10,
+            "boundary": 54
+        },
+        {
+            "id": "28a51fde-8293-4fde-a681-33f204c15cbd",
+            "type": "tree",
+            "x": 1845,
+            "y": 315,
+            "oRadius": 89,
+            "iRadius": 99,
+            "sides": 10,
+            "boundary": 54
+        },
+        {
+            "id": "d0ca7686-5296-448c-8aa0-8f6d172e85e7",
+            "type": "tree",
+            "x": 375,
+            "y": 2445,
+            "oRadius": 83,
+            "iRadius": 93,
+            "sides": 11,
+            "boundary": 52
+        },
+        {
+            "id": "010548e8-039a-439d-ba6b-4adf6ff1ed50",
+            "type": "rock",
+            "x": 630,
+            "y": 2715,
+            "radius": 141,
+            "boundary": 163
+        },
+        {
+            "id": "517816e2-5d57-4d09-a3a6-3fa118287056",
+            "type": "rock",
+            "x": 1215,
+            "y": 2520,
+            "radius": 146,
+            "boundary": 168
+        },
+        {
+            "id": "3d45624e-cbe7-4632-95d7-5d9be7ef516b",
+            "type": "tree",
+            "x": 1200,
+            "y": 3105,
+            "oRadius": 80,
+            "iRadius": 90,
+            "sides": 11,
+            "boundary": 51
+        },
+        {
+            "id": "fa97c56a-5eb5-41f4-9d64-773d8780585a",
+            "type": "tree",
+            "x": 885,
+            "y": 3720,
+            "oRadius": 82,
+            "iRadius": 92,
+            "sides": 11,
+            "boundary": 51.66666666666667
+        },
+        {
+            "id": "905f17b7-1e47-4aa1-ac9a-ddc3de3ca29d",
+            "type": "tree",
+            "x": 705,
+            "y": 4125,
+            "oRadius": 92,
+            "iRadius": 102,
+            "sides": 10,
+            "boundary": 55
+        },
+        {
+            "id": "7f8fc882-5af9-47f0-8710-810c969f6390",
+            "type": "rock",
+            "x": 90,
+            "y": 4365,
+            "radius": 134,
+            "boundary": 156
+        },
+        {
+            "id": "6999b87e-5fc5-49f0-a68b-121a685e8833",
+            "type": "bush",
+            "x": 270,
+            "y": 3420,
+            "oRadius": 40,
+            "iRadius": 42,
+            "sides": 15,
+            "boundary": 64
+        },
+        {
+            "id": "ccd43c34-5848-4f9e-8f7e-4219806d9cdd",
+            "type": "rock",
+            "x": 1080,
+            "y": 3405,
+            "radius": 128,
+            "boundary": 150
+        },
+        {
+            "id": "3e115ab8-8f99-47aa-ac1f-8a5f87e205d7",
+            "type": "tree",
+            "x": 1710,
+            "y": 3105,
+            "oRadius": 84,
+            "iRadius": 94,
+            "sides": 12,
+            "boundary": 52.33333333333333
+        },
+        {
+            "id": "616cfafd-2afd-4710-a783-b364a428a9aa",
+            "type": "tree",
+            "x": 1605,
+            "y": 2700,
+            "oRadius": 95,
+            "iRadius": 105,
+            "sides": 12,
+            "boundary": 56
+        },
+        {
+            "id": "93fd3628-20a6-4291-bac6-93be18d63a43",
+            "type": "tree",
+            "x": 2160,
+            "y": 2430,
+            "oRadius": 81,
+            "iRadius": 91,
+            "sides": 12,
+            "boundary": 51.33333333333333
+        },
+        {
+            "id": "be331101-46b4-4f32-bc26-fc25eaadb7fb",
+            "type": "bush",
+            "x": 2475,
+            "y": 2865,
+            "oRadius": 40,
+            "iRadius": 42,
+            "sides": 19,
+            "boundary": 64
+        },
+        {
+            "id": "d9161555-f62e-4144-a7bd-0b3bfc0d2b6d",
+            "type": "bush",
+            "x": 2610,
+            "y": 2325,
+            "oRadius": 40,
+            "iRadius": 42,
+            "sides": 15,
+            "boundary": 64
+        },
+        {
+            "id": "14705ae4-2b37-4d44-a6a4-700f747d0b7b",
+            "type": "bush",
+            "x": 2895,
+            "y": 1995,
+            "oRadius": 40,
+            "iRadius": 42,
+            "sides": 18,
+            "boundary": 64
+        },
+        {
+            "id": "61602d9c-8312-480b-b963-66606e9d1f06",
+            "type": "bush",
+            "x": 3345,
+            "y": 2025,
+            "oRadius": 40,
+            "iRadius": 42,
+            "sides": 19,
+            "boundary": 64
+        },
+        {
+            "id": "31367fde-a709-4cd8-8b2b-ec47f76bc60d",
+            "type": "tree",
+            "x": 3795,
+            "y": 1890,
+            "oRadius": 85,
+            "iRadius": 95,
+            "sides": 12,
+            "boundary": 52.66666666666667
+        },
+        {
+            "id": "8d751d86-b23f-4514-b9c4-37c0c6dda1dd",
+            "type": "tree",
+            "x": 3960,
+            "y": 2295,
+            "oRadius": 72,
+            "iRadius": 82,
+            "sides": 10,
+            "boundary": 48.33333333333333
+        },
+        {
+            "id": "525a48cd-312b-4220-85d1-ae47a7bf2966",
+            "type": "bush",
+            "x": 3810,
+            "y": 2790,
+            "oRadius": 40,
+            "iRadius": 42,
+            "sides": 18,
+            "boundary": 64
+        },
+        {
+            "id": "28a07ea9-34f6-41a3-9cea-3622fb7a860e",
+            "type": "rock",
+            "x": 3495,
+            "y": 3150,
+            "radius": 138,
+            "boundary": 160
+        },
+        {
+            "id": "62486f5b-6163-4eb6-94d3-32431d16aa5c",
+            "type": "tree",
+            "x": 3015,
+            "y": 3030,
+            "oRadius": 89,
+            "iRadius": 99,
+            "sides": 11,
+            "boundary": 54
+        },
+        {
+            "id": "0db3d35a-6bbd-4137-8b66-e8170b882314",
+            "type": "rock",
+            "x": 2925,
+            "y": 2670,
+            "radius": 130,
+            "boundary": 152
+        },
+        {
+            "id": "d01f0afb-164d-452b-b822-29da644f978e",
+            "type": "rock",
+            "x": 3030,
+            "y": 2310,
+            "radius": 132,
+            "boundary": 154
+        },
+        {
+            "id": "065082b4-7d6f-466c-87f2-2e5880f0b725",
+            "type": "tree",
+            "x": 2490,
+            "y": 2010,
+            "oRadius": 76,
+            "iRadius": 86,
+            "sides": 12,
+            "boundary": 49.66666666666667
+        },
+        {
+            "id": "f87f78c7-514e-40ff-9b35-0623dc93b8e4",
+            "type": "tree",
+            "x": 2040,
+            "y": 2985,
+            "oRadius": 88,
+            "iRadius": 98,
+            "sides": 10,
+            "boundary": 53.666666666666664
+        },
+        {
+            "id": "0b585b13-f066-4555-978b-09fe5d1b7cd1",
+            "type": "rock",
+            "x": 2235,
+            "y": 3375,
+            "radius": 131,
+            "boundary": 153
+        },
+        {
+            "id": "e27a90be-0872-47f3-b5e1-3478ade47f2a",
+            "type": "tree",
+            "x": 1785,
+            "y": 3780,
+            "oRadius": 77,
+            "iRadius": 87,
+            "sides": 13,
+            "boundary": 50
+        },
+        {
+            "id": "4356dd6c-ae5d-4e72-9550-77d2ad22e46c",
+            "type": "tree",
+            "x": 1890,
+            "y": 4395,
+            "oRadius": 79,
+            "iRadius": 89,
+            "sides": 13,
+            "boundary": 50.66666666666667
+        },
+        {
+            "id": "3f92d5b1-4b7c-429b-992c-b1740a3f7f7c",
+            "type": "tree",
+            "x": 2475,
+            "y": 4125,
+            "oRadius": 70,
+            "iRadius": 80,
+            "sides": 12,
+            "boundary": 47.66666666666667
+        },
+        {
+            "id": "90a2c316-9562-46dc-9953-2afd4e863439",
+            "type": "tree",
+            "x": 2730,
+            "y": 3690,
+            "oRadius": 91,
+            "iRadius": 101,
+            "sides": 13,
+            "boundary": 54.666666666666664
+        },
+        {
+            "id": "2cc94409-455b-44ed-984c-88170986159f",
+            "type": "rock",
+            "x": 3240,
+            "y": 3675,
+            "radius": 132,
+            "boundary": 154
+        },
+        {
+            "id": "66e6e9ff-d4fc-43ac-a4d4-c303a0a28d3b",
+            "type": "tree",
+            "x": 3630,
+            "y": 4035,
+            "oRadius": 86,
+            "iRadius": 96,
+            "sides": 11,
+            "boundary": 53
+        },
+        {
+            "id": "34ef0a00-a8e4-4be1-9fc5-1d5eeb0beae8",
+            "type": "tree",
+            "x": 4005,
+            "y": 3645,
+            "oRadius": 78,
+            "iRadius": 88,
+            "sides": 13,
+            "boundary": 50.33333333333333
+        },
+        {
+            "id": "7c2df584-b511-4929-a839-4f91d7607fba",
+            "type": "tree",
+            "x": 4020,
+            "y": 3120,
+            "oRadius": 90,
+            "iRadius": 100,
+            "sides": 10,
+            "boundary": 54.333333333333336
+        },
+        {
+            "id": "d1991523-4e15-4994-9ea9-33cdb4ccb67b",
+            "type": "tree",
+            "x": 4245,
+            "y": 2670,
+            "oRadius": 85,
+            "iRadius": 95,
+            "sides": 12,
+            "boundary": 52.66666666666667
+        },
+        {
+            "id": "46cc47c3-69b2-4ea6-b16a-7c6a45c4dfba",
+            "type": "bush",
+            "x": 4245,
+            "y": 2070,
+            "oRadius": 40,
+            "iRadius": 42,
+            "sides": 18,
+            "boundary": 64
+        },
+        {
+            "id": "dec55dcc-f6a9-4e28-94d8-063c6a8542c5",
+            "type": "tree",
+            "x": 4245,
+            "y": 1620,
+            "oRadius": 77,
+            "iRadius": 87,
+            "sides": 13,
+            "boundary": 50
+        },
+        {
+            "id": "48c6cae0-b14e-48b8-98e1-29293f0afeb7",
+            "type": "tree",
+            "x": 4305,
+            "y": 975,
+            "oRadius": 81,
+            "iRadius": 91,
+            "sides": 11,
+            "boundary": 51.33333333333333
+        },
+        {
+            "id": "e39ce548-0173-415d-87bb-a2a60609dd7d",
+            "type": "tree",
+            "x": 825,
+            "y": 2055,
+            "oRadius": 76,
+            "iRadius": 86,
+            "sides": 13,
+            "boundary": 49.66666666666667
+        },
+        {
+            "id": "ad7fd535-1607-4447-a080-d70103cfbc2f",
+            "type": "bush",
+            "x": 300,
+            "y": 1980,
+            "oRadius": 40,
+            "iRadius": 42,
+            "sides": 16,
+            "boundary": 64
+        },
+        {
+            "id": "5fc7473e-d6d9-499a-860b-3b6e2dec033b",
+            "type": "bush",
+            "x": 105,
+            "y": 1410,
+            "oRadius": 40,
+            "iRadius": 42,
+            "sides": 15,
+            "boundary": 64
+        },
+        {
+            "id": "ee686919-f02a-4085-8f7f-535b34ea0141",
+            "type": "tree",
+            "x": 90,
+            "y": 1155,
+            "oRadius": 81,
+            "iRadius": 91,
+            "sides": 10,
+            "boundary": 51.33333333333333
+        },
+        {
+            "id": "91d3e2fa-5984-447c-ad9d-d3cd2bda8d3c",
+            "type": "tree",
+            "x": 135,
+            "y": 825,
+            "oRadius": 85,
+            "iRadius": 95,
+            "sides": 10,
+            "boundary": 52.66666666666667
+        },
+        {
+            "id": "9346e3e6-64fe-46b7-8e29-191653207705",
+            "type": "tree",
+            "x": 1395,
+            "y": 675,
+            "oRadius": 77,
+            "iRadius": 87,
+            "sides": 13,
+            "boundary": 50
+        },
+        {
+            "id": "24822a02-729f-42ad-b8e4-7e842cd971c7",
+            "type": "bush",
+            "x": 2880,
+            "y": 65,
+            "oRadius": 40,
+            "iRadius": 42,
+            "sides": 19,
+            "boundary": 64
+        },
+        {
+            "id": "e8f7a5fc-1839-43c3-b392-2902c097c17a",
+            "type": "tree",
+            "x": 3555,
+            "y": 50,
+            "oRadius": 84,
+            "iRadius": 94,
+            "sides": 11,
+            "boundary": 52.33333333333333
+        },
+        {
+            "id": "faf5c123-66cf-4c24-ad3f-f07987d253e6",
+            "type": "bush",
+            "x": 3615,
+            "y": 3605,
+            "oRadius": 40,
+            "iRadius": 42,
+            "sides": 17,
+            "boundary": 64
+        },
+        {
+            "id": "3f4bb538-e340-4729-aa5c-7ae6237475a2",
+            "type": "tree",
+            "x": 3225,
+            "y": 4265,
+            "oRadius": 87,
+            "iRadius": 97,
+            "sides": 13,
+            "boundary": 53.333333333333336
+        },
+        {
+            "id": "vlad-chilom-wont-notice",
+            "type": "tree",
+            "x": 2580,
+            "y": 4475,
+            "oRadius": 72,
+            "iRadius": 82,
+            "sides": 11,
+            "boundary": 48.33333333333333
+        },
+        {
+            "id": "53c19577-5279-45ad-9695-a4640e9e6b0c",
+            "type": "rock",
+            "x": 1710,
+            "y": 4130,
+            "radius": 123,
+            "boundary": 145
+        },
+        {
+            "id": "f10d36ba-a8be-45d1-80cc-aad6497ac3e0",
+            "type": "tree",
+            "x": 1005,
+            "y": 4295,
+            "oRadius": 74,
+            "iRadius": 84,
+            "sides": 12,
+            "boundary": 49
+        }
+    ]
+}

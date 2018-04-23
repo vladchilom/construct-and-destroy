@@ -7,36 +7,11 @@ var io = require('socket.io')(http)
 var config = require('config')
 var uuidv4 = require('uuid/v4');
 var util = require('./util/util.js');
+var m = require('./util/map.json')
+var fs = require('fs')
 
-var mapInitialize = false
 var players = {}
-var mapObjects = []
-var treePosition = [{x: 250, y: 400}, 
-                    {x: 500, y: 600},
-                    {x: 100, y: 200},
-                    {x: 400, y: 180},
-                    {x: 600, y: 900},
-                    {x: 1300, y: 300},
-                    {x: 950, y: 320}, 
-                    {x: 1400, y: 3600}, 
-                    {x: 1650, y: 1000}, 
-                    {x: 3500, y: 2500}]
-var bushPosition = [{x: 350, y: 1500}, 
-                    {x: 350, y: 4000}, 
-                    {x: 600, y: 3500}, 
-                    {x: 4000, y: 1500}, 
-                    {x: 3000, y: 1000}, 
-                    {x: 4000, y: 700}, 
-                    {x: 1500, y: 2250}, 
-                    {x: 3500, y: 730}, 
-                    {x: 530, y: 3600}]
-var rockPosition = [{x: 700, y: 400}, 
-                    {x: 2500, y: 455}, 
-                    {x: 1500, y: 360}, 
-                    {x: 600, y: 1650}, 
-                    {x: 600, y: 3200}, 
-                    {x: 2500, y: 1600}, 
-                    {x: 2000, y: 2000}]
+var mapObjects = m.mapObjects
 app.use(express.static(__dirname + '/../client'))
 
 function addTree(coords) {
@@ -83,21 +58,18 @@ function addRock(coords) {
   })
 }
 
-function initializeMap() {
-  var i
-  for (i = 0; i < treePosition.length; i++) {
-    addTree(treePosition[i])
+function writeMap() {
+  fs.readFile('server/util/map.json', 'utf8', function readFileCallback(err, data) {
+  if (err) {
+    console.log(err)
   }
-  for (i = 0; i < bushPosition.length; i++) {
-    addBush(bushPosition[i])
+  else {
+    var obj = JSON.parse(data)
+    obj.mapObjects = mapObjects
+    obj = JSON.stringify(obj, null, 4)
+    fs.writeFile('server/util/map.json', obj, 'utf8', (error) => { console.log("Error!"); })
   }
-  for (i = 0; i < rockPosition.length; i++) {
-    addRock(rockPosition[i])
-  } 
-}
-
-if (!mapInitialize) {
-  initializeMap()
+})
 }
 
 app.get('/', function(req, res) {
@@ -144,31 +116,33 @@ io.on('connection', function(socket) {
   })
 
   socket.on('Create Object', function() {
-    // var randomVar = util.randomInRange(1, 4)
-    // for (var i = 0; i < mapObjects.trees.length; i++) {
-    //   if ((trees[i].x <= players[socket.id].x + 100 && trees[i].x >= players[socket.id].x - 100) && (trees[i].y <= players[socket.id].y + 100 && trees[i].y >= players[socket.id].y - 100)) {
+    // var buildRadius = 0
+    // var randomVar = util.randomInRange(0, 100)
+    // for (var i = 0; i < mapObjects.length; i++) {
+    //   if (mapObjects[i].type == "tree") {
+    //     buildRadius = 240
+    //   }
+    //   else if (mapObjects[i].type == "bush") {
+    //     buildRadius = 240
+    //   }
+    //   else {
+    //     buildRadius = 240
+    //   }
+    //   if ((mapObjects[i].x <= players[socket.id].x + buildRadius && mapObjects[i].x >= players[socket.id].x - buildRadius) && (mapObjects[i].y <= players[socket.id].y + buildRadius && mapObjects[i].y >= players[socket.id].y - buildRadius)) {
     //     return
     //   }
     // }
-    // for (var i = 0; i < mapObjects.rocks.length; i++) {
-    //   if ((rocks[i].x <= players[socket.id].x + 100 && rocks[i].x >= players[socket.id].x - 100) && (rocks[i].y <= players[socket.id].y + 100 && rocks[i].y >= players[socket.id].y - 100)) {
-    //     return
-    //   }
-    // }
-    // for (var i = 0; i < mapObjects.bushes.length; i++) {
-    //   if ((bushes[i].x <= players[socket.id].x + 100 && bushes[i].x >= players[socket.id].x - 100) && (bushes[i].y <= players[socket.id].y + 100 && bushes[i].y >= players[socket.id].y - 100)) {
-    //     return
-    //   }
-    // }
-    // if (randomVar == 1) {
+  
+    // if (randomVar <= 20) {
     //   addRock({x: players[socket.id].x, y: players[socket.id].y})
     // }
-    // else if (randomVar == 2) {
+    // else if (randomVar <= 65) {
     //   addTree({x: players[socket.id].x, y: players[socket.id].y})
     // }
-    // else if (randomVar == 3) {
+    // else if (randomVar <= 100) {
     //   addBush({x: players[socket.id].x, y: players[socket.id].y})
     // }
+    // writeMap()
   })
 
   socket.on('window resized', function(data) {
