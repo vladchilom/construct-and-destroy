@@ -323,8 +323,26 @@ var pushObjectOut = function(id, x, y, movingIntoObject) {
   }
   var movingIntoObject = isMovingIntoObject(id, newx, newy, movingIntoObject.object.id)
   if (!movingIntoObject.status) {
-    return { x: newx, y: newy }
+    if (isWithinArenaBounds(id, newx, newy)) {
+      return { x: newx, y: newy }
+    }
   }
+}
+
+var isWithinArenaBounds = function(id, x, y) {
+  if ((x - config.get('playerRadius')) <= 0) {
+    return false
+  }
+  if ((x + config.get('playerRadius')) >= (0 + config.get('gameWidth'))) {
+    return false
+  }
+  if ((y - config.get('playerRadius')) <= 0) {
+    return false
+  }
+  if ((y + config.get('playerRadius')) >= (0 + config.get('gameHeight'))) {
+    return false
+  }
+  return true
 }
 
 var isWithinArenaBoundsX = function(id, x) {

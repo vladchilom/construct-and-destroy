@@ -174,7 +174,7 @@ function checkIfAttackAngleChanged() {
 
 function checkIfAttacked() {
   if (map.keys && map.keys[32]) {
-    socket.emit('Create Object', socket.id)
+    attack()
   }
 }
 
@@ -225,7 +225,7 @@ function resize() {
   halfScreenHeight = window.innerHeight / 2
 }
 
-function attack(event) {
+function attack() {
   if (!socket) {
     return
   }
