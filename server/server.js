@@ -9,6 +9,7 @@ var uuidv4 = require('uuid/v4')
 var util = require('./util/util.js')
 var map = require('../config/map.json').map
 
+var sockets = {}
 var players = {}
 app.use(express.static(__dirname + '/../client'))
 
@@ -18,11 +19,16 @@ app.get('/', function(req, res) {
 
 io.on('connection', function(socket) {
   console.log(socket.id + ' connected')
+  sockets[socket.id] = socket
+
+  socket.emit('request screen size')
 
   players[socket.id] = {
     id: socket.id,
     x: 450,
     y: 450,
+    halfScreenWidth: config.get('gameWidth') / 2,
+    halfScreenHeight: config.get('gameHeight') / 2,
     attackAngle: 0,
     equippedWeapon: 'melee',
     lastAttack: new Date(1),
@@ -55,8 +61,9 @@ io.on('connection', function(socket) {
     }
   })
 
-  socket.on('window resized', function(data) {
-    
+  socket.on('window resized', function(id, halfScreenWidth, halfScreenHeight) {
+    players[id].halfScreenWidth = halfScreenWidth
+    players[id].halfScreenHeight = halfScreenHeight
   })
 
   socket.on('attack', function(id) {
@@ -275,12 +282,30 @@ var isWithinArenaBoundsY = function(id, y) {
   return y
 }
 
+var objectIsVisible = function(object, player) {
+  if ((object.x + object.visibleRadius) >= (player.x - player.halfScreenWidth)) {
+    if ((object.x - object.visibleRadius) <= (player.x + player.halfScreenWidth)) {
+      if ((object.y + object.visibleRadius) >= (player.y - player.halfScreenHeight)) {
+        if ((object.y - object.visibleRadius) <= (player.y + player.halfScreenHeight)) {
+          return true
+        }
+      }
+    }
+  }
+  return false
+}
+
 var sendGameUpdates = function() {
   io.emit('players', players)
 }
 
 var sendMapInfo = function() {
-  io.emit('map objects', map)
+  for (var id in players) {
+    var visibleObjects = map.filter(function(object) {
+      return objectIsVisible(object, players[id])
+    })
+    sockets[id].emit('map objects', visibleObjects)
+  }
 }
 
 http.listen(7070, function(err){

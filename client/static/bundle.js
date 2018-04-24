@@ -115,6 +115,10 @@ function setupClientServerCommunication() {
     }
   })
 
+  socket.on('request screen size', function() {
+    resize()
+  })
+
   socket.on('players', function(data) {
     for (id in data) {
       if (id !== 'undefined') {
@@ -285,6 +289,9 @@ function resize() {
   canvas.height = window.innerHeight
   halfScreenWidth = window.innerWidth / 2
   halfScreenHeight = window.innerHeight / 2
+  if (socket.id) {
+    socket.emit('window resized', socket.id, halfScreenWidth, halfScreenHeight)
+  }
 }
 
 function attack() {
