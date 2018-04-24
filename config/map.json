@@ -9,6 +9,7 @@
     "oRadius": 72,
     "iRadius": 82,
     "sides": 13,
+    "maxBoundary": 48.33333333333333,
     "boundary": 48.33333333333333,
     "visibleRadius": 82
   },
@@ -23,6 +24,7 @@
     "oRadius": 88,
     "iRadius": 98,
     "sides": 13,
+    "maxBoundary": 53.666666666666664,
     "boundary": 53.666666666666664,
     "visibleRadius": 98
   },
@@ -37,6 +39,7 @@
     "oRadius": 76,
     "iRadius": 86,
     "sides": 10,
+    "maxBoundary": 49.66666666666667,
     "boundary": 49.66666666666667,
     "visibleRadius": 86
   },
@@ -51,6 +54,7 @@
     "oRadius": 70,
     "iRadius": 80,
     "sides": 10,
+    "maxBoundary": 47.66666666666667,
     "boundary": 47.66666666666667,
     "visibleRadius": 80
   },
@@ -65,6 +69,7 @@
     "oRadius": 84,
     "iRadius": 94,
     "sides": 10,
+    "maxBoundary": 52.33333333333333,
     "boundary": 52.33333333333333,
     "visibleRadius": 94
   },
@@ -79,6 +84,7 @@
     "oRadius": 95,
     "iRadius": 105,
     "sides": 13,
+    "maxBoundary": 56,
     "boundary": 56,
     "visibleRadius": 105
   },
@@ -93,6 +99,7 @@
     "oRadius": 85,
     "iRadius": 95,
     "sides": 11,
+    "maxBoundary": 52.66666666666667,
     "boundary": 52.66666666666667,
     "visibleRadius": 95
   },
@@ -107,6 +114,7 @@
     "oRadius": 80,
     "iRadius": 90,
     "sides": 13,
+    "maxBoundary": 51,
     "boundary": 51,
     "visibleRadius": 90
   },
@@ -121,6 +129,7 @@
     "oRadius": 86,
     "iRadius": 96,
     "sides": 11,
+    "maxBoundary": 53,
     "boundary": 53,
     "visibleRadius": 96
   },
@@ -135,6 +144,7 @@
     "oRadius": 96,
     "iRadius": 106,
     "sides": 12,
+    "maxBoundary": 56.333333333333336,
     "boundary": 56.333333333333336,
     "visibleRadius": 106
   },
@@ -149,6 +159,7 @@
     "oRadius": 40,
     "iRadius": 42,
     "sides": 19,
+    "maxBoundary": 64,
     "boundary": 64,
     "visibleRadius": 64
   },
@@ -163,6 +174,7 @@
     "oRadius": 40,
     "iRadius": 42,
     "sides": 16,
+    "maxBoundary": 64,
     "boundary": 64,
     "visibleRadius": 64
   },
@@ -177,6 +189,7 @@
     "oRadius": 40,
     "iRadius": 42,
     "sides": 16,
+    "maxBoundary": 64,
     "boundary": 64,
     "visibleRadius": 64
   },
@@ -191,6 +204,7 @@
     "oRadius": 40,
     "iRadius": 42,
     "sides": 18,
+    "maxBoundary": 64,
     "boundary": 64,
     "visibleRadius": 64
   },
@@ -205,6 +219,7 @@
     "oRadius": 40,
     "iRadius": 42,
     "sides": 18,
+    "maxBoundary": 64,
     "boundary": 64,
     "visibleRadius": 64
   },
@@ -219,6 +234,7 @@
     "oRadius": 40,
     "iRadius": 42,
     "sides": 18,
+    "maxBoundary": 64,
     "boundary": 64,
     "visibleRadius": 64
   },
@@ -233,6 +249,7 @@
     "oRadius": 40,
     "iRadius": 42,
     "sides": 18,
+    "maxBoundary": 64,
     "boundary": 64,
     "visibleRadius": 64
   },
@@ -247,6 +264,7 @@
     "oRadius": 40,
     "iRadius": 42,
     "sides": 17,
+    "maxBoundary": 64,
     "boundary": 64,
     "visibleRadius": 64
   },
@@ -261,6 +279,7 @@
     "oRadius": 40,
     "iRadius": 42,
     "sides": 16,
+    "maxBoundary": 64,
     "boundary": 64,
     "visibleRadius": 64
   },
@@ -273,6 +292,7 @@
     "maxHealth": 90,
     "currentHealth": 90,
     "radius": 137,
+    "maxBoundary": 159,
     "boundary": 159,
     "visibleRadius":  137
   },
@@ -285,6 +305,7 @@
     "maxHealth": 90,
     "currentHealth": 90,
     "radius": 139,
+    "maxBoundary": 161,
     "boundary": 161,
     "visibleRadius": 139
   },
@@ -297,6 +318,7 @@
     "maxHealth": 90,
     "currentHealth": 90,
     "radius": 133,
+    "maxBoundary": 155,
     "boundary": 155,
     "visibleRadius": 133
   },
@@ -309,6 +331,7 @@
     "maxHealth": 90,
     "currentHealth": 90,
     "radius": 149,
+    "maxBoundary": 171,
     "boundary": 171,
     "visibleRadius":  149
   },
@@ -321,6 +344,7 @@
     "maxHealth": 90,
     "currentHealth": 90,
     "radius": 146,
+    "maxBoundary": 168,
     "boundary": 168,
     "visibleRadius":  146
   },
@@ -333,6 +357,7 @@
     "maxHealth": 90,
     "currentHealth": 90,
     "radius": 149,
+    "maxBoundary": 171,
     "boundary": 171,
     "visibleRadius": 149
   },
@@ -345,6 +370,7 @@
     "maxHealth": 90,
     "currentHealth": 90,
     "radius": 129,
+    "maxBoundary": 151,
     "boundary": 151,
     "visibleRadius": 129
   },
@@ -359,6 +385,7 @@
     "oRadius": 40,
     "iRadius": 42,
     "sides": 16,
+    "maxBoundary": 64,
     "boundary": 64,
     "visibleRadius": 64
   },
@@ -373,6 +400,7 @@
     "oRadius": 83,
     "iRadius": 93,
     "sides": 11,
+    "maxBoundary": 52,
     "boundary": 52,
     "visibleRadius": 93
   },
@@ -387,6 +415,7 @@
     "oRadius": 79,
     "iRadius": 89,
     "sides": 12,
+    "maxBoundary": 50.66666666666667,
     "boundary": 50.66666666666667,
     "visibleRadius": 89
   },
@@ -399,6 +428,7 @@
     "maxHealth": 90,
     "currentHealth": 90,
     "radius": 149,
+    "maxBoundary": 171,
     "boundary": 171,
     "visibleRadius": 149
   },
@@ -413,6 +443,7 @@
     "oRadius": 85,
     "iRadius": 95,
     "sides": 13,
+    "maxBoundary": 52.66666666666667,
     "boundary": 52.66666666666667,
     "visibleRadius": 95
   },
@@ -427,6 +458,7 @@
     "oRadius": 72,
     "iRadius": 82,
     "sides": 11,
+    "maxBoundary": 48.33333333333333,
     "boundary": 48.33333333333333,
     "visibleRadius": 82
   },
@@ -439,6 +471,7 @@
     "maxHealth": 90,
     "currentHealth": 90,
     "radius": 147,
+    "maxBoundary": 169,
     "boundary": 169,
     "visibleRadius": 147
   },
@@ -453,6 +486,7 @@
     "oRadius": 40,
     "iRadius": 42,
     "sides": 17,
+    "maxBoundary": 64,
     "boundary": 64,
     "visibleRadius": 64
   },
@@ -467,6 +501,7 @@
     "oRadius": 40,
     "iRadius": 42,
     "sides": 15,
+    "maxBoundary": 64,
     "boundary": 64,
     "visibleRadius": 64
   },
@@ -481,6 +516,7 @@
     "oRadius": 88,
     "iRadius": 98,
     "sides": 11,
+    "maxBoundary": 53.666666666666664,
     "boundary": 53.666666666666664,
     "visibleRadius": 98
   },
@@ -495,6 +531,7 @@
     "oRadius": 71,
     "iRadius": 81,
     "sides": 13,
+    "maxBoundary": 48,
     "boundary": 48,
     "visibleRadius": 81
   },
@@ -509,6 +546,7 @@
     "oRadius": 79,
     "iRadius": 89,
     "sides": 13,
+    "maxBoundary": 50.66666666666667,
     "boundary": 50.66666666666667,
     "visibleRadius": 89
   },
@@ -523,6 +561,7 @@
     "oRadius": 40,
     "iRadius": 42,
     "sides": 15,
+    "maxBoundary": 64,
     "boundary": 64,
     "visibleRadius": 64
   },
@@ -537,6 +576,7 @@
     "oRadius": 93,
     "iRadius": 103,
     "sides": 10,
+    "maxBoundary": 55.333333333333336,
     "boundary": 55.333333333333336,
     "visibleRadius": 103
   },
@@ -551,6 +591,7 @@
     "oRadius": 96,
     "iRadius": 106,
     "sides": 11,
+    "maxBoundary": 56.333333333333336,
     "boundary": 56.333333333333336,
     "visibleRadius": 106
   },
@@ -563,6 +604,7 @@
     "maxHealth": 90,
     "currentHealth": 90,
     "radius": 136,
+    "maxBoundary": 158,
     "boundary": 158,
     "visibleRadius": 136
   },
@@ -577,6 +619,7 @@
     "oRadius": 79,
     "iRadius": 89,
     "sides": 12,
+    "maxBoundary": 50.66666666666667,
     "boundary": 50.66666666666667,
     "visibleRadius": 89
   },
@@ -589,6 +632,7 @@
     "maxHealth": 90,
     "currentHealth": 90,
     "radius": 149,
+    "maxBoundary": 171,
     "boundary": 171,
     "visibleRadius": 149
   },
@@ -601,6 +645,7 @@
     "maxHealth": 90,
     "currentHealth": 90,
     "radius": 146,
+    "maxBoundary": 168,
     "boundary": 168,
     "visibleRadius": 146
   },
@@ -615,6 +660,7 @@
     "oRadius": 95,
     "iRadius": 105,
     "sides": 11,
+    "maxBoundary": 56,
     "boundary": 56,
     "visibleRadius": 105
   },
@@ -629,6 +675,7 @@
     "oRadius": 40,
     "iRadius": 42,
     "sides": 16,
+    "maxBoundary": 64,
     "boundary": 64,
     "visibleRadius": 64
   },
@@ -643,6 +690,7 @@
     "oRadius": 40,
     "iRadius": 42,
     "sides": 18,
+    "maxBoundary": 64,
     "boundary": 64,
     "visibleRadius": 64
   },
@@ -657,6 +705,7 @@
     "oRadius": 89,
     "iRadius": 99,
     "sides": 10,
+    "maxBoundary": 54,
     "boundary": 54,
     "visibleRadius": 99
   },
@@ -671,6 +720,7 @@
     "oRadius": 89,
     "iRadius": 99,
     "sides": 10,
+    "maxBoundary": 54,
     "boundary": 54,
     "visibleRadius": 99
   },
@@ -685,6 +735,7 @@
     "oRadius": 83,
     "iRadius": 93,
     "sides": 11,
+    "maxBoundary": 52,
     "boundary": 52,
     "visibleRadius": 93
   },
@@ -697,6 +748,7 @@
     "maxHealth": 90,
     "currentHealth": 90,
     "radius": 141,
+    "maxBoundary": 163,
     "boundary": 163,
     "visibleRadius":  141
   },
@@ -709,6 +761,7 @@
     "maxHealth": 90,
     "currentHealth": 90,
     "radius": 146,
+    "maxBoundary": 168,
     "boundary": 168,
     "visibleRadius": 146
   },
@@ -723,6 +776,7 @@
     "oRadius": 80,
     "iRadius": 90,
     "sides": 11,
+    "maxBoundary": 51,
     "boundary": 51,
     "visibleRadius": 90
   },
@@ -737,6 +791,7 @@
     "oRadius": 82,
     "iRadius": 92,
     "sides": 11,
+    "maxBoundary": 51.66666666666667,
     "boundary": 51.66666666666667,
     "visibleRadius": 92
   },
@@ -751,6 +806,7 @@
     "oRadius": 92,
     "iRadius": 102,
     "sides": 10,
+    "maxBoundary": 55,
     "boundary": 55,
     "visibleRadius": 102
   },
@@ -763,6 +819,7 @@
     "maxHealth": 90,
     "currentHealth": 90,
     "radius": 134,
+    "maxBoundary": 156,
     "boundary": 156,
     "visibleRadius": 156
   },
@@ -777,6 +834,7 @@
     "oRadius": 40,
     "iRadius": 42,
     "sides": 15,
+    "maxBoundary": 64,
     "boundary": 64,
     "visibleRadius": 64
   },
@@ -789,6 +847,7 @@
     "maxHealth": 90,
     "currentHealth": 90,
     "radius": 128,
+    "maxBoundary": 150,
     "boundary": 150,
     "visibleRadius": 128
   },
@@ -803,6 +862,7 @@
     "oRadius": 84,
     "iRadius": 94,
     "sides": 12,
+    "maxBoundary": 52.33333333333333,
     "boundary": 52.33333333333333,
     "visibleRadius": 94
   },
@@ -817,6 +877,7 @@
     "oRadius": 95,
     "iRadius": 105,
     "sides": 12,
+    "maxBoundary": 56,
     "boundary": 56,
     "visibleRadius": 105
   },
@@ -831,6 +892,7 @@
     "oRadius": 81,
     "iRadius": 91,
     "sides": 12,
+    "maxBoundary": 51.33333333333333,
     "boundary": 51.33333333333333,
     "visibleRadius": 91
   },
@@ -845,6 +907,7 @@
     "oRadius": 40,
     "iRadius": 42,
     "sides": 19,
+    "maxBoundary": 64,
     "boundary": 64,
     "visibleRadius": 64
   },
@@ -859,6 +922,7 @@
     "oRadius": 40,
     "iRadius": 42,
     "sides": 15,
+    "maxBoundary": 64,
     "boundary": 64,
     "visibleRadius": 64
   },
@@ -873,6 +937,7 @@
     "oRadius": 40,
     "iRadius": 42,
     "sides": 18,
+    "maxBoundary": 64,
     "boundary": 64,
     "visibleRadius": 64
   },
@@ -887,6 +952,7 @@
     "oRadius": 40,
     "iRadius": 42,
     "sides": 19,
+    "maxBoundary": 64,
     "boundary": 64,
     "visibleRadius": 64
   },
@@ -901,6 +967,7 @@
     "oRadius": 85,
     "iRadius": 95,
     "sides": 12,
+    "maxBoundary": 52.66666666666667,
     "boundary": 52.66666666666667,
     "visibleRadius": 95
   },
@@ -915,6 +982,7 @@
     "oRadius": 72,
     "iRadius": 82,
     "sides": 10,
+    "maxBoundary": 48.33333333333333,
     "boundary": 48.33333333333333,
     "visibleRadius": 82
   },
@@ -929,6 +997,7 @@
     "oRadius": 40,
     "iRadius": 42,
     "sides": 18,
+    "maxBoundary": 64,
     "boundary": 64,
     "visibleRadius": 64
   },
@@ -941,6 +1010,7 @@
     "maxHealth": 90,
     "currentHealth": 90,
     "radius": 138,
+    "maxBoundary": 160,
     "boundary": 160,
     "visibleRadius": 138
   },
@@ -955,6 +1025,7 @@
     "oRadius": 89,
     "iRadius": 99,
     "sides": 11,
+    "maxBoundary": 54,
     "boundary": 54,
     "visibleRadius": 99
   },
@@ -967,6 +1038,7 @@
     "maxHealth": 90,
     "currentHealth": 90,
     "radius": 130,
+    "maxBoundary": 152,
     "boundary": 152,
     "visibleRadius": 130
   },
@@ -979,6 +1051,7 @@
     "maxHealth": 90,
     "currentHealth": 90,
     "radius": 132,
+    "maxBoundary": 154,
     "boundary": 154,
     "visibleRadius": 132
   },
@@ -993,6 +1066,7 @@
     "oRadius": 76,
     "iRadius": 86,
     "sides": 12,
+    "maxBoundary": 49.66666666666667,
     "boundary": 49.66666666666667,
     "visibleRadius": 86
   },
@@ -1007,6 +1081,7 @@
     "oRadius": 88,
     "iRadius": 98,
     "sides": 10,
+    "maxBoundary": 53.666666666666664,
     "boundary": 53.666666666666664,
     "visibleRadius": 98
   },
@@ -1019,6 +1094,7 @@
     "maxHealth": 90,
     "currentHealth": 90,
     "radius": 131,
+    "maxBoundary": 153,
     "boundary": 153,
     "visibleRadius": 131
   },
@@ -1033,6 +1109,7 @@
     "oRadius": 77,
     "iRadius": 87,
     "sides": 13,
+    "maxBoundary": 50,
     "boundary": 50,
     "visibleRadius": 87
   },
@@ -1047,6 +1124,7 @@
     "oRadius": 79,
     "iRadius": 89,
     "sides": 13,
+    "maxBoundary": 50.66666666666667,
     "boundary": 50.66666666666667,
     "visibleRadius": 89
   },
@@ -1061,6 +1139,7 @@
     "oRadius": 70,
     "iRadius": 80,
     "sides": 12,
+    "maxBoundary": 47.66666666666667,
     "boundary": 47.66666666666667,
     "visibleRadius": 80
   },
@@ -1075,6 +1154,7 @@
     "oRadius": 91,
     "iRadius": 101,
     "sides": 13,
+    "maxBoundary": 54.666666666666664,
     "boundary": 54.666666666666664,
     "visibleRadius": 101
   },
@@ -1087,6 +1167,7 @@
     "maxHealth": 90,
     "currentHealth": 90,
     "radius": 132,
+    "maxBoundary": 154,
     "boundary": 154,
     "visibleRadius": 132
   },
@@ -1101,6 +1182,7 @@
     "oRadius": 86,
     "iRadius": 96,
     "sides": 11,
+    "maxBoundary": 53,
     "boundary": 53,
     "visibleRadius": 96
   },
@@ -1115,6 +1197,7 @@
     "oRadius": 78,
     "iRadius": 88,
     "sides": 13,
+    "maxBoundary": 50.33333333333333,
     "boundary": 50.33333333333333,
     "visibleRadius": 88
   },
@@ -1129,6 +1212,7 @@
     "oRadius": 90,
     "iRadius": 100,
     "sides": 10,
+    "maxBoundary": 54.333333333333336,
     "boundary": 54.333333333333336,
     "visibleRadius": 100
   },
@@ -1143,6 +1227,7 @@
     "oRadius": 85,
     "iRadius": 95,
     "sides": 12,
+    "maxBoundary": 52.66666666666667,
     "boundary": 52.66666666666667,
     "visibleRadius": 95
   },
@@ -1157,6 +1242,7 @@
     "oRadius": 40,
     "iRadius": 42,
     "sides": 18,
+    "maxBoundary": 64,
     "boundary": 64,
     "visibleRadius": 64
   },
@@ -1171,6 +1257,7 @@
     "oRadius": 77,
     "iRadius": 87,
     "sides": 13,
+    "maxBoundary": 50,
     "boundary": 50,
     "visibleRadius": 87
   },
@@ -1185,6 +1272,7 @@
     "oRadius": 81,
     "iRadius": 91,
     "sides": 11,
+    "maxBoundary": 51.33333333333333,
     "boundary": 51.33333333333333,
     "visibleRadius": 91
   },
@@ -1199,6 +1287,7 @@
     "oRadius": 76,
     "iRadius": 86,
     "sides": 13,
+    "maxBoundary": 49.66666666666667,
     "boundary": 49.66666666666667,
     "visibleRadius": 86
   },
@@ -1213,6 +1302,7 @@
     "oRadius": 40,
     "iRadius": 42,
     "sides": 16,
+    "maxBoundary": 64,
     "boundary": 64,
     "visibleRadius": 64
   },
@@ -1227,6 +1317,7 @@
     "oRadius": 40,
     "iRadius": 42,
     "sides": 15,
+    "maxBoundary": 64,
     "boundary": 64,
     "visibleRadius": 64
   },
@@ -1241,6 +1332,7 @@
     "oRadius": 81,
     "iRadius": 91,
     "sides": 10,
+    "maxBoundary": 51.33333333333333,
     "boundary": 51.33333333333333,
     "visibleRadius": 91
   },
@@ -1255,6 +1347,7 @@
     "oRadius": 85,
     "iRadius": 95,
     "sides": 10,
+    "maxBoundary": 52.66666666666667,
     "boundary": 52.66666666666667,
     "visibleRadius": 95
   },
@@ -1269,6 +1362,7 @@
     "oRadius": 77,
     "iRadius": 87,
     "sides": 13,
+    "maxBoundary": 50,
     "boundary": 50,
     "visibleRadius": 87
   },
@@ -1283,6 +1377,7 @@
     "oRadius": 40,
     "iRadius": 42,
     "sides": 19,
+    "maxBoundary": 64,
     "boundary": 64,
     "visibleRadius": 64
   },
@@ -1297,6 +1392,7 @@
     "oRadius": 84,
     "iRadius": 94,
     "sides": 11,
+    "maxBoundary": 52.33333333333333,
     "boundary": 52.33333333333333,
     "visibleRadius": 94
   },
@@ -1311,6 +1407,7 @@
     "oRadius": 40,
     "iRadius": 42,
     "sides": 17,
+    "maxBoundary": 64,
     "boundary": 64,
     "visibleRadius": 64
   },
@@ -1325,6 +1422,7 @@
     "oRadius": 87,
     "iRadius": 97,
     "sides": 13,
+    "maxBoundary": 53.333333333333336,
     "boundary": 53.333333333333336,
     "visibleRadius": 97
   },
@@ -1339,6 +1437,7 @@
     "oRadius": 72,
     "iRadius": 82,
     "sides": 11,
+    "maxBoundary": 48.33333333333333,
     "boundary": 48.33333333333333,
     "visibleRadius": 82
   },
@@ -1351,6 +1450,7 @@
     "maxHealth": 90,
     "currentHealth": 90,
     "radius": 123,
+    "maxBoundary": 145,
     "boundary": 145,
     "visibleRadius": 123
   },
@@ -1365,6 +1465,7 @@
     "oRadius": 74,
     "iRadius": 84,
     "sides": 12,
+    "maxBoundary": 49,
     "boundary": 49,
     "visibleRadius": 84
   }

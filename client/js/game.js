@@ -20,6 +20,7 @@ var players
 var trees = []
 var bushes = []
 var rocks = []
+var graves = []
 var projectiles = []
 
 var weapon = 'melee'
@@ -82,6 +83,7 @@ function setupClientServerCommunication() {
     trees = []
     bushes = []
     rocks = []
+    graves = []
     for (objectId in data) {
       if (data[objectId].type == 'tree') {
         trees.push(data[objectId])
@@ -91,6 +93,9 @@ function setupClientServerCommunication() {
       }
       else if (data[objectId].type == 'rock') {
         rocks.push(data[objectId])
+      }
+      else if (data[objectId].type == 'grave') {
+        graves.push(data[objectId])
       }
     }
   })
@@ -194,6 +199,9 @@ function updateMap() {
   drawBackground()
   drawCoordinateGrid()
   writeCoordinates()
+  for (id in graves) {
+    drawGrave(graves[id])
+  }
   context.beginPath()
   for (id in players) {
     if (id !== 'undefined') {
@@ -216,19 +224,19 @@ function updateMap() {
   for (id in rocks) {
     drawRock(rocks[id])
   }
-  for (id in projectiles) {
-    drawProjectile(projectiles[id])
-  }
+  // for (id in projectiles) {
+  //   drawProjectile(projectiles[id])
+  // }
   context.closePath()
 }
 
 function writeCoordinates() {
   context.beginPath()
-  context.fillStyle = "white"
+  context.fillStyle = 'white'
   context.fillRect(canvas.width - 250, 0, canvas.width, 30)
-  context.fillStyle = "black"
+  context.fillStyle = 'black'
 
-  context.fillText("x: " + position.currentx + ", y: " + position.currenty + " angle: " + position.currentAttackAngle, canvas.width - 240, 15)
+  context.fillText('x: ' + position.currentx + ', y: ' + position.currenty + ' angle: ' + position.currentAttackAngle, canvas.width - 240, 15)
   context.fill()
 }
 
@@ -421,8 +429,8 @@ function drawRock(rock) {
   ydiff = players[socket.id].y - rock.y
   newX = halfScreenWidth - xdiff
   newY = halfScreenHeight - ydiff
-  context.fillStyle = "lightgray"
-  context.strokeStyle = "black"
+  context.fillStyle = 'lightgray'
+  context.strokeStyle = 'black'
   context.lineWidth=5
   context.beginPath()
   context.arc(newX, newY, rock.radius, 0 , 2*Math.PI)
@@ -437,9 +445,9 @@ function drawBush(bush) {
   ydiff = players[socket.id].y - bush.y
   newX = halfScreenWidth - xdiff
   newY = halfScreenHeight - ydiff
-  drawStar(newX, newY, bush.oRadius, bush.iRadius, bush.sides, "darkgreen", "darkgreen")
-  drawStar(newX, newY, (bush.oRadius * 3)/4, (bush.iRadius * 3) / 4, bush.sides, "green", "green")
-  drawStar(newX, newY, bush.oRadius/2, bush.iRadius/2, bush.sides, "lightgreen", "lightgreen")
+  drawStar(newX, newY, bush.oRadius, bush.iRadius, bush.sides, 'darkgreen', 'darkgreen')
+  drawStar(newX, newY, (bush.oRadius * 3)/4, (bush.iRadius * 3) / 4, bush.sides, 'green', 'green')
+  drawStar(newX, newY, bush.oRadius/2, bush.iRadius/2, bush.sides, 'lightgreen', 'lightgreen')
 
 }
 
@@ -473,12 +481,31 @@ function drawStar(cx, cy, oRadius, iRadius, sides, strokeStyle, fillStyle) {
 }
 
 function drawTree(tree) {
-  xdiff = players[socket.id].x - tree.x
-  ydiff = players[socket.id].y - tree.y
-  newX = halfScreenWidth - xdiff
-  newY = halfScreenHeight - ydiff
-  drawStar(newX, newY, tree.oRadius, tree.iRadius, tree.sides, 'green', 'rgba(0,80,0,.9)')
-  drawStar(newX, newY, (tree.oRadius/3), (tree.iRadius/3), tree.sides, 'rgb(73, 51, 0)', 'rgb(84, 51, 0)')
+  if (tree.currentHealth > 0) {
+    xdiff = players[socket.id].x - tree.x
+    ydiff = players[socket.id].y - tree.y
+    newX = halfScreenWidth - xdiff
+    newY = halfScreenHeight - ydiff
+    drawStar(newX, newY, tree.oRadius, tree.iRadius, tree.sides, 'green', 'rgba(0,80,0,.9)')
+    drawStar(newX, newY, (tree.oRadius/3), (tree.iRadius/3), tree.sides, 'rgb(73, 51, 0)', 'rgb(84, 51, 0)')
+  }
+}
+
+function drawGrave(grave) {
+  xdiff = players[socket.id].x - grave.x
+  ydiff = players[socket.id].y - grave.y
+  x = halfScreenWidth - xdiff
+  y = halfScreenHeight - ydiff
+  context.lineWidth = 1
+  context.fillStyle = 'rgba(107, 106, 107, 0.4)'
+  context.strokeStyle = 'rgba(107, 106, 107, 0.4)'
+  context.beginPath()
+  context.arc(x, y, grave.radius, 0, 2 * Math.PI)
+  context.closePath()
+  context.stroke()
+  context.fill()
+  context.lineWidth = 1
+  context.strokeStyle = 'black'
 }
 
 function drawProjectile(projectile) {
@@ -486,8 +513,8 @@ function drawProjectile(projectile) {
   ydiff = players[socket.id].y - projectile.y
   newX = halfScreenWidth - xdiff
   newY = halfScreenHeight - ydiff
-  context.fillStyle = "blue"
-  context.strokeStyle = "blue"
+  context.fillStyle = 'rgb(0, 0, 255, 0.1)'
+  context.strokeStyle = 'rgb(0, 0, 255, 0.1)'
   context.lineWidth=5
   context.beginPath()
   context.arc(newX, newY, projectile.radius, 0 , 2*Math.PI)
@@ -500,7 +527,7 @@ function drawProjectile(projectile) {
 
 function drawBackground() {
   context.beginPath()
-  context.fillStyle = "rgb(153, 255, 102)"
+  context.fillStyle = 'rgb(153, 255, 102)'
   context.fillRect(0,0,canvas.width,canvas.height)
   context.fill()
 }

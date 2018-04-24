@@ -330,29 +330,143 @@ var projectileIsInObject = function(projectile, object) {
   return false;
 }
 
-var damageObject = function(projectile, object) {
-  if (object.type == 'tree') {
-    damageTree(projectile, object)
+var projectileExpired = function(projectile) {
+  if (projectile.speed == 0) {
+    return true
   }
-  if (object.type == 'rock') {
-    damageRock(projectile, object)
+  return false
+}
+
+var damageObject = function(projectileId, objectId) {
+  if (map[objectId].type == 'tree') {
+    damageTree(projectileId, objectId)
   }
-  if (object.type == 'bush') {
-    damageBush(projectile, object)
+  if (map[objectId].type == 'rock') {
+    damageRock(projectileId, objectId)
+  }
+  if (map[objectId].type == 'bush') {
+    damageBush(projectileId, objectId)
   }
 }
 
-var damageTree = function(projectile, object) {
-  var newHealth = object.currentHealth - projectile.damage + 0.0
-  var newBoundary = object.boundary * (newHealth / object.maxHealth)
+var damageTree = function(projectileId, objectId) {
+  var newHealth = map[objectId].currentHealth - projectiles[projectileId].damage + 0.0
+  if (newHealth > 0) {
+    var sizeFactor = 1.0
+    if (newHealth >= 50) {
+      sizeFactor = 0.9
+    } else if (newHealth >= 40) {
+      sizeFactor = 0.83
+    } else if (newHealth >= 30) {
+      sizeFactor = 0.76
+    } else if (newHealth >= 20) {
+      sizeFactor = 0.70
+    } else if (newHealth >= 10) {
+      sizeFactor = 0.65
+    } else {
+      sizeFactor = 0.63
+    }
+    var newBoundary = map[objectId].maxBoundary * sizeFactor
+    var newIRadius = Math.max((newBoundary - 22) * 3 + 5, 5)
+    var newORadius = newIRadius - 10
+    map[objectId].currentHealth = newHealth
+    map[objectId].boundary = newBoundary
+    map[objectId].iRadius = newIRadius
+    map[objectId].oRadius = newORadius
+  } else {
+    var grave = {
+      id: uuidv4(),
+      type: 'grave',
+      x: map[objectId].x,
+      y: map[objectId].y,
+      radius: map[objectId].iRadius / 2,
+      boundary: 0
+    }
+    map[grave.id] = grave
+    map[objectId].currentHealth = newHealth
+    map[objectId].boundary = 0
+    map[objectId].iRadius = 0
+    map[objectId].oRadius = 0
+  }
 }
 
-var damageRock = function(projectile, object) {
-
+var damageRock = function(projectileId, objectId) {
+  var newHealth = map[objectId].currentHealth - projectiles[projectileId].damage + 0.0
+  if (newHealth > 0) {
+    var sizeFactor = 1.0
+    if (newHealth >= 80) {
+      sizeFactor = 0.9
+    } else if (newHealth >= 70) {
+      sizeFactor = 0.83
+    } else if (newHealth >= 60) {
+      sizeFactor = 0.76
+    } else if (newHealth >= 50) {
+      sizeFactor = 0.70
+    } else if (newHealth >= 40) {
+      sizeFactor = 0.65
+    } else if (newHealth >= 30) {
+      sizeFactor = 0.61
+    } else if (newHealth >= 20) {
+      sizeFactor = 0.57
+    } else if (newHealth >= 10) {
+      sizeFactor = 0.53
+    } else {
+      sizeFactor = 0.50
+    }
+    var newBoundary = map[objectId].maxBoundary * sizeFactor
+    var newRadius = newBoundary - 22
+    map[objectId].currentHealth = newHealth
+    map[objectId].boundary = newBoundary
+    map[objectId].radius = newRadius
+  } else {
+    var grave = {
+      id: uuidv4(),
+      type: 'grave',
+      x: map[objectId].x,
+      y: map[objectId].y,
+      radius: map[objectId].radius / 2,
+      boundary: 0
+    }
+    map[grave.id] = grave
+    map[objectId].currentHealth = newHealth
+    map[objectId].boundary = 0
+    map[objectId].radius = 0
+  }
 }
 
-var damageBush = function(projectile, object) {
-
+var damageBush = function(projectileId, objectId) {
+  var newHealth = map[objectId].currentHealth - projectiles[projectileId].damage + 0.0
+  if (newHealth > 0) {
+    var sizeFactor = 1.0
+    if (newHealth >= 20) {
+      sizeFactor = 0.9
+    } else if (newHealth >= 10) {
+      sizeFactor = 0.84
+    } else {
+      sizeFactor = 0.79
+    }
+    var newBoundary = map[objectId].maxBoundary * sizeFactor
+    var newIRadius = newBoundary - 22
+    var newORadius = newIRadius - 2
+    map[objectId].currentHealth = newHealth
+    map[objectId].boundary = newBoundary
+    map[objectId].iRadius = newIRadius
+    map[objectId].oRadius = newORadius
+  } else {
+    var grave = {
+      id: uuidv4(),
+      type: 'grave',
+      x: map[objectId].x,
+      y: map[objectId].y,
+      radius: map[objectId].iRadius / 2,
+      boundary: 0
+    }
+    map[grave.id] = grave
+    map[objectId].currentHealth = newHealth
+    map[objectId].boundary = 0
+    map[objectId].iRadius = 0
+    map[objectId].oRadius = 0
+  }
 }
 
 var sendGameUpdates = function() {
@@ -389,10 +503,20 @@ var sendProjectiles = function() {
 
 var processProjectiles = function() {
   for (var projectileId in projectiles) {
+    var projectileDeleted = false
     for (var objectId in map) {
-      if (projectileIsInObject(projectiles[projectileId], map[objectId])) {
-        damageObject(projectiles[projectileId], map[objectId])
+      if (map[objectId].type != 'grave') {
+        if (projectileIsInObject(projectiles[projectileId], map[objectId])) {
+          damageObject(projectileId, objectId)
+          delete projectiles[projectileId]
+          projectileDeleted = true
+          break
+        }
       }
+    }
+    if (!projectileDeleted && projectileExpired(projectiles[projectileId])) {
+      delete projectiles[projectileId]
+      break
     }
   }
 }
@@ -405,4 +529,4 @@ http.listen(7070, function(err){
 setInterval(sendGameUpdates, 1000 / 60)
 setInterval(sendMapInfo, 1000 / 60)
 setInterval(sendProjectiles, 1000 / 60)
-setInterval(processProjectiles, 1000, 60)
+setInterval(processProjectiles, 1000 / 60)
