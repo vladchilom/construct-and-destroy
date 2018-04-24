@@ -5,72 +5,12 @@ var app = express()
 var http = require('http').Server(app)
 var io = require('socket.io')(http)
 var config = require('config')
-var uuidv4 = require('uuid/v4');
-var util = require('./util/util.js');
-var m = require('./util/map.json')
-var fs = require('fs')
+var uuidv4 = require('uuid/v4')
+var util = require('./util/util.js')
+var map = require('../config/map.json').map
 
 var players = {}
-var mapObjects = m.mapObjects
 app.use(express.static(__dirname + '/../client'))
-
-function addTree(coords) {
-  var oRadius = util.randomInRange(70, 100)
-  var iRadius = (oRadius + 10)
-  var sides = util.randomInRange(10, 14)
-  mapObjects.push({
-    id: uuidv4(),
-    type: 'tree',
-    x: coords.x,
-    y: coords.y,
-    oRadius: oRadius,
-    iRadius: iRadius,
-    sides: sides,
-    boundary: iRadius / 3 + 21
-  })
-}
-
-function addBush(coords) {
-  var oRadius = 40
-  var iRadius = (oRadius + 2)
-  var sides = util.randomInRange(15, 20)
-  mapObjects.push({
-    id: uuidv4(),
-    type: 'bush',
-    x: coords.x,
-    y: coords.y,
-    oRadius: oRadius,
-    iRadius: iRadius,
-    sides: sides,
-    boundary: iRadius + 22
-  })
-}
-
-function addRock(coords) {
-  var radius = util.randomInRange(120, 150)
-  mapObjects.push({
-    id: uuidv4(),
-    type: 'rock',
-    x: coords.x,
-    y: coords.y,
-    radius: radius,
-    boundary: radius + 22
-  })
-}
-
-function writeMap() {
-  fs.readFile('server/util/map.json', 'utf8', function readFileCallback(err, data) {
-  if (err) {
-    console.log(err)
-  }
-  else {
-    var obj = JSON.parse(data)
-    obj.mapObjects = mapObjects
-    obj = JSON.stringify(obj, null, 4)
-    fs.writeFile('server/util/map.json', obj, 'utf8', (error) => { console.log("Error!"); })
-  }
-})
-}
 
 app.get('/', function(req, res) {
   res.sendFile('index.html', { root: './client/html/' })
@@ -113,36 +53,6 @@ io.on('connection', function(socket) {
     if (id && attackAngle) {
       players[id].attackAngle = attackAngle
     }
-  })
-
-  socket.on('Create Object', function() {
-    // var buildRadius = 0
-    // var randomVar = util.randomInRange(0, 100)
-    // for (var i = 0; i < mapObjects.length; i++) {
-    //   if (mapObjects[i].type == "tree") {
-    //     buildRadius = 240
-    //   }
-    //   else if (mapObjects[i].type == "bush") {
-    //     buildRadius = 240
-    //   }
-    //   else {
-    //     buildRadius = 240
-    //   }
-    //   if ((mapObjects[i].x <= players[socket.id].x + buildRadius && mapObjects[i].x >= players[socket.id].x - buildRadius) && (mapObjects[i].y <= players[socket.id].y + buildRadius && mapObjects[i].y >= players[socket.id].y - buildRadius)) {
-    //     return
-    //   }
-    // }
-  
-    // if (randomVar <= 20) {
-    //   addRock({x: players[socket.id].x, y: players[socket.id].y})
-    // }
-    // else if (randomVar <= 65) {
-    //   addTree({x: players[socket.id].x, y: players[socket.id].y})
-    // }
-    // else if (randomVar <= 100) {
-    //   addBush({x: players[socket.id].x, y: players[socket.id].y})
-    // }
-    // writeMap()
   })
 
   socket.on('window resized', function(data) {
@@ -196,8 +106,8 @@ var isLegalMovement = function(id, x, y) {
 
 var isMovingIntoObject = function(id, x, y, ignoreId) {
   if (ignoreId != 'none') {
-    for (var i = 0; i < mapObjects.length; i++) {
-      var object = mapObjects[i]
+    for (var i = 0; i < map.length; i++) {
+      var object = map[i]
       if (object.id != ignoreId) {
         var distance = Math.sqrt((object.x - x) * (object.x - x) + (object.y - y) * (object.y - y))
         if (distance <= object.boundary) {
@@ -206,8 +116,8 @@ var isMovingIntoObject = function(id, x, y, ignoreId) {
       }
     }
   } else {
-    for (var i = 0; i < mapObjects.length; i++) {
-      var object = mapObjects[i]
+    for (var i = 0; i < map.length; i++) {
+      var object = map[i]
       var distance = Math.sqrt((object.x - x) * (object.x - x) + (object.y - y) * (object.y - y))
       if (distance <= object.boundary) {
         return { status: true, object: object }
@@ -370,7 +280,7 @@ var sendGameUpdates = function() {
 }
 
 var sendMapInfo = function() {
-  io.emit('map objects', mapObjects)
+  io.emit('map objects', map)
 }
 
 http.listen(7070, function(err){
