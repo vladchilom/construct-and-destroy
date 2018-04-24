@@ -283,6 +283,9 @@ var isWithinArenaBoundsY = function(id, y) {
 }
 
 var objectIsVisible = function(object, player) {
+  if (!object.visibleRadius) {
+    object.visibleRadius = config.get('playerRadius')
+  }
   if ((object.x + object.visibleRadius) >= (player.x - player.halfScreenWidth)) {
     if ((object.x - object.visibleRadius) <= (player.x + player.halfScreenWidth)) {
       if ((object.y + object.visibleRadius) >= (player.y - player.halfScreenHeight)) {
@@ -296,7 +299,19 @@ var objectIsVisible = function(object, player) {
 }
 
 var sendGameUpdates = function() {
-  io.emit('players', players)
+  for (var me in players) {
+    var visiblePlayers = {}
+    for (var id in players) {
+      if (me == id) {
+        visiblePlayers[me] = players[me]
+      } else {
+        if (objectIsVisible(players[id], players[me])) {
+          visiblePlayers[id] = players[id]
+        }
+      }
+    }
+    sockets[me].emit('players', visiblePlayers)
+  }
 }
 
 var sendMapInfo = function() {
