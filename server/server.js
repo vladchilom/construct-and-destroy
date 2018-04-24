@@ -7,10 +7,11 @@ var io = require('socket.io')(http)
 var config = require('config')
 var uuidv4 = require('uuid/v4')
 var util = require('./util/util.js')
-var map = require('../config/map.json').map
+var map = require('../config/map.json')
 
 var sockets = {}
 var players = {}
+var projectiles = {}
 app.use(express.static(__dirname + '/../client'))
 
 app.get('/', function(req, res) {
@@ -25,6 +26,8 @@ io.on('connection', function(socket) {
 
   players[socket.id] = {
     id: socket.id,
+    type: 'player',
+    health: 100,
     x: 450,
     y: 450,
     halfScreenWidth: config.get('gameWidth') / 2,
@@ -82,12 +85,30 @@ io.on('connection', function(socket) {
 
 var processMeleeAttack = function(id) {
   var now = new Date()
-  if (now <= (players[id].lastAttack + players[id].lastAttackDuration)) {
+  if (now <= new Date(players[id].lastAttack.getTime() + players[id].lastAttackDuration)) {
     return
   }
   players[id].lastAttack = now
   players[id].lastAttackWeapon = 'melee'
   players[id].lastAttackDuration = config.get('attackAnimationDuration.melee')
+  addMeleeProjectile(players[id])
+}
+
+var addMeleeProjectile = function(player) {
+  var x = player.x + (config.get('playerRadius') + 12) * Math.cos(-player.attackAngle)
+  var y = player.y + (config.get('playerRadius') + 12) * Math.sin(-player.attackAngle)
+  var projectile = {
+    id: uuidv4(),
+    sentBy: player.id,
+    x: x,
+    y: y,
+    direction: player.attackAngle,
+    damage: config.get('attackDamage.melee'),
+    radius: config.get('attackRadius.melee'),
+    speed: config.get('attackTravelSpeed.melee'),
+    color: config.get('attackColor.melee')
+  }
+  projectiles[projectile.id] = projectile
 }
 
 var setupGame = function(socket) {
@@ -113,8 +134,8 @@ var isLegalMovement = function(id, x, y) {
 
 var isMovingIntoObject = function(id, x, y, ignoreId) {
   if (ignoreId != 'none') {
-    for (var i = 0; i < map.length; i++) {
-      var object = map[i]
+    for (var id in map) {
+      var object = map[id]
       if (object.id != ignoreId) {
         var distance = Math.sqrt((object.x - x) * (object.x - x) + (object.y - y) * (object.y - y))
         if (distance <= object.boundary) {
@@ -123,8 +144,8 @@ var isMovingIntoObject = function(id, x, y, ignoreId) {
       }
     }
   } else {
-    for (var i = 0; i < map.length; i++) {
-      var object = map[i]
+    for (var id in map) {
+      var object = map[id]
       var distance = Math.sqrt((object.x - x) * (object.x - x) + (object.y - y) * (object.y - y))
       if (distance <= object.boundary) {
         return { status: true, object: object }
@@ -298,6 +319,42 @@ var objectIsVisible = function(object, player) {
   return false
 }
 
+var projectileIsInObject = function(projectile, object) {
+  var boundary = object.boundary - config.get('playerRadius')
+  var centerDiff = Math.sqrt((projectile.x - object.x) * (projectile.x - object.x) + (projectile.y - object.y) * (projectile.y - object.y))
+  if (centerDiff >= Math.abs(boundary - projectile.radius)) {
+    if (centerDiff <= (boundary + projectile.radius)) {
+      return true;
+    }
+  }
+  return false;
+}
+
+var damageObject = function(projectile, object) {
+  if (object.type == 'tree') {
+    damageTree(projectile, object)
+  }
+  if (object.type == 'rock') {
+    damageRock(projectile, object)
+  }
+  if (object.type == 'bush') {
+    damageBush(projectile, object)
+  }
+}
+
+var damageTree = function(projectile, object) {
+  var newHealth = object.currentHealth - projectile.damage + 0.0
+  var newBoundary = object.boundary * (newHealth / object.maxHealth)
+}
+
+var damageRock = function(projectile, object) {
+
+}
+
+var damageBush = function(projectile, object) {
+
+}
+
 var sendGameUpdates = function() {
   for (var me in players) {
     var visiblePlayers = {}
@@ -315,11 +372,28 @@ var sendGameUpdates = function() {
 }
 
 var sendMapInfo = function() {
-  for (var id in players) {
-    var visibleObjects = map.filter(function(object) {
-      return objectIsVisible(object, players[id])
-    })
-    sockets[id].emit('map objects', visibleObjects)
+  for (var playerId in players) {
+    var visibleObjects = {}
+    for (var objectId in map) {
+      if (objectIsVisible(map[objectId], players[playerId])) {
+        visibleObjects[objectId] = map[objectId]
+      }
+    }
+    sockets[playerId].emit('map objects', visibleObjects)
+  }
+}
+
+var sendProjectiles = function() {
+  io.emit('projectiles', projectiles)
+}
+
+var processProjectiles = function() {
+  for (var projectileId in projectiles) {
+    for (var objectId in map) {
+      if (projectileIsInObject(projectiles[projectileId], map[objectId])) {
+        damageObject(projectiles[projectileId], map[objectId])
+      }
+    }
   }
 }
 
@@ -330,3 +404,5 @@ http.listen(7070, function(err){
 
 setInterval(sendGameUpdates, 1000 / 60)
 setInterval(sendMapInfo, 1000 / 60)
+setInterval(sendProjectiles, 1000 / 60)
+setInterval(processProjectiles, 1000, 60)

@@ -20,6 +20,7 @@ var players
 var trees = []
 var bushes = []
 var rocks = []
+var projectiles = []
 
 var weapon = 'melee'
 var position
@@ -81,17 +82,21 @@ function setupClientServerCommunication() {
     trees = []
     bushes = []
     rocks = []
-    for (var i = 0; i < data.length; i++) {
-      if (data[i].type == 'tree') {
-        trees.push(data[i])
+    for (objectId in data) {
+      if (data[objectId].type == 'tree') {
+        trees.push(data[objectId])
       }
-      else if (data[i].type == 'bush') {
-        bushes.push(data[i])
+      else if (data[objectId].type == 'bush') {
+        bushes.push(data[objectId])
       }
-      else if (data[i].type == 'rock') {
-        rocks.push(data[i])
+      else if (data[objectId].type == 'rock') {
+        rocks.push(data[objectId])
       }
     }
+  })
+
+  socket.on('projectiles', function(data) {
+    projectiles = data
   })
 
   socket.on('player disconnected', function(data) {
@@ -202,9 +207,18 @@ function updateMap() {
       }
     }
   }
-  trees.forEach(drawTree);
-  bushes.forEach(drawBush);
-  rocks.forEach(drawRock);
+  for (id in trees) {
+    drawTree(trees[id])
+  }
+  for (id in bushes) {
+    drawBush(bushes[id])
+  }
+  for (id in rocks) {
+    drawRock(rocks[id])
+  }
+  for (id in projectiles) {
+    drawProjectile(projectiles[id])
+  }
   context.closePath()
 }
 
@@ -409,11 +423,13 @@ function drawRock(rock) {
   newY = halfScreenHeight - ydiff
   context.fillStyle = "lightgray"
   context.strokeStyle = "black"
-  context.beginPath();
+  context.lineWidth=5
+  context.beginPath()
   context.arc(newX, newY, rock.radius, 0 , 2*Math.PI)
   context.closePath()
-  context.stroke();
-  context.fill();
+  context.stroke()
+  context.fill()
+  context.lineWidth = 1
 }
 
 function drawBush(bush) {
@@ -428,31 +444,31 @@ function drawBush(bush) {
 }
 
 function drawStar(cx, cy, oRadius, iRadius, sides, strokeStyle, fillStyle) {
-  var rot=Math.PI/2*3;
-  var x=cx;
-  var y=cy;
-  var step = Math.PI/sides;
+  var rot=Math.PI/2*3
+  var x=cx
+  var y=cy
+  var step = Math.PI/sides
 
-  context.beginPath();
+  context.beginPath()
   context.moveTo(cx,cy-oRadius)
   for(i=0; i<sides; i++){
-    x=cx+Math.cos(rot)*oRadius;
-    y=cy+Math.sin(rot)*oRadius;
+    x=cx+Math.cos(rot)*oRadius
+    y=cy+Math.sin(rot)*oRadius
     context.lineTo(x,y)
     rot+=step
 
-    x=cx+Math.cos(rot)*iRadius;
-    y=cy+Math.sin(rot)*iRadius;
+    x=cx+Math.cos(rot)*iRadius
+    y=cy+Math.sin(rot)*iRadius
     context.lineTo(x,y)
     rot+=step
   }
-  context.lineTo(cx,cy-oRadius);
-  context.closePath();
-  context.lineWidth=5;
-  context.strokeStyle = strokeStyle;
-  context.stroke();
-  context.fillStyle = fillStyle;
-  context.fill();
+  context.lineTo(cx,cy-oRadius)
+  context.closePath()
+  context.lineWidth=5
+  context.strokeStyle = strokeStyle
+  context.stroke()
+  context.fillStyle = fillStyle
+  context.fill()
     
 }
 
@@ -463,7 +479,22 @@ function drawTree(tree) {
   newY = halfScreenHeight - ydiff
   drawStar(newX, newY, tree.oRadius, tree.iRadius, tree.sides, 'green', 'rgba(0,80,0,.9)')
   drawStar(newX, newY, (tree.oRadius/3), (tree.iRadius/3), tree.sides, 'rgb(73, 51, 0)', 'rgb(84, 51, 0)')
+}
 
+function drawProjectile(projectile) {
+  xdiff = players[socket.id].x - projectile.x
+  ydiff = players[socket.id].y - projectile.y
+  newX = halfScreenWidth - xdiff
+  newY = halfScreenHeight - ydiff
+  context.fillStyle = "blue"
+  context.strokeStyle = "blue"
+  context.lineWidth=5
+  context.beginPath()
+  context.arc(newX, newY, projectile.radius, 0 , 2*Math.PI)
+  context.closePath()
+  context.stroke()
+  context.fill()
+  context.lineWidth = 1
 }
 
 

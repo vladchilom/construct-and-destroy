@@ -1,10 +1,22 @@
 {
   "gameWidth": 4500,
   "gameHeight": 4500,
-  "gameSpeed": 8,
+  "gameSpeed": 5,
   "gridSpacing": 200,
   "playerRadius": 20,
+  "attackDamage": {
+    "melee": 10
+  },
   "attackAnimationDuration": {
     "melee": 300
+  },
+  "attackRadius": {
+    "melee": 20
+  },
+  "attackTravelSpeed": {
+    "melee": 0
+  },
+  "attackColor": {
+    "melee": "none"
   }
 }
