@@ -8,6 +8,7 @@ var config = require('config')
 var uuidv4 = require('uuid/v4')
 var util = require('./util/util.js')
 var map = require('../config/map.json')
+var minimap = require('../config/minimap.json')
 
 var sockets = {}
 var players = {}
@@ -73,9 +74,11 @@ io.on('connection', function(socket) {
 var makeNewPlayer = function(socket) {
   return {
     id: socket.id,
+    name: 'Dennis',
     type: 'player',
     health: 100,
     materials: 0,
+    kill: 0,
     x: 450,
     y: 450,
     halfScreenWidth: config.get('gameWidth') / 2,
@@ -123,7 +126,8 @@ var setupGame = function(socket) {
     gameWidth: config.get('gameWidth'),
     gameHeight: config.get('gameHeight'),
     gridSpacing: config.get('gridSpacing'),
-    playerRadius: config.get('playerRadius')
+    playerRadius: config.get('playerRadius'),
+    minimap: minimap
   }
   socket.emit('setup game', specs)
 }

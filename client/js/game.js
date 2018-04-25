@@ -3,6 +3,8 @@ var Position = require('./Position')
 var Map = require('./Map')
 var Player = require('./Player')
 
+setInterval(drawHUDMiniMap, 1000)
+
 $(() => {
   //showLoadingDiv()
   loadImages()
@@ -17,8 +19,10 @@ $(() => {
 var socket
 var canvas
 var context
+var minimapImage
 var materialImage
 var meleeImage
+var minimapDrawn = false
 
 var players
 var trees = []
@@ -115,9 +119,11 @@ function setupClientServerCommunication() {
 
 function loadImages() {
   materialImage = new Image()
-  materialImage.src = '../img/wood2.png'
+  materialImage.src = '../img/wood3.png'
+  minimapImage = new Image()
+  minimapImage.src = '../img/minimap.png'
   meleeImage = new Image()
-  meleeImage.src = '../img/melee.png'
+  meleeImage.src = '../img/melee2.png'
 }
 
 function showLoadingDiv() {
@@ -218,10 +224,10 @@ function updateMap() {
     return
   }
   processPlayerInput()
+  drawHUD()
   map.clear()
   drawBackground()
   drawCoordinateGrid()
-  writeCoordinates()
   for (id in graves) {
     drawGrave(graves[id])
   }
@@ -253,17 +259,6 @@ function updateMap() {
   }
 }
 
-function writeCoordinates() {
-  context.beginPath()
-  context.fillStyle = 'white'
-  context.fillRect(canvas.width - 250, 0, canvas.width, 30)
-  context.fillStyle = 'black'
-
-  context.fillText('x: ' + position.currentx + ', y: ' + position.currenty + ' angle: ' + position.currentAttackAngle, canvas.width - 240, 15)
-  context.fill()
-  context.closePath()
-}
-
 function drawHUD() {
   if (!players[socket.id]) {
     return
@@ -271,6 +266,8 @@ function drawHUD() {
   drawHealthBar()
   drawHUDMaterials()
   drawHUDWeapon()
+  drawHUDMiniMap()
+  drawHUDLeaderboard()
 }
 
 function drawHealthBar() {
@@ -292,7 +289,6 @@ function drawHealthBar() {
   context.fillRect(healthX + (healthCornerRadius / 2), healthY + (healthCornerRadius / 2), healthWidth - healthCornerRadius,  healthHeight - healthCornerRadius) 
   context.closePath()
 
-  context.lineWidth = 5
   context.lineJoin = 'round'
   context.lineWidth = healthCornerRadius
   context.fillStyle = 'rgba(0, 0, 0, 0)'
@@ -306,6 +302,9 @@ function drawHealthBar() {
   context.strokeRect(healthX + (healthCornerRadius / 2), healthY + (healthCornerRadius / 2), healthPercentage,  healthHeight - healthCornerRadius)
   context.fillRect(healthX + (healthCornerRadius / 2), healthY + (healthCornerRadius / 2), healthWidth - healthCornerRadius,  healthHeight - healthCornerRadius) 
   context.closePath()
+
+  context.lineJoin = 'miter'
+  context.lineWidth = 1
 }
 
 function drawHUDMaterials() {
@@ -318,17 +317,20 @@ function drawHUDMaterials() {
   var imageOffset = (materialWidth - imageSize) / 1.5
 
   var font = (materialWidth / 5) + 'px sans-serif'
-  context.font = 
   context.font = font
   context.textAlign = 'center'
   context.textBaseline = 'middle'
-  context.fillStyle = 'rgba(0, 0, 0, 0.10'
+  context.fillStyle = 'rgba(0, 0, 0, 0.6)'
+  context.lineWidth = 2
+  context.strokeStyle = 'rgba(0, 0, 0, 0.8)'
+  context.textStyle = 'white'
 
   context.beginPath()
+  context.strokeRect(materialX, materialY, materialWidth, materialHeight)
   context.fillRect(materialX, materialY, materialWidth, materialHeight)
   context.drawImage(materialImage, materialX + imageOffset / 1.2, materialY + imageOffset, imageSize, imageSize)
 
-  context.fillStyle = 'black'
+  context.fillStyle = 'white'
   context.fillText(players[socket.id].materials, materialX + materialWidth / 4.5, materialY + materialWidth / 6.0)
   context.fill()
 
@@ -345,16 +347,118 @@ function drawHUDWeapon() {
   var imageOffset = (weaponWidth - imageSize) / 1.5
 
   var font = (weaponWidth / 5) + 'px sans-serif'
-  context.font = 
   context.font = font
   context.textAlign = 'center'
   context.textBaseline = 'middle'
-  context.fillStyle = 'rgba(0, 0, 0, 0.10'
+  context.fillStyle = 'rgba(0, 0, 0, 0.6)'
+  context.lineWidth = 2
+  context.strokeStyle = 'rgba(0, 0, 0, 0.8)'
 
   context.beginPath()
+  context.strokeRect(weaponX, weaponY, weaponWidth, weaponWidth)
   context.fillRect(weaponX, weaponY, weaponWidth, weaponWidth)
-  console.log(weaponX, weaponY, weaponWidth)
   context.drawImage(meleeImage, weaponX + imageOffset / 1.2, weaponY + imageOffset / 1.2, imageSize, imageSize)
+
+  context.fillStyle = 'black'
+  context.fill()
+
+  context.closePath()
+}
+
+function drawHUDMiniMap() {
+  if (!gameSpecs) {
+    return
+  }
+  var minimapWidth = Math.min(window.innerWidth / 4, window.innerHeight / 4)
+  minimapWidth = Math.max(minimapWidth, 100)
+  var minimapHeight = minimapWidth
+  var minimapX = 15
+  var minimapY = 15
+
+  var font = (minimapWidth / 5) + 'px sans-serif'
+  context.font = font
+  context.textAlign = 'center'
+  context.textBaseline = 'middle'
+  context.fillStyle = 'rgba(0, 255, 0, 0.80)'
+  context.lineWidth = 2
+  context.strokeStyle = 'rgba(0, 0, 0, 0.8)'
+
+  context.beginPath()
+  context.strokeRect(minimapX, minimapY, minimapWidth, minimapHeight)
+  context.fillRect(minimapX, minimapY, minimapWidth, minimapHeight)
+  context.drawImage(minimapImage, minimapX, minimapY, minimapWidth, minimapHeight)
+
+  context.closePath()
+
+  var playerXRelative = (players[socket.id].x / gameSpecs.gameWidth) * minimapWidth + minimapX
+  var playerYRelative = (players[socket.id].y / gameSpecs.gameHeight) * minimapHeight + minimapY
+
+  context.lineWidth = 1
+  context.fillStyle = 'red'
+
+  context.beginPath()
+  context.arc(playerXRelative, playerYRelative, 4, 0, 2 * Math.PI)
+  context.closePath()
+  context.stroke()
+  context.fill()
+  context.lineWidth = 1
+
+  // Ended up taking a screenshot of a higher rendering of the minimap
+  // Doing it dynamically was somewhat annoying
+  // will change later
+  // if (!minimapDrawn) {
+  //   for (id in gameSpecs.minimap) {
+  //     var objectXRelative = (gameSpecs.minimap[id].x / gameSpecs.gameWidth) * minimapWidth + minimapX
+  //     var objectYRelative = (gameSpecs.minimap[id].y / gameSpecs.gameHeight) * minimapHeight + minimapY
+  //     console.log(objectXRelative, objectYRelative)
+  //     context.beginPath()
+  //     if (gameSpecs.minimap[id].type == 'tree') {
+  //       context.fillStyle = 'green'
+  //       context.arc(objectXRelative, objectYRelative, 2, 0, 2 * Math.PI)
+  //     } else if (gameSpecs.minimap[id].type == 'bush') {
+  //       context.fillStyle = 'lightgreen'
+  //       context.arc(objectXRelative, objectYRelative, 1, 0, 2 * Math.PI)
+  //     } else if (gameSpecs.minimap[id].type == 'rock') {
+  //       context.fillStyle = 'lightgray'
+  //       context.arc(objectXRelative, objectYRelative, 3, 0, 2 * Math.PI)
+  //     }
+  //     context.closePath()
+  //     context.stroke()
+  //     context.fill()
+  //     context.lineWidth = 1 
+  //   }
+  //   minimapDrawn = true
+  // }
+
+  context.closePath()
+  context.fillStyle = 'black'
+  context.lineWidth = 1
+}
+
+function drawHUDLeaderboard() {
+  var leaderboardWidth = Math.min(window.innerWidth / 4, window.innerHeight / 4)
+  leaderboardWidth = Math.max(leaderboardWidth, 100)
+  var leaderboardWidth = leaderboardWidth
+  var leaderboardX = window.innerWidth - 15 - leaderboardWidth
+  var leaderboardY = 15
+
+  var font = (leaderboardWidth / 8) + 'px sans-serif'
+  context.font = font
+  context.textAlign = 'center'
+  context.textBaseline = 'middle'
+  context.fillStyle = 'rgba(0, 0, 0, 0.6)'
+  context.lineWidth = 2
+  context.strokeStyle = 'rgba(0, 0, 0, 0.8)'
+
+  context.beginPath()
+  context.strokeRect(leaderboardX, leaderboardY, leaderboardWidth, leaderboardWidth)
+  context.fillRect(leaderboardX, leaderboardY, leaderboardWidth, leaderboardWidth)
+  context.fillStyle = 'white'
+  context.fillText('Leaderboard', window.innerWidth - (leaderboardWidth / 2) - 15, leaderboardY + leaderboardWidth / 7.0)
+  context.fillText('1) Dennis', window.innerWidth - (leaderboardWidth / 2) - 15, leaderboardY + leaderboardWidth / 3.0)
+  context.fillText('2) Dennis', window.innerWidth - (leaderboardWidth / 2) - 15, leaderboardY + leaderboardWidth / 2.0)
+  context.fillText('3) Dennis', window.innerWidth - (leaderboardWidth / 2) - 15, leaderboardY + leaderboardWidth / 1.5)
+  context.fillText('4) Dennis', window.innerWidth - (leaderboardWidth / 2) - 15, leaderboardY + leaderboardWidth / 1.2)
 
   context.fillStyle = 'black'
   context.fill()
