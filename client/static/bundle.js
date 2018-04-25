@@ -66,6 +66,7 @@ var Map = require('./Map')
 var Player = require('./Player')
 
 $(() => {
+  //showLoadingDiv()
   connectToServer()
   initializeCanvas()
   initializePlayers()
@@ -171,6 +172,15 @@ function setupClientServerCommunication() {
   })
 }
 
+function showLoadingDiv() {
+  $('#loading-div').show()
+  var bar = new ProgressBar.Line('#loading-bar', { easing: 'easeInOut', strokeWidth: 0.5, duration: 2500, color: '#000000' })
+  bar.animate(1)
+  setTimeout(() => {
+    $('#loading-div').hide()
+  }, 2500)
+}
+
 function initializeMap() {
   map = new Map(canvas, context)
 
@@ -256,6 +266,9 @@ function checkIfAttacked() {
 
 function updateMap() {
   requestAnimationFrame(updateMap)
+  if (!socket) {
+    return
+  }
   processPlayerInput()
   map.clear()
   drawBackground()
@@ -286,10 +299,10 @@ function updateMap() {
   for (id in rocks) {
     drawRock(rocks[id])
   }
-  // for (id in projectiles) {
-  //   drawProjectile(projectiles[id])
-  // }
-  context.closePath()
+  drawHUD()
+  for (id in projectiles) {
+    drawProjectile(projectiles[id])
+  }
 }
 
 function writeCoordinates() {
@@ -302,6 +315,44 @@ function writeCoordinates() {
   context.fill()
 }
 
+function drawHUD() {
+  if (!players[socket.id]) {
+    return
+  }
+  var healthWidth = window.innerWidth / 3.5
+  var healthHeight = Math.min(window.innerHeight / 20, 20)
+  var healthHeightOffset = 1.5 * healthHeight
+  var healthCornerRadius = 20;
+  var healthX = halfScreenWidth - healthWidth / 2
+  var healthY = window.innerHeight - healthHeightOffset
+  var healthRatio = players[socket.id].health / 100.0
+
+  context.lineWidth = 5
+  context.lineJoin = 'round'
+  context.lineWidth = healthCornerRadius
+  context.fillStyle = 'rgba(0, 0, 0, 0)'
+  context.strokeStyle = 'rgba(0, 0, 0, 0.8)'
+
+  context.beginPath()
+  context.strokeRect(healthX + (healthCornerRadius / 2), healthY + (healthCornerRadius / 2), healthWidth - healthCornerRadius,  healthHeight - healthCornerRadius)
+  context.fillRect(healthX + (healthCornerRadius / 2), healthY + (healthCornerRadius / 2), healthWidth - healthCornerRadius,  healthHeight - healthCornerRadius) 
+  context.closePath()
+
+  context.lineWidth = 5
+  context.lineJoin = 'round'
+  context.lineWidth = healthCornerRadius
+  context.fillStyle = 'rgba(0, 0, 0, 0)'
+  context.strokeStyle = 'rgba(0, 0, 255, 0.8)'
+  if (healthRatio <= 0.15) {
+    context.strokeStyle = 'rgba(255, 0, 0, 0.8)'
+  }
+
+  context.beginPath()
+  healthPercentage = (healthWidth - healthCornerRadius) * healthRatio
+  context.strokeRect(healthX + (healthCornerRadius / 2), healthY + (healthCornerRadius / 2), healthPercentage,  healthHeight - healthCornerRadius)
+  context.fillRect(healthX + (healthCornerRadius / 2), healthY + (healthCornerRadius / 2), healthWidth - healthCornerRadius,  healthHeight - healthCornerRadius) 
+  context.closePath()
+}
 
 function resize() {
   if (!socket) {
@@ -370,6 +421,7 @@ function drawPlayer(player) {
   } else {
     drawWeapon(player, x, y)
   }
+  context.lineWidth = 1
 }
 
 function drawEnemy(player) {

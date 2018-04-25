@@ -22,22 +22,9 @@ io.on('connection', function(socket) {
   console.log(socket.id + ' connected')
   sockets[socket.id] = socket
 
-  socket.emit('request screen size')
+  players[socket.id] = makeNewPlayer(socket)
 
-  players[socket.id] = {
-    id: socket.id,
-    type: 'player',
-    health: 100,
-    x: 450,
-    y: 450,
-    halfScreenWidth: config.get('gameWidth') / 2,
-    halfScreenHeight: config.get('gameHeight') / 2,
-    attackAngle: 0,
-    equippedWeapon: 'melee',
-    lastAttack: new Date(1),
-    lastAttackWeapon: '',
-    lastAttackDuration: 0
-  }
+  socket.emit('request screen size')
 
   socket.on('update position', function(id, x, y) {
     if (!isLegalMovement(id, x, y)) {
@@ -83,6 +70,24 @@ io.on('connection', function(socket) {
   setupGame(socket)
 })
 
+var makeNewPlayer = function(socket) {
+  return {
+    id: socket.id,
+    type: 'player',
+    health: 100,
+    materials: 0,
+    x: 450,
+    y: 450,
+    halfScreenWidth: config.get('gameWidth') / 2,
+    halfScreenHeight: config.get('gameHeight') / 2,
+    attackAngle: 0,
+    equippedWeapon: 'melee',
+    lastAttack: new Date(1),
+    lastAttackWeapon: '',
+    lastAttackDuration: 0
+  }
+}
+
 var processMeleeAttack = function(id) {
   var now = new Date()
   if (now <= new Date(players[id].lastAttack.getTime() + players[id].lastAttackDuration)) {
@@ -103,6 +108,7 @@ var addMeleeProjectile = function(player) {
     x: x,
     y: y,
     direction: player.attackAngle,
+    type: 'melee',
     damage: config.get('attackDamage.melee'),
     radius: config.get('attackRadius.melee'),
     speed: config.get('attackTravelSpeed.melee'),
@@ -320,12 +326,23 @@ var objectIsVisible = function(object, player) {
 }
 
 var projectileIsInObject = function(projectile, object) {
-  var boundary = object.boundary - config.get('playerRadius')
+  var boundary = object.boundary
+  if (projectile.type == 'melee') {
+    boundary = boundary - config.get('playerRadius')
+  }
   var centerDiff = Math.sqrt((projectile.x - object.x) * (projectile.x - object.x) + (projectile.y - object.y) * (projectile.y - object.y))
   if (centerDiff >= Math.abs(boundary - projectile.radius)) {
     if (centerDiff <= (boundary + projectile.radius)) {
       return true;
     }
+  }
+  return false;
+}
+
+var projectileIsInPlayer = function(projectile, player) {
+  var centerDiff = Math.sqrt((projectile.x - player.x) * (projectile.x - player.x) + (projectile.y - player.y) * (projectile.y - player.y))
+  if (centerDiff <= (config.get('playerRadius') + projectile.radius)) {
+    return true;
   }
   return false;
 }
@@ -351,6 +368,9 @@ var damageObject = function(projectileId, objectId) {
 
 var damageTree = function(projectileId, objectId) {
   var newHealth = map[objectId].currentHealth - projectiles[projectileId].damage + 0.0
+  if (projectiles[projectileId].type == 'melee') {
+    players[projectiles[projectileId].sentBy].materials += util.randomInRange(9, 14)
+  }
   if (newHealth > 0) {
     var sizeFactor = 1.0
     if (newHealth >= 50) {
@@ -392,6 +412,9 @@ var damageTree = function(projectileId, objectId) {
 
 var damageRock = function(projectileId, objectId) {
   var newHealth = map[objectId].currentHealth - projectiles[projectileId].damage + 0.0
+  if (projectiles[projectileId].type == 'melee') {
+    players[projectiles[projectileId].sentBy].materials += util.randomInRange(5, 9)
+  }
   if (newHealth > 0) {
     var sizeFactor = 1.0
     if (newHealth >= 80) {
@@ -436,6 +459,9 @@ var damageRock = function(projectileId, objectId) {
 
 var damageBush = function(projectileId, objectId) {
   var newHealth = map[objectId].currentHealth - projectiles[projectileId].damage + 0.0
+  if (projectiles[projectileId].type == 'melee') {
+    players[projectiles[projectileId].sentBy].materials += util.randomInRange(8, 11)
+  }
   if (newHealth > 0) {
     var sizeFactor = 1.0
     if (newHealth >= 20) {
@@ -466,6 +492,15 @@ var damageBush = function(projectileId, objectId) {
     map[objectId].boundary = 0
     map[objectId].iRadius = 0
     map[objectId].oRadius = 0
+  }
+}
+
+var damagePlayer = function(projectileId, playerId) {
+  var newHealth = players[playerId].health - projectiles[projectileId].damage + 0.0
+  if (newHealth > 0) {
+    players[playerId].health = newHealth
+  } else {
+    console.log("DEAD")
   }
 }
 
@@ -511,6 +546,19 @@ var processProjectiles = function() {
           delete projectiles[projectileId]
           projectileDeleted = true
           break
+        }
+      }
+    }
+    if (!projectileDeleted) {
+      for (var playerId in players) {
+        if (playerId != projectiles[projectileId].sentBy) {
+          if (projectileIsInPlayer(projectiles[projectileId], players[playerId])) {
+            console.log(projectiles[projectileId], players[playerId])
+            damagePlayer(projectileId, playerId)
+            delete projectiles[projectileId]
+            projectileDeleted = true
+            break
+          }
         }
       }
     }
