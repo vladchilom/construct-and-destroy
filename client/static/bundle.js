@@ -67,6 +67,7 @@ var Player = require('./Player')
 
 $(() => {
   //showLoadingDiv()
+  loadImages()
   connectToServer()
   initializeCanvas()
   initializePlayers()
@@ -78,6 +79,8 @@ $(() => {
 var socket
 var canvas
 var context
+var materialImage
+var meleeImage
 
 var players
 var trees = []
@@ -170,6 +173,13 @@ function setupClientServerCommunication() {
   socket.on('player disconnected', function(data) {
     delete players[data]
   })
+}
+
+function loadImages() {
+  materialImage = new Image()
+  materialImage.src = '../img/wood2.png'
+  meleeImage = new Image()
+  meleeImage.src = '../img/melee.png'
 }
 
 function showLoadingDiv() {
@@ -313,18 +323,24 @@ function writeCoordinates() {
 
   context.fillText('x: ' + position.currentx + ', y: ' + position.currenty + ' angle: ' + position.currentAttackAngle, canvas.width - 240, 15)
   context.fill()
+  context.closePath()
 }
 
 function drawHUD() {
   if (!players[socket.id]) {
     return
   }
+  drawHealthBar()
+  drawHUDMaterials()
+  drawHUDWeapon()
+}
+
+function drawHealthBar() {
   var healthWidth = window.innerWidth / 3.5
   var healthHeight = Math.min(window.innerHeight / 20, 20)
-  var healthHeightOffset = 1.5 * healthHeight
   var healthCornerRadius = 20;
   var healthX = halfScreenWidth - healthWidth / 2
-  var healthY = window.innerHeight - healthHeightOffset
+  var healthY = window.innerHeight - healthHeight - 15
   var healthRatio = players[socket.id].health / 100.0
 
   context.lineWidth = 5
@@ -351,6 +367,60 @@ function drawHUD() {
   healthPercentage = (healthWidth - healthCornerRadius) * healthRatio
   context.strokeRect(healthX + (healthCornerRadius / 2), healthY + (healthCornerRadius / 2), healthPercentage,  healthHeight - healthCornerRadius)
   context.fillRect(healthX + (healthCornerRadius / 2), healthY + (healthCornerRadius / 2), healthWidth - healthCornerRadius,  healthHeight - healthCornerRadius) 
+  context.closePath()
+}
+
+function drawHUDMaterials() {
+  var materialWidth = Math.min(window.innerWidth / 4, window.innerHeight / 4)
+  materialWidth = Math.max(materialWidth, 100)
+  var materialHeight = materialWidth
+  var materialX = 15
+  var materialY = window.innerHeight - 15 - materialHeight
+  var imageSize = materialWidth / 1.3
+  var imageOffset = (materialWidth - imageSize) / 1.5
+
+  var font = (materialWidth / 5) + 'px sans-serif'
+  context.font = 
+  context.font = font
+  context.textAlign = 'center'
+  context.textBaseline = 'middle'
+  context.fillStyle = 'rgba(0, 0, 0, 0.10'
+
+  context.beginPath()
+  context.fillRect(materialX, materialY, materialWidth, materialHeight)
+  context.drawImage(materialImage, materialX + imageOffset / 1.2, materialY + imageOffset, imageSize, imageSize)
+
+  context.fillStyle = 'black'
+  context.fillText(players[socket.id].materials, materialX + materialWidth / 4.5, materialY + materialWidth / 6.0)
+  context.fill()
+
+  context.closePath()
+}
+
+function drawHUDWeapon() {
+  var weaponWidth = Math.min(window.innerWidth / 4, window.innerHeight / 4)
+  weaponWidth = Math.max(weaponWidth, 100)
+  var weaponWidth = weaponWidth
+  var weaponX = window.innerWidth - 15 - weaponWidth
+  var weaponY = window.innerHeight - 15 - weaponWidth
+  var imageSize = weaponWidth / 1.3
+  var imageOffset = (weaponWidth - imageSize) / 1.5
+
+  var font = (weaponWidth / 5) + 'px sans-serif'
+  context.font = 
+  context.font = font
+  context.textAlign = 'center'
+  context.textBaseline = 'middle'
+  context.fillStyle = 'rgba(0, 0, 0, 0.10'
+
+  context.beginPath()
+  context.fillRect(weaponX, weaponY, weaponWidth, weaponWidth)
+  console.log(weaponX, weaponY, weaponWidth)
+  context.drawImage(meleeImage, weaponX + imageOffset / 1.2, weaponY + imageOffset / 1.2, imageSize, imageSize)
+
+  context.fillStyle = 'black'
+  context.fill()
+
   context.closePath()
 }
 
