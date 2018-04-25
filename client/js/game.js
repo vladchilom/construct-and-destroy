@@ -28,6 +28,8 @@ var players
 var trees = []
 var bushes = []
 var rocks = []
+var armories = []
+
 var graves = []
 var projectiles = []
 
@@ -92,6 +94,7 @@ function setupClientServerCommunication() {
     bushes = []
     rocks = []
     graves = []
+    armories = []
     for (objectId in data) {
       if (data[objectId].type == 'tree') {
         trees.push(data[objectId])
@@ -104,6 +107,9 @@ function setupClientServerCommunication() {
       }
       else if (data[objectId].type == 'grave') {
         graves.push(data[objectId])
+      }
+      else if (data[objectId].type == 'armory') {
+        armories.push(data[objectId])
       }
     }
   })
@@ -224,12 +230,15 @@ function updateMap() {
     return
   }
   processPlayerInput()
-  drawHUD()
+  // drawHUD()
   map.clear()
   drawBackground()
   drawCoordinateGrid()
   for (id in graves) {
     drawGrave(graves[id])
+  }
+  for (id in armories) {
+    drawArmory(armories[id])
   }
   context.beginPath()
   for (id in players) {
@@ -675,6 +684,124 @@ function drawBush(bush) {
   drawStar(newX, newY, (bush.oRadius * 3)/4, (bush.iRadius * 3) / 4, bush.sides, 'green', 'green')
   drawStar(newX, newY, bush.oRadius/2, bush.iRadius/2, bush.sides, 'lightgreen', 'lightgreen')
 
+}
+
+
+function drawArmory(armory) {
+  xdiff = players[socket.id].x - armory.x
+  ydiff = players[socket.id].y - armory.y
+  newX = halfScreenWidth - xdiff
+  newY = halfScreenHeight - ydiff
+  context.fillStyle = "rgb(206, 119, 51)"
+  context.beginPath()
+  context.fillRect(newX, newY, armory.width, armory.height)
+  context.closePath()
+  drawTiles(armory)
+  drawWallLines(armory)
+  for(var i = 0; i < armory.walls.length; i++) {
+    drawWall(armory.walls[i])
+  }
+}
+function drawWall(wall) {
+  xdiff = players[socket.id].x - wall.x
+  ydiff = players[socket.id].y - wall.y
+  newX = halfScreenWidth - xdiff
+  newY = halfScreenHeight - ydiff
+  context.fillStyle = "rgb(128, 128, 128)"
+  context.beginPath();
+  context.rect(newX, newY, wall.width, wall.height)
+  context.closePath()
+  context.fill()
+
+}
+function drawTiles(armory) {
+  xdiff = players[socket.id].x - armory.x
+  ydiff = players[socket.id].y - armory.y
+  newX = halfScreenWidth - xdiff
+  newY = halfScreenHeight - ydiff
+  var moduloLine = 0
+  for (var i = 5; i < armory.height; i += 75) {
+    context.beginPath()
+    context.lineWidth = 0.5
+    context.moveTo(newX, newY + i)
+    context.lineTo(newX + armory.width, newY + i)
+    context.stroke()
+
+    for (var j = 0; j < armory.width - 100; j += 100) {
+      context.beginPath()
+      context.strokeStyle = "#723E1C"
+      context.lineWidth = 0.5
+      context.moveTo(newX + j + ((moduloLine % 4) * 40), newY + i)
+      if (i + 75 > armory.height) {
+        context.lineTo(newX + j + ((moduloLine % 4) * 40), newY + armory.height)
+
+      }
+      else {
+        context.lineTo(newX + j + ((moduloLine % 4) * 40), newY + i + 75)
+      }
+      context.stroke()
+    }
+    moduloLine = (moduloLine + 1) % 4
+  }
+
+}
+function drawWallLines(armory) { 
+  xdiff = players[socket.id].x - armory.x
+  ydiff = players[socket.id].y - armory.y
+  newX = halfScreenWidth - xdiff
+  newY = halfScreenHeight - ydiff
+  context.strokeStyle = "#000"
+
+  if (armory.orientation == "horizontal") {
+    context.beginPath()
+    context.lineWidth = 10
+    context.moveTo(newX, newY)
+    context.lineTo(newX + armory.width, newY)
+    context.lineTo(newX + armory.width, newY + (armory.height / 3))
+    context.lineTo(newX + armory.width - armory.thickness, newY + (armory.height / 3))
+    context.lineTo(newX + armory.width - armory.thickness, newY + armory.thickness)
+    context.lineTo(newX + armory.thickness, newY + armory.thickness)
+    context.lineTo(newX + armory.thickness, newY + (armory.height / 3))
+    context.lineTo(newX, newY + (armory.height / 3))
+    context.lineTo(newX, newY - 3)
+    context.stroke()
+    context.beginPath()
+    context.moveTo(newX + armory.width, newY + armory.height)
+    context.lineTo(newX, newY + armory.height)
+    context.lineTo(newX, newY + (2 * armory.height / 3))
+    context.lineTo(newX + armory.thickness, newY + (2 * armory.height / 3))
+    context.lineTo(newX + armory.thickness, newY + armory.height - armory.thickness)
+    context.lineTo(newX + armory.width - armory.thickness, newY + armory.height - armory.thickness)
+    context.lineTo(newX + armory.width - armory.thickness, newY + (2 * armory.height / 3))
+    context.lineTo(newX + armory.width, newY + (2 * armory.height / 3))
+    context.closePath()
+    context.stroke()
+  }
+  else if (armory.orientation == "vertical"){
+    context.beginPath()
+    context.lineWidth = 7
+    context.moveTo(newX, newY)
+    context.lineTo(newX + (armory.width / 3), newY)
+    context.lineTo(newX + (armory.width / 3), newY + armory.thickness)
+    context.lineTo(newX + (armory.thickness), newY + armory.thickness)
+    context.lineTo(newX + armory.thickness, newY + armory.height - armory.thickness)
+    context.lineTo(newX + (armory.width / 3), newY + armory.height - armory.thickness)
+    context.lineTo(newX + (armory.width / 3), newY + armory.height)
+    context.lineTo(newX, newY + armory.height)
+    context.closePath()
+    context.stroke()
+    context.beginPath()
+    context.moveTo(newX + armory.width, newY)
+    context.lineTo(newX + (2 * armory.width / 3), newY)
+    context.lineTo(newX + (2 * armory.width / 3), newY + armory.thickness)
+    context.lineTo(newX + armory.width - armory.thickness, newY + armory.thickness)
+    context.lineTo(newX + armory.width - armory.thickness, newY + armory.height - armory.thickness)
+    context.lineTo(newX + (2 * armory.width / 3), newY + armory.height - armory.thickness)
+    context.lineTo(newX + (2 * armory.width / 3), newY + armory.height)
+    context.lineTo(newX + armory.width, newY + armory.height)
+    context.closePath()
+    context.stroke()
+  }
 }
 
 function drawStar(cx, cy, oRadius, iRadius, sides, strokeStyle, fillStyle) {
