@@ -63,6 +63,12 @@ io.on('connection', function(socket) {
     }
   })
 
+  socket.on('build', function(id) {
+    if (players[id].equippedWeapon == 'melee') {
+      processBuild(id);
+    }
+  })
+
   socket.on('disconnect', function() {
     delete players[socket.id]
     socket.broadcast.emit('player disconnected', socket.id)
@@ -87,7 +93,10 @@ var makeNewPlayer = function(socket) {
     equippedWeapon: 'melee',
     lastAttack: new Date(1),
     lastAttackWeapon: '',
-    lastAttackDuration: 0
+    lastAttackDuration: 0,
+    lastBuildDuration: 0,
+    lastBuild: new Date(1)
+
   }
 }
 
@@ -100,6 +109,82 @@ var processMeleeAttack = function(id) {
   players[id].lastAttackWeapon = 'melee'
   players[id].lastAttackDuration = config.get('attackAnimationDuration.melee')
   addMeleeProjectile(players[id])
+}
+
+function addWall(coords, height, width) {
+  var uuid = uuidv4()
+  map[uuid] = {
+    id: uuid,
+    type: 'wall',
+    x: coords.x,
+    y: coords.y,
+    maxhealth: 120,
+    currenthealth: 120,
+    visibleRadius: 512,
+    height: height,
+    width: width
+  }
+}
+
+var processBuild = function(id) {
+  // the reason for build animation delay is to prevent macro scripting...because as the #1 game streamed on twitch this is important
+  var now = new Date()
+  if (now <= new Date(players[id].lastBuild.getTime() + players[id].lastBuildDuration)) {
+    return
+  }
+  players[id].lastBuild = now
+  players[id].lastAttackWeapon = 'melee' // change to wrench/whatever at later date
+  players[id].lastBuildDuration = config.get('attackAnimationDuration.build')
+  console.log(map)
+
+  // get player xQuadrant and yQuadrant
+  var angle = players[id].attackAngle // reduce typing
+  var half
+  var xQuadrant = Math.floor((players[id].x) / config.gridSpacing)
+  var yQuadrant = Math.floor((players[id].y) / config.gridSpacing)
+  if (angle > Math.PI && angle < 2 * Math.PI) {
+    var interceptChecker = (yQuadrant + 1) * config.gridSpacing
+    half = false // if on top
+  }
+  else if (angle > 0 && angle < Math.PI) {
+    var interceptChecker = (yQuadrant) * config.gridSpacing
+    half = true
+  }
+  else {
+    // else you are you getting a perfect angle...probably not possible.
+    return
+  }
+  // following codes not optimal
+  // but just wanted to get it to work.
+  var xAxisWhichWall = (interceptChecker - getIntercept(players[id].x, players[id].y, Math.tan(-angle))) / Math.tan(-angle)
+  if ((angle > (3*Math.PI)/2 && angle < 2*Math.PI) || (angle > 0 && angle < Math.PI/2)) {
+    if (xAxisWhichWall > (xQuadrant + 1) * config.gridSpacing) {
+      console.log("RightSide", xAxisWhichWall, (xQuadrant + 1) * config.gridSpacing, angle/Math.PI + "pi", getIntercept(players[id].x, players[id].y, Math.tan(angle)))
+      addWall({x: (xQuadrant + 1) * config.gridSpacing - 12, y: (yQuadrant) * config.gridSpacing}, config.gridSpacing, 25)
+    }
+    else {
+      if (half) {
+        addWall({x: (xQuadrant * config.gridSpacing), y: (yQuadrant) * config.gridSpacing - 12}, 25, config.gridSpacing)
+      }
+      else {
+        addWall({x: (xQuadrant * config.gridSpacing), y: (yQuadrant + 1) * config.gridSpacing - 12}, 25, config.gridSpacing)
+      }
+    }
+  }
+  else {
+    if (xAxisWhichWall < (xQuadrant) * config.gridSpacing) {
+      addWall({x: (xQuadrant * config.gridSpacing) - 12, y: (yQuadrant) * config.gridSpacing}, config.gridSpacing, 25)
+    }
+    else {
+      if (half) {
+        addWall({x: (xQuadrant * config.gridSpacing), y: (yQuadrant) * config.gridSpacing - 12}, 25, config.gridSpacing)
+      }
+      else {
+        addWall({x: (xQuadrant * config.gridSpacing), y: (yQuadrant + 1) * config.gridSpacing - 12}, 25, config.gridSpacing)
+      }
+    }
+
+  }
 }
 
 var addMeleeProjectile = function(player) {

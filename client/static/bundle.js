@@ -91,6 +91,7 @@ var trees = []
 var bushes = []
 var rocks = []
 var armories = []
+var walls = []
 
 var graves = []
 var projectiles = []
@@ -135,12 +136,15 @@ function setupClientServerCommunication() {
     for (id in data) {
       if (id !== 'undefined') {
         if (players[id]) {
+          currentBuildState = players[id].inBuildState
           currentAttackState = players[id].inAttackState
           currentRandomVariable = players[id].attackStateRandomVariable
           players[id] = data[id]
           if (currentAttackState) {
             players[id].inAttackState = currentAttackState
             players[id].attackStateRandomVariable = currentRandomVariable
+          } else if (currentBuildState) {
+            players[id].inBuildState = currentBuildState
           } else {
             players[id].attackStateRandomVariable = 0
           }
@@ -157,6 +161,7 @@ function setupClientServerCommunication() {
     rocks = []
     graves = []
     armories = []
+    walls = []
     for (objectId in data) {
       if (data[objectId].type == 'tree') {
         trees.push(data[objectId])
@@ -172,6 +177,9 @@ function setupClientServerCommunication() {
       }
       else if (data[objectId].type == 'armory') {
         armories.push(data[objectId])
+      }
+      else if (data[objectId].type == 'wall') {
+        walls.push(data[objectId])
       }
     }
   })
@@ -220,6 +228,11 @@ function setupKeyListeners() {
   })
   window.addEventListener('resize', resize)
   window.addEventListener('click', attack)
+  window.addEventListener('contextmenu', function(e) {
+    e.preventDefault();
+    build();
+    return false;
+  }, false)
   window.addEventListener('mousemove', updateAttackAngle)
 }
 
@@ -323,6 +336,9 @@ function updateMap() {
   }
   for (id in rocks) {
     drawRock(rocks[id])
+  }
+  for (id in walls) {
+    drawWall(walls[id])
   }
   drawHUD()
   for (id in projectiles) {
@@ -525,7 +541,7 @@ function drawHUDLeaderboard() {
   context.strokeRect(leaderboardX, leaderboardY, leaderboardWidth, leaderboardWidth)
   context.fillRect(leaderboardX, leaderboardY, leaderboardWidth, leaderboardWidth)
   context.fillStyle = 'white'
-  context.fillText('Leaderboard', window.innerWidth - (leaderboardWidth / 2) - 15, leaderboardY + leaderboardWidth / 7.0)
+  context.fillText(position.currentAttackAngle, window.innerWidth - (leaderboardWidth / 2) - 15, leaderboardY + leaderboardWidth / 7.0)
   context.fillText('1) Dennis', window.innerWidth - (leaderboardWidth / 2) - 15, leaderboardY + leaderboardWidth / 3.0)
   context.fillText('2) Dennis', window.innerWidth - (leaderboardWidth / 2) - 15, leaderboardY + leaderboardWidth / 2.0)
   context.fillText('3) Dennis', window.innerWidth - (leaderboardWidth / 2) - 15, leaderboardY + leaderboardWidth / 1.5)
@@ -556,6 +572,17 @@ function attack() {
   }
   if (!players[socket.id].inAttackState) {
     socket.emit('attack', socket.id)
+  }
+}
+
+function build() {
+
+  var inBuildState = true // when reloading/shooting are implemented, don't want to build when doing these actions
+  if (!socket) {
+    return
+  }
+  if (!players[socket.id].inAttackState && inBuildState) { // for now just don't do it when its attacking
+    socket.emit('build', socket.id)
   }
 }
 
@@ -601,7 +628,11 @@ function drawPlayer(player) {
   context.lineWidth = 1
   if (isInAttackState(player)) {
     animateAttack(player, x, y)
-  } else {
+  }
+  else if(isInBuildState(player)) {
+    animateBuild(player, x, y)
+  } 
+  else {
     drawWeapon(player, x, y)
   }
   context.lineWidth = 1
@@ -641,6 +672,43 @@ function isInAttackState(player) {
     player.inAttackState = false
     return false
   }
+}
+
+function drawWall(wall) {
+  xdiff = players[socket.id].x - wall.x
+  ydiff = players[socket.id].y - wall.y
+  newX = halfScreenWidth - xdiff
+  newY = halfScreenHeight - ydiff
+  context.fillStyle = "rgb(128, 128, 128)"
+  context.lineWidth = 7
+
+  context.beginPath();
+  context.rect(newX, newY, wall.width, wall.height)
+
+  context.closePath()
+  context.stroke()
+
+  context.fill()
+}
+
+function isInBuildState(player) {
+  var now = new Date()
+  var buildTime = new Date(player.lastBuild)
+  var animationWindow = new Date(buildTime.getTime() + player.lastBuildDuration)
+
+  if (now <= animationWindow) {
+    player.inBuildState = true
+    return true
+  }
+  else {
+    player.inBuildState = false
+    return false
+  }
+}
+
+function animateBuild(player, x, y) {
+  console.log("you built something!") //Probably do not need to animate build.
+  //animateBuildAttack(player, x, y);
 }
 
 function drawWeapon(player, x, y) {
@@ -759,12 +827,12 @@ function drawArmory(armory) {
   context.fillRect(newX, newY, armory.width, armory.height)
   context.closePath()
   drawTiles(armory)
-  drawWallLines(armory)
+  drawArmoryWallLines(armory)
   for(var i = 0; i < armory.walls.length; i++) {
-    drawWall(armory.walls[i])
+    drawArmoryWall(armory.walls[i])
   }
 }
-function drawWall(wall) {
+function drawArmoryWall(wall) {
   xdiff = players[socket.id].x - wall.x
   ydiff = players[socket.id].y - wall.y
   newX = halfScreenWidth - xdiff
@@ -807,7 +875,7 @@ function drawTiles(armory) {
   }
 
 }
-function drawWallLines(armory) { 
+function drawArmoryWallLines(armory) { 
   xdiff = players[socket.id].x - armory.x
   ydiff = players[socket.id].y - armory.y
   newX = halfScreenWidth - xdiff
@@ -957,6 +1025,7 @@ function drawCoordinateGrid() {
   context.globalAlpha = 0.15
 
   xoffset = (position.currentx - halfScreenWidth) % gameSpecs.gridSpacing
+  // console.log(xoffset, window.innerWidth)
   for (var x = -xoffset; x <= window.innerWidth; x += gameSpecs.gridSpacing) {
     context.moveTo(x, 0)
     context.lineTo(x, window.innerHeight)

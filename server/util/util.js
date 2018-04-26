@@ -1,4 +1,6 @@
 'use strict'
+var config = require('config')
+
 
 function randomInRange(from, to) {
   return Math.floor(Math.random() * (to - from)) + from
@@ -47,6 +49,8 @@ function addRock(coords) {
     boundary: radius + 22
   })
 }
+
+
 
 module.exports = {
   randomInRange:randomInRange,
