@@ -118,6 +118,7 @@ var makeNewPlayer = function(socket) {
     name: 'dennis',
     type: 'player',
     health: 100,
+    lastHealth: 100,
     materials: 0,
     kills: 0,
     deaths: 0,
@@ -695,6 +696,12 @@ var respawnPlayers = function() {
       players[id].y = util.randomInRange(400, 450)
       players[id].lastDied = now
       sockets[id].emit('respawn')
+    } else {
+      if (players[id].health < players[id].lastHealth) {
+        setTimeout(function(){
+          players[id].lastHealth = players[id].health
+        }, 50);
+      }
     }
   }
 }

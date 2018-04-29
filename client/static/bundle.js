@@ -719,6 +719,11 @@ function drawPlayer(player) {
     y = halfScreenHeight
     context.lineWidth = 5
     context.fillStyle = 'rgba(255, 220, 178)'
+    if (player.health < player.lastHealth) {
+      context.strokeStyle = 'red'
+    } else {
+      context.strokeStyle = 'black'
+    }
     context.beginPath()
     context.arc(x, y, gameSpecs.playerRadius, 0, 2 * Math.PI)
     context.closePath()
@@ -732,6 +737,7 @@ function drawPlayer(player) {
       drawWeapon(player, x, y)
     }
     context.lineWidth = 1
+    context.strokeStyle = 'black'
   }
 }
 
@@ -748,6 +754,11 @@ function drawEnemy(player) {
     y = halfScreenHeight - ydiff
     context.lineWidth = 5
     context.fillStyle = 'rgba(255, 220, 178)'
+    if (player.health < player.lastHealth) {
+      context.strokeStyle = 'red'
+    } else {
+      context.strokeStyle = 'black'
+    }
     context.beginPath()
     context.arc(x, y, gameSpecs.playerRadius, 0, 2 * Math.PI)
     context.closePath()
@@ -759,6 +770,7 @@ function drawEnemy(player) {
     } else {
       drawWeapon(player, x, y)
     }
+    context.strokeStyle = 'black'
   }
 }
 
