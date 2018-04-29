@@ -10,18 +10,20 @@ $(() => {
   showWelcomeDiv()
   processNameInput()
   loadImages()
+  loadSounds()
   connectToServer()
   initializeCanvas()
   initializePlayers()
   setupClientServerCommunication()
   initializeMap()
-  loadImages()
   setupKeyListeners()
 })
 
 var socket
 var canvas
 var context
+var minimapDrawn = false
+
 var minimapImage
 var materialImage
 var meleeImage
@@ -29,7 +31,15 @@ var buildImage
 var hammerImage
 var pistolImage
 var graveImage
-var minimapDrawn = false
+
+var pistolSound
+var punchSound
+var damageObject
+var buildSound
+var moveSound
+var swapToPistolSound
+var swapToBuildSound
+var swapToPunchSound
 
 var players
 var trees = []
@@ -148,6 +158,17 @@ function setupClientServerCommunication() {
   })
 }
 
+function loadSounds() {
+  pistolSound = new Audio('../sound/pistolSound.wav')
+  punchSound = new Audio('../sound/punchSound.flac')
+  damageObject = new Audio('../sound/damageObject.wav')
+  buildSound = new Audio('../sound/buildSound.wav')
+  moveSound = new Audio('../sound/moveSound.wav')
+  swapToPistolSound = new Audio('../sound/swapToPistolSound.wav')
+  swapToBuildSound = new Audio('../sound/swapToBuildSound.flac')
+  swapToPunchSound = new Audio('../sound/swapToPunchSound.wav')
+}
+
 function loadImages() {
   materialImage = new Image()
   materialImage.src = '../img/wood3.png'
@@ -255,6 +276,8 @@ function checkIfMoved() {
   if (playerPositionIsNew(xspeed, yspeed)) {
     x = players[socket.id].x + xspeed
     y = players[socket.id].y + yspeed
+    moveSound.volume = 0.13
+    moveSound.play()
     socket.emit('update position', socket.id, x, y)
   }
 }
@@ -295,13 +318,22 @@ function checkIfSwappedWeapon() {
     return
   }
   if (map.keys && map.keys[49]) {
-    socket.emit('swap weapon', socket.id, 'pistol')
+    if (players[socket.id].equippedWeapon != 'pistol') {
+      socket.emit('swap weapon', socket.id, 'pistol')
+      swapToPistolSound.play()
+    }
   }
   else if (map.keys && map.keys[50]) {
-    socket.emit('swap weapon', socket.id, 'melee')
+    if (players[socket.id].equippedWeapon != 'melee') {
+      socket.emit('swap weapon', socket.id, 'melee')
+      swapToPunchSound.play()
+    }
   }
   else if (map.keys && map.keys[51]) {
-    socket.emit('swap weapon', socket.id, 'build')
+    if (players[socket.id].equippedWeapon != 'build') {
+      socket.emit('swap weapon', socket.id, 'build')
+      swapToBuildSound.play()
+    }
   }
 }
 
@@ -692,7 +724,7 @@ function drawEnemy(player) {
     y = halfScreenHeight - ydiff
     context.lineWidth = 5
     context.fillStyle = 'rgba(255, 220, 178)'
-    if (player.health < player.lastHealth) {
+    if (player.health < player.lastHealth || new Date(new Date(player.lastDamaged).getTime() + 100) >= new Date()) {
       context.strokeStyle = 'red'
     } else {
       context.strokeStyle = 'black'
@@ -949,12 +981,15 @@ function drawDeath(player, x, y) {
 
 function animateAttack(player, x, y) {
   if (player.lastAttackWeapon == 'melee') {
+    punchSound.play()
     animateMeleeAttack(player, x, y)
   }
   if (player.lastAttackWeapon == 'build') {
+    buildSound.play()
     animateBuild(player, x, y)
   }
   if (player.lastAttackWeapon == 'pistol') {
+    pistolSound.play()
     animatePistol(player, x, y)
   }
 }
@@ -1015,6 +1050,9 @@ function drawRock(rock) {
   context.stroke()
   context.fill()
   context.lineWidth = 1
+  if (new Date(new Date(rock.lastDamaged).getTime() + 100) >= new Date()) {
+    damageObject.play()
+  }
 }
 
 function drawBush(bush) {
@@ -1025,7 +1063,9 @@ function drawBush(bush) {
   drawStar(newX, newY, bush.oRadius, bush.iRadius, bush.sides, 'darkgreen', 'darkgreen')
   drawStar(newX, newY, (bush.oRadius * 3)/4, (bush.iRadius * 3) / 4, bush.sides, 'green', 'green')
   drawStar(newX, newY, bush.oRadius/2, bush.iRadius/2, bush.sides, 'lightgreen', 'lightgreen')
-
+  if (new Date(new Date(bush.lastDamaged).getTime() + 100) >= new Date()) {
+    damageObject.play()
+  }
 }
 
 function drawMiniArmory(armory) {
@@ -1265,6 +1305,9 @@ function drawTree(tree) {
     newY = halfScreenHeight - ydiff
     drawStar(newX, newY, tree.oRadius, tree.iRadius, tree.sides, 'green', 'rgba(0,80,0,.9)')
     drawStar(newX, newY, (tree.oRadius/3), (tree.iRadius/3), tree.sides, 'rgb(73, 51, 0)', 'rgb(84, 51, 0)')
+    if (new Date(new Date(tree.lastDamaged).getTime() + 100) >= new Date()) {
+      damageObject.play()
+    }
   }
 }
 

@@ -132,7 +132,8 @@ var makeNewPlayer = function(socket) {
     lastAttack: new Date(1),
     lastAttackWeapon: '',
     lastAttackDuration: 0,
-    lastDied: new Date(1)
+    lastDied: new Date(1),
+    lastDamaged: new Date(1)
   }
 }
 
@@ -273,6 +274,9 @@ var setupGame = function(socket) {
     minimap: minimap
   }
   socket.emit('setup game', specs)
+  for (var objectId in map) {
+    map[objectId].lastDamaged = new Date(1)
+  }
 }
 
 var isLegalMovement = function(id, x, y) {
@@ -550,6 +554,7 @@ var damageTree = function(projectileId, objectId) {
     map[objectId].boundary = newBoundary
     map[objectId].iRadius = newIRadius
     map[objectId].oRadius = newORadius
+    map[objectId].lastDamaged = new Date()
   } else {
     var grave = {
       id: uuidv4(),
@@ -598,6 +603,7 @@ var damageRock = function(projectileId, objectId) {
     map[objectId].currentHealth = newHealth
     map[objectId].boundary = newBoundary
     map[objectId].radius = newRadius
+    map[objectId].lastDamaged = new Date()
   } else {
     var grave = {
       id: uuidv4(),
@@ -635,6 +641,7 @@ var damageBush = function(projectileId, objectId) {
     map[objectId].boundary = newBoundary
     map[objectId].iRadius = newIRadius
     map[objectId].oRadius = newORadius
+    map[objectId].lastDamaged = new Date()
   } else {
     var grave = {
       id: uuidv4(),
@@ -659,6 +666,7 @@ var damagePlayer = function(projectileId, playerId) {
   var newHealth = players[playerId].health - projectiles[projectileId].damage + 0.0
   if (newHealth > 0) {
     players[playerId].health = newHealth
+    players[playerId].lastDamaged = new Date()
   } else {
     players[playerId].health = 0
     players[playerId].deaths += 1
@@ -698,9 +706,7 @@ var respawnPlayers = function() {
       sockets[id].emit('respawn')
     } else {
       if (players[id].health < players[id].lastHealth) {
-        setTimeout(function(){
-          players[id].lastHealth = players[id].health
-        }, 50);
+        players[id].lastHealth = players[id].health
       }
     }
   }
