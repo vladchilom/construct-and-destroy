@@ -1,23 +1,28 @@
 {
   "gameWidth": 5000,
   "gameHeight": 5000,
-  "gameSpeed": 15,
+  "gameSpeed": 5,
   "gridSpacing": 200,
   "playerRadius": 20,
   "attackDamage": {
-    "melee": 10
+    "melee": 10,
+    "pistol": 20
   },
   "attackAnimationDuration": {
     "melee": 300,
-    "build": 50
+    "build": 300,
+    "pistol": 150
   },
   "attackRadius": {
-    "melee": 20
+    "melee": 20,
+    "pistol": 5
   },
   "attackTravelSpeed": {
-    "melee": 0
+    "melee": 0,
+    "pistol": 10
   },
   "attackColor": {
-    "melee": "none"
+    "melee": "none",
+    "pistol": "none"
   }
 }

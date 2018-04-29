@@ -61,11 +61,26 @@ io.on('connection', function(socket) {
     if (players[id].equippedWeapon == 'melee') {
       processMeleeAttack(id)
     }
+    if (players[id].equippedWeapon == 'build') {
+      processBuild(id)
+    }
+    if (players[id].equippedWeapon == 'pistol') {
+      processPistol(id)
+    }
   })
 
-  socket.on('build', function(id) {
-    if (players[id].equippedWeapon == 'melee') {
-      processBuild(id);
+  socket.on('swap weapon', function(id, weapon) {
+    var playerHasWeapon = false
+    for (var i = 0; i < players[id].weapons.length; i++) {
+      if (players[id].weapons[i] === weapon) {
+        playerHasWeapon = true
+      }
+    }
+    if (!playerHasWeapon) {
+      return
+    }
+    else {
+      players[id].equippedWeapon = weapon
     }
   })
 
@@ -91,12 +106,10 @@ var makeNewPlayer = function(socket) {
     halfScreenHeight: config.get('gameHeight') / 2,
     attackAngle: 0,
     equippedWeapon: 'melee',
+    weapons: ['melee', 'build', 'pistol'],
     lastAttack: new Date(1),
     lastAttackWeapon: '',
-    lastAttackDuration: 0,
-    lastBuildDuration: 0,
-    lastBuild: new Date(1)
-
+    lastAttackDuration: 0
   }
 }
 
@@ -109,6 +122,17 @@ var processMeleeAttack = function(id) {
   players[id].lastAttackWeapon = 'melee'
   players[id].lastAttackDuration = config.get('attackAnimationDuration.melee')
   addMeleeProjectile(players[id])
+}
+
+var processPistol = function(id) {
+  var now = new Date()
+  if (now <= new Date(players[id].lastAttack.getTime() + players[id].lastAttackDuration)) {
+    return
+  }
+  players[id].lastAttack = now
+  players[id].lastAttackWeapon = 'pistol'
+  players[id].lastAttackDuration = config.get('attackAnimationDuration.pistol')
+  addPistolProjectile(players[id])
 }
 
 function addWall(coords, height, width) {
@@ -127,39 +151,32 @@ function addWall(coords, height, width) {
 }
 
 var processBuild = function(id) {
-  // the reason for build animation delay is to prevent macro scripting...because as the #1 game streamed on twitch this is important
   var now = new Date()
-  if (now <= new Date(players[id].lastBuild.getTime() + players[id].lastBuildDuration)) {
+  if (now <= new Date(players[id].lastAttack.getTime() + players[id].lastAttackDuration)) {
     return
   }
-  players[id].lastBuild = now
-  players[id].lastAttackWeapon = 'melee' // change to wrench/whatever at later date
-  players[id].lastBuildDuration = config.get('attackAnimationDuration.build')
-  console.log(map)
+  players[id].lastAttack = now
+  players[id].lastAttackWeapon = 'build'
+  players[id].lastAttackDuration = config.get('attackAnimationDuration.build')
 
-  // get player xQuadrant and yQuadrant
-  var angle = players[id].attackAngle // reduce typing
+  var angle = players[id].attackAngle
   var half
   var xQuadrant = Math.floor((players[id].x) / config.gridSpacing)
   var yQuadrant = Math.floor((players[id].y) / config.gridSpacing)
   if (angle > Math.PI && angle < 2 * Math.PI) {
     var interceptChecker = (yQuadrant + 1) * config.gridSpacing
-    half = false // if on top
+    half = false
   }
   else if (angle > 0 && angle < Math.PI) {
     var interceptChecker = (yQuadrant) * config.gridSpacing
     half = true
   }
   else {
-    // else you are you getting a perfect angle...probably not possible.
     return
   }
-  // following codes not optimal
-  // but just wanted to get it to work.
   var xAxisWhichWall = (interceptChecker - getIntercept(players[id].x, players[id].y, Math.tan(-angle))) / Math.tan(-angle)
   if ((angle > (3*Math.PI)/2 && angle < 2*Math.PI) || (angle > 0 && angle < Math.PI/2)) {
     if (xAxisWhichWall > (xQuadrant + 1) * config.gridSpacing) {
-      console.log("RightSide", xAxisWhichWall, (xQuadrant + 1) * config.gridSpacing, angle/Math.PI + "pi", getIntercept(players[id].x, players[id].y, Math.tan(angle)))
       addWall({x: (xQuadrant + 1) * config.gridSpacing - 12, y: (yQuadrant) * config.gridSpacing}, config.gridSpacing, 25)
     }
     else {
@@ -201,6 +218,24 @@ var addMeleeProjectile = function(player) {
     radius: config.get('attackRadius.melee'),
     speed: config.get('attackTravelSpeed.melee'),
     color: config.get('attackColor.melee')
+  }
+  projectiles[projectile.id] = projectile
+}
+
+var addPistolProjectile = function(player) {
+  var x = player.x + (config.get('playerRadius') + 12) * Math.cos(-player.attackAngle)
+  var y = player.y + (config.get('playerRadius') + 12) * Math.sin(-player.attackAngle)
+  var projectile = {
+    id: uuidv4(),
+    sentBy: player.id,
+    x: x,
+    y: y,
+    direction: player.attackAngle,
+    type: 'pistol',
+    damage: config.get('attackDamage.pistol'),
+    radius: config.get('attackRadius.pistol'),
+    speed: config.get('attackTravelSpeed.pistol'),
+    color: config.get('attackColor.pistol')
   }
   projectiles[projectile.id] = projectile
 }
@@ -642,7 +677,6 @@ var processProjectiles = function() {
       for (var playerId in players) {
         if (playerId != projectiles[projectileId].sentBy) {
           if (projectileIsInPlayer(projectiles[projectileId], players[playerId])) {
-            console.log(projectiles[projectileId], players[playerId])
             damagePlayer(projectileId, playerId)
             delete projectiles[projectileId]
             projectileDeleted = true

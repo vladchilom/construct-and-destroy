@@ -22,6 +22,9 @@ var context
 var minimapImage
 var materialImage
 var meleeImage
+var buildImage
+var hammerImage
+var pistolImage
 var minimapDrawn = false
 
 var players
@@ -74,15 +77,12 @@ function setupClientServerCommunication() {
     for (id in data) {
       if (id !== 'undefined') {
         if (players[id]) {
-          currentBuildState = players[id].inBuildState
           currentAttackState = players[id].inAttackState
           currentRandomVariable = players[id].attackStateRandomVariable
           players[id] = data[id]
           if (currentAttackState) {
             players[id].inAttackState = currentAttackState
             players[id].attackStateRandomVariable = currentRandomVariable
-          } else if (currentBuildState) {
-            players[id].inBuildState = currentBuildState
           } else {
             players[id].attackStateRandomVariable = 0
           }
@@ -138,6 +138,12 @@ function loadImages() {
   minimapImage.src = '../img/minimap.png'
   meleeImage = new Image()
   meleeImage.src = '../img/melee2.png'
+  buildImage = new Image()
+  buildImage.src = '../img/build.png'
+  hammerImage = new Image()
+  hammerImage.src = '../img/hammer.png'
+  pistolImage = new Image()
+  pistolImage.src = '../img/pistol.png'
 }
 
 function showLoadingDiv() {
@@ -166,11 +172,6 @@ function setupKeyListeners() {
   })
   window.addEventListener('resize', resize)
   window.addEventListener('click', attack)
-  window.addEventListener('contextmenu', function(e) {
-    e.preventDefault();
-    build();
-    return false;
-  }, false)
   window.addEventListener('mousemove', updateAttackAngle)
 }
 
@@ -182,6 +183,7 @@ function processPlayerInput() {
   checkIfMoved()
   checkIfAttackAngleChanged()
   checkIfAttacked()
+  checkIfSwappedWeapon()
 }
 
 function checkIfMoved() {
@@ -237,13 +239,27 @@ function checkIfAttacked() {
   }
 }
 
+function checkIfSwappedWeapon() {
+  if (!socket || !socket.id) {
+    return
+  }
+  if (map.keys && map.keys[49]) {
+    socket.emit('swap weapon', socket.id, 'pistol')
+  }
+  else if (map.keys && map.keys[50]) {
+    socket.emit('swap weapon', socket.id, 'melee')
+  }
+  else if (map.keys && map.keys[51]) {
+    socket.emit('swap weapon', socket.id, 'build')
+  }
+}
+
 function updateMap() {
   requestAnimationFrame(updateMap)
   if (!socket) {
     return
   }
   processPlayerInput()
-  // drawHUD()
   map.clear()
   drawBackground()
   drawCoordinateGrid()
@@ -382,7 +398,15 @@ function drawHUDWeapon() {
   context.beginPath()
   context.strokeRect(weaponX, weaponY, weaponWidth, weaponWidth)
   context.fillRect(weaponX, weaponY, weaponWidth, weaponWidth)
-  context.drawImage(meleeImage, weaponX + imageOffset / 1.2, weaponY + imageOffset / 1.2, imageSize, imageSize)
+  if (players[socket.id].equippedWeapon == 'melee') {
+    context.drawImage(meleeImage, weaponX + imageOffset / 1.2, weaponY + imageOffset / 1.2, imageSize, imageSize)
+  }
+  else if(players[socket.id].equippedWeapon == 'build') {
+    context.drawImage(buildImage, weaponX + imageOffset / 1.2, weaponY + imageOffset / 1.2, imageSize, imageSize)
+  }
+  else if(players[socket.id].equippedWeapon == 'pistol') {
+    context.drawImage(pistolImage, weaponX + imageOffset / 1.2, weaponY + imageOffset / 1.2, imageSize, imageSize)
+  }
 
   context.fillStyle = 'black'
   context.fill()
@@ -419,7 +443,7 @@ function drawHUDMiniMap() {
   var playerYRelative = (players[socket.id].y / gameSpecs.gameHeight) * minimapHeight + minimapY
 
   context.lineWidth = 1
-  context.fillStyle = 'red'
+  context.fillStyle = 'rgba(255, 220, 178)'
 
   context.beginPath()
   context.arc(playerXRelative, playerYRelative, 4, 0, 2 * Math.PI)
@@ -513,17 +537,6 @@ function attack() {
   }
 }
 
-function build() {
-
-  var inBuildState = true // when reloading/shooting are implemented, don't want to build when doing these actions
-  if (!socket) {
-    return
-  }
-  if (!players[socket.id].inAttackState && inBuildState) { // for now just don't do it when its attacking
-    socket.emit('build', socket.id)
-  }
-}
-
 function updateAttackAngle(event) {
   xdiff = (event.clientX - halfScreenWidth)
   ydiff = (halfScreenHeight - event.clientY)
@@ -557,7 +570,7 @@ function drawPlayer(player) {
   x = halfScreenWidth
   y = halfScreenHeight
   context.lineWidth = 5
-  context.fillStyle = 'red'
+  context.fillStyle = 'rgba(255, 220, 178)'
   context.beginPath()
   context.arc(x, y, gameSpecs.playerRadius, 0, 2 * Math.PI)
   context.closePath()
@@ -567,9 +580,6 @@ function drawPlayer(player) {
   if (isInAttackState(player)) {
     animateAttack(player, x, y)
   }
-  else if(isInBuildState(player)) {
-    animateBuild(player, x, y)
-  } 
   else {
     drawWeapon(player, x, y)
   }
@@ -629,29 +639,64 @@ function drawWall(wall) {
   context.fill()
 }
 
-function isInBuildState(player) {
+function animateBuild(player, x, y) {
   var now = new Date()
-  var buildTime = new Date(player.lastBuild)
-  var animationWindow = new Date(buildTime.getTime() + player.lastBuildDuration)
+  var attackTime = new Date(player.lastAttack)
+  var frame = (now - attackTime) / 10
+  hammerWidth = 30
+  hammerHeight = 30
+  if (frame > 17) {
+    frame = 30 - frame
+  }
+  radius = gameSpecs.playerRadius + 5
+  largeRadius = gameSpecs.playerRadius + 5 + frame
+  angleDifference = frame * 0.035
 
-  if (now <= animationWindow) {
-    player.inBuildState = true
-    return true
-  }
-  else {
-    player.inBuildState = false
-    return false
-  }
+  leftx = x + radius * Math.cos(player.attackAngle + 0.6)
+  lefty = y - radius * Math.sin(player.attackAngle + 0.6)
+  rightx = x + largeRadius * Math.cos(player.attackAngle - 0.6 + angleDifference)
+  righty = y - largeRadius * Math.sin(player.attackAngle - 0.6 + angleDifference)
+
+  hammerx = x + largeRadius * Math.cos(player.attackAngle + 0.5)
+  hammery = y - largeRadius * Math.sin(player.attackAngle + 0.5)
+
+  context.lineWidth = 5
+  context.fillStyle = 'rgba(255, 220, 178)'
+
+  context.beginPath()
+  context.arc(leftx, lefty, 6, 0, 2 * Math.PI)
+  context.closePath()
+  context.stroke()
+  context.fill()
+
+  context.beginPath()
+  context.arc(rightx, righty, 6, 0, 2 * Math.PI)
+  context.closePath()
+  context.stroke()
+  context.fill()
+
+  context.translate(hammerx, hammery)
+  context.rotate(-player.attackAngle)
+  context.translate(-hammerx, -hammery)
+  context.drawImage(hammerImage, hammerx, hammery, hammerWidth, hammerHeight)
+  context.setTransform(1, 0, 0, 1, 0, 0)
+
+  context.lineWidth = 1
 }
 
-function animateBuild(player, x, y) {
-  console.log("you built something!") //Probably do not need to animate build.
-  //animateBuildAttack(player, x, y);
+function animatePistol(player, x, y) {
+  console.log('pistol shot')
 }
 
 function drawWeapon(player, x, y) {
   if (player.equippedWeapon == 'melee') {
     drawMeleeWeapon(player, x, y)
+  }
+  if (player.equippedWeapon == 'build') {
+    drawBuildWeapon(player, x, y)
+  }
+  if (player.equippedWeapon == 'pistol') {
+    drawPistol(player, x, y)
   }
 }
 
@@ -662,7 +707,7 @@ function drawMeleeWeapon(player, x, y) {
   rightx = x + radius * Math.cos(player.attackAngle - 0.6)
   righty = y - radius * Math.sin(player.attackAngle - 0.6)
   context.lineWidth = 5
-  context.fillStyle = 'red'
+  context.fillStyle = 'rgba(255, 220, 178)'
 
   context.beginPath()
   context.arc(leftx, lefty, 6, 0, 2 * Math.PI)
@@ -679,9 +724,92 @@ function drawMeleeWeapon(player, x, y) {
   context.lineWidth = 1
 }
 
+function drawBuildWeapon(player, x, y) {
+  radius = gameSpecs.playerRadius + 5
+  leftx = x + radius * Math.cos(player.attackAngle + 0.6)
+  lefty = y - radius * Math.sin(player.attackAngle + 0.6)
+  rightx = x + radius * Math.cos(player.attackAngle - 0.6)
+  righty = y - radius * Math.sin(player.attackAngle - 0.6)
+  hammerx = x + radius * Math.cos(player.attackAngle + 0.5)
+  hammery = y - radius * Math.sin(player.attackAngle + 0.5)
+  hammerWidth = 30
+  hammerHeight = 30
+  context.lineWidth = 5
+  context.fillStyle = 'rgba(255, 220, 178)'
+
+  context.beginPath()
+  context.arc(leftx, lefty, 6, 0, 2 * Math.PI)
+  context.closePath()
+  context.stroke()
+  context.fill()
+
+  context.beginPath()
+  context.arc(rightx, righty, 6, 0, 2 * Math.PI)
+  context.closePath()
+  context.stroke()
+  context.fill()
+
+  context.translate(hammerx, hammery)
+  context.rotate(-player.attackAngle)
+  context.translate(-hammerx, -hammery)
+  context.drawImage(hammerImage, hammerx, hammery, hammerWidth, hammerHeight)
+  context.setTransform(1, 0, 0, 1, 0, 0)
+
+  context.lineWidth = 1
+}
+
+function drawPistol(player, x, y) {
+  radius = gameSpecs.playerRadius + 5
+  context.lineWidth = 5
+  context.fillStyle = 'rgba(255, 220, 178)'
+
+
+  pistolX = x + (radius + 0) * Math.cos(-player.attackAngle)
+  pistolY = y + (radius + 0) * Math.sin(-player.attackAngle)
+  context.beginPath()
+  context.arc(pistolX, pistolY, 6, 0, 2 * Math.PI)
+  context.closePath()
+  context.stroke()
+  context.fill()
+
+  context.fillStyle = 'black'
+
+  pistolX = x + (radius + 8) * Math.cos(-player.attackAngle)
+  pistolY = y + (radius + 8) * Math.sin(-player.attackAngle)
+  context.beginPath()
+  context.arc(pistolX, pistolY, 6, 0, 2 * Math.PI)
+  context.closePath()
+  context.stroke()
+  context.fill()
+
+  pistolX = x + (radius + 12) * Math.cos(-player.attackAngle)
+  pistolY = y + (radius + 12) * Math.sin(-player.attackAngle)
+  context.beginPath()
+  context.arc(pistolX, pistolY, 6, 0, 2 * Math.PI)
+  context.closePath()
+  context.stroke()
+  context.fill()
+
+  pistolX = x + (radius + 16) * Math.cos(-player.attackAngle)
+  pistolY = y + (radius + 16) * Math.sin(-player.attackAngle)
+  context.beginPath()
+  context.arc(pistolX, pistolY, 6, 0, 2 * Math.PI)
+  context.closePath()
+  context.stroke()
+  context.fill()
+
+  context.lineWidth = 1
+}
+
 function animateAttack(player, x, y) {
   if (player.lastAttackWeapon == 'melee') {
     animateMeleeAttack(player, x, y)
+  }
+  if (player.lastAttackWeapon == 'build') {
+    animateBuild(player, x, y)
+  }
+  if (player.lastAttackWeapon == 'pistol') {
+    animatePistol(player, x, y)
   }
 }
 
@@ -710,7 +838,7 @@ function animateMeleeAttack(player, x, y) {
   }
 
   context.lineWidth = 5
-  context.fillStyle = 'red'
+  context.fillStyle = 'rgba(255, 220, 178)'
 
   context.beginPath()
   context.arc(leftx, lefty, 6, 0, 2 * Math.PI)
@@ -963,7 +1091,6 @@ function drawCoordinateGrid() {
   context.globalAlpha = 0.15
 
   xoffset = (position.currentx - halfScreenWidth) % gameSpecs.gridSpacing
-  // console.log(xoffset, window.innerWidth)
   for (var x = -xoffset; x <= window.innerWidth; x += gameSpecs.gridSpacing) {
     context.moveTo(x, 0)
     context.lineTo(x, window.innerHeight)
