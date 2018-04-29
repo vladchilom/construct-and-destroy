@@ -6,12 +6,12 @@
   "playerRadius": 20,
   "attackDamage": {
     "melee": 10,
-    "pistol": 20
+    "pistol": 15
   },
   "attackAnimationDuration": {
     "melee": 300,
     "build": 300,
-    "pistol": 150
+    "pistol": 225
   },
   "attackRadius": {
     "melee": 20,
@@ -23,6 +23,6 @@
   },
   "attackColor": {
     "melee": "none",
-    "pistol": "none"
+    "pistol": "rgb(64, 64, 64, 1)"
   }
 }

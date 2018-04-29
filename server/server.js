@@ -478,6 +478,13 @@ var projectileExpired = function(projectile) {
   return false
 }
 
+var moveProjectile = function(projectileId) {
+  var newx = projectiles[projectileId].x + projectiles[projectileId].speed * Math.cos(projectiles[projectileId].direction)
+  var newy = projectiles[projectileId].y - projectiles[projectileId].speed * Math.sin(projectiles[projectileId].direction)
+  projectiles[projectileId].x = newx
+  projectiles[projectileId].y = newy
+}
+
 var damageObject = function(projectileId, objectId) {
   if (map[objectId].type == 'tree') {
     damageTree(projectileId, objectId)
@@ -688,6 +695,9 @@ var processProjectiles = function() {
     if (!projectileDeleted && projectileExpired(projectiles[projectileId])) {
       delete projectiles[projectileId]
       break
+    }
+    if (!projectileDeleted) {
+      moveProjectile(projectileId)
     }
   }
 }

@@ -747,7 +747,14 @@ function animateBuild(player, x, y) {
 }
 
 function animatePistol(player, x, y) {
-  console.log('pistol shot')
+  drawPistol(player, x, y)
+  radius = gameSpecs.playerRadius + 5
+
+  flairX = x + (radius + 22) * Math.cos(-player.attackAngle)
+  flairY = y + (radius + 22) * Math.sin(-player.attackAngle)
+  drawStar(flairX, flairY, 3, 5, 15, 'rgba(255, 255, 0)', 'rgba(255, 255, 0)')
+
+  context.lineWidth = 1
 }
 
 function drawWeapon(player, x, y) {
@@ -844,8 +851,24 @@ function drawPistol(player, x, y) {
   context.stroke()
   context.fill()
 
+  pistolX = x + (radius + 10) * Math.cos(-player.attackAngle)
+  pistolY = y + (radius + 10) * Math.sin(-player.attackAngle)
+  context.beginPath()
+  context.arc(pistolX, pistolY, 6, 0, 2 * Math.PI)
+  context.closePath()
+  context.stroke()
+  context.fill()
+
   pistolX = x + (radius + 12) * Math.cos(-player.attackAngle)
   pistolY = y + (radius + 12) * Math.sin(-player.attackAngle)
+  context.beginPath()
+  context.arc(pistolX, pistolY, 6, 0, 2 * Math.PI)
+  context.closePath()
+  context.stroke()
+  context.fill()
+
+  pistolX = x + (radius + 14) * Math.cos(-player.attackAngle)
+  pistolY = y + (radius + 14) * Math.sin(-player.attackAngle)
   context.beginPath()
   context.arc(pistolX, pistolY, 6, 0, 2 * Math.PI)
   context.closePath()
@@ -1124,15 +1147,17 @@ function drawProjectile(projectile) {
   ydiff = players[socket.id].y - projectile.y
   newX = halfScreenWidth - xdiff
   newY = halfScreenHeight - ydiff
-  context.fillStyle = 'rgb(0, 0, 255, 0.1)'
-  context.strokeStyle = 'rgb(0, 0, 255, 0.1)'
-  context.lineWidth=5
-  context.beginPath()
-  context.arc(newX, newY, projectile.radius, 0 , 2*Math.PI)
-  context.closePath()
-  context.stroke()
-  context.fill()
-  context.lineWidth = 1
+  if (projectile.type == 'pistol') {
+    context.fillStyle = projectile.color
+    context.strokeStyle = projectile.color
+    context.lineWidth=5
+    context.beginPath()
+    context.arc(newX, newY, projectile.radius, 0 , 2*Math.PI)
+    context.closePath()
+    context.stroke()
+    context.fill()
+    context.lineWidth = 1
+  }
 }
 
 
