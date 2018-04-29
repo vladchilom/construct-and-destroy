@@ -12,12 +12,32 @@
   </head>
 
   <body>
-    <canvas id='canvas'></canvas>
-    <div id='loading-div'>
-      <div id='loading-tag'>
-        connecting to server
+    <div id="container">
+      <canvas id='canvas'></canvas>
+      <div id='loading-div'>
+        <div id='loading-tag'>
+          connecting to server
+        </div>
+        <div id='loading-bar'></div>
       </div>
-      <div id='loading-bar'></div>
+      <div id='welcome-div'>
+        <b>Welcome to Construct &amp; Destroy</b> <br><br>
+        Whats your name? <br><br><br>
+        <form id='inputName'><input type="text" name="fname" id='textInputName' value=''></form><br><br>
+        <button class = 'buttons' type='submit' form='inputName'>Go!</button> <br><br><br><br>
+        <u>Controls</u> <br><br>
+        Movement - WASD or Arrow Keys <br><br>
+        Attack - Space or Click <br><br>
+        Pistol - 1 <br><br>
+        Fist - 2 <br><br>
+        Build - 3 <br><br>
+      </div>
+      <div id='respawn-div'>
+        <br> <br> <br> <br>
+        You Died! <br> <br> <br> <br>
+
+        Respawning...
+      </div>
     </div>
   </body>
 

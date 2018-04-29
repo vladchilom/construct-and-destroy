@@ -7,12 +7,15 @@ var Player = require('./Player')
 
 $(() => {
   //showLoadingDiv()
+  showWelcomeDiv()
+  processNameInput()
   loadImages()
   connectToServer()
   initializeCanvas()
   initializePlayers()
   setupClientServerCommunication()
   initializeMap()
+  loadImages()
   setupKeyListeners()
 })
 
@@ -25,6 +28,7 @@ var meleeImage
 var buildImage
 var hammerImage
 var pistolImage
+var graveImage
 var minimapDrawn = false
 
 var players
@@ -42,6 +46,7 @@ var position
 
 var map
 var gameSpecs
+var leaderboardData
 var halfScreenWidth
 var halfScreenHeight
 
@@ -71,6 +76,18 @@ function setupClientServerCommunication() {
 
   socket.on('request screen size', function() {
     resize()
+  })
+
+  socket.on('ready', function() {
+    hideWelcomeDiv()
+  })
+
+  socket.on('respawn', function() {
+    hideRespawnDiv()
+  })
+
+  socket.on('leaderboard info', function(leaderboardInfo) {
+    leaderboardData = leaderboardInfo
   })
 
   socket.on('players', function(data) {
@@ -144,6 +161,8 @@ function loadImages() {
   hammerImage.src = '../img/hammer.png'
   pistolImage = new Image()
   pistolImage.src = '../img/pistol.png'
+  graveImage = new Image()
+  graveImage.src = '../img/grave.png'
 }
 
 function showLoadingDiv() {
@@ -153,6 +172,35 @@ function showLoadingDiv() {
   setTimeout(() => {
     $('#loading-div').hide()
   }, 2500)
+}
+
+function showWelcomeDiv() {
+  $('#welcome-div').show()
+}
+
+function hideWelcomeDiv() {
+  $('#welcome-div').hide()
+}
+
+
+function showRespawnDiv() {
+  $('#respawn-div').show()
+}
+
+function hideRespawnDiv() {
+  $('#respawn-div').hide()
+}
+
+function processNameInput() {
+  $('#inputName').submit(function(event) {
+      if (!socket || !socket.id) {
+        return
+      }
+      event.preventDefault()
+      if ($('#textInputName').val().length != 0) {
+        socket.emit('set name', $('#textInputName').val())
+      }
+  });
 }
 
 function initializeMap() {
@@ -177,7 +225,10 @@ function setupKeyListeners() {
 
 
 function processPlayerInput() {
-  if (!gameSpecsLoaded()) {
+  if (!socket || !socket.id || !players || !players[socket.id]) {
+    return
+  }
+  if (!gameSpecsLoaded() || !players[socket.id].ready) {
     return
   }
   checkIfMoved()
@@ -297,6 +348,11 @@ function updateMap() {
   drawHUD()
   for (id in projectiles) {
     drawProjectile(projectiles[id])
+  }
+  if (socket && socket.id && players && players[socket.id] && players[socket.id].health <= 0) {
+    showRespawnDiv()
+  } else {
+    hideRespawnDiv()
   }
 }
 
@@ -444,12 +500,14 @@ function drawHUDMiniMap() {
   context.lineWidth = 1
   context.fillStyle = 'rgba(255, 220, 178)'
 
-  context.beginPath()
-  context.arc(playerXRelative, playerYRelative, 4, 0, 2 * Math.PI)
-  context.closePath()
-  context.stroke()
-  context.fill()
-  context.lineWidth = 1
+  if (players[socket.id].ready) {
+    context.beginPath()
+    context.arc(playerXRelative, playerYRelative, 4, 0, 2 * Math.PI)
+    context.closePath()
+    context.stroke()
+    context.fill()
+    context.lineWidth = 1
+  }
 
   // Ended up taking a screenshot of a higher rendering of the minimap
   // Doing it dynamically was somewhat annoying
@@ -504,11 +562,21 @@ function drawHUDLeaderboard() {
   context.strokeRect(leaderboardX, leaderboardY, leaderboardWidth, leaderboardWidth)
   context.fillRect(leaderboardX, leaderboardY, leaderboardWidth, leaderboardWidth)
   context.fillStyle = 'white'
-  context.fillText(position.currentAttackAngle, window.innerWidth - (leaderboardWidth / 2) - 15, leaderboardY + leaderboardWidth / 7.0)
-  context.fillText('1) Dennis', window.innerWidth - (leaderboardWidth / 2) - 15, leaderboardY + leaderboardWidth / 3.0)
-  context.fillText('2) Dennis', window.innerWidth - (leaderboardWidth / 2) - 15, leaderboardY + leaderboardWidth / 2.0)
-  context.fillText('3) Dennis', window.innerWidth - (leaderboardWidth / 2) - 15, leaderboardY + leaderboardWidth / 1.5)
-  context.fillText('4) Dennis', window.innerWidth - (leaderboardWidth / 2) - 15, leaderboardY + leaderboardWidth / 1.2)
+  context.fillText('Leaderboard', window.innerWidth - (leaderboardWidth / 2) - 15, leaderboardY + leaderboardWidth / 7.0)
+  if (leaderboardData) {
+    if (leaderboardData[0] != 'none') {
+      context.fillText('1) ' + leaderboardData[0], window.innerWidth - (leaderboardWidth / 2) - 15, leaderboardY + leaderboardWidth / 3.0)
+    }
+    if (leaderboardData[1] != 'none') {
+      context.fillText('2) ' + leaderboardData[1], window.innerWidth - (leaderboardWidth / 2) - 15, leaderboardY + leaderboardWidth / 2.0)
+    }
+    if (leaderboardData[2] != 'none') {
+      context.fillText('3) ' + leaderboardData[2], window.innerWidth - (leaderboardWidth / 2) - 15, leaderboardY + leaderboardWidth / 1.5)
+    }
+    if (leaderboardData[3] != 'none') {
+      context.fillText('4) ' + leaderboardData[3], window.innerWidth - (leaderboardWidth / 2) - 15, leaderboardY + leaderboardWidth / 1.2)
+    }
+  }
 
   context.fillStyle = 'black'
   context.fill()
@@ -517,7 +585,7 @@ function drawHUDLeaderboard() {
 }
 
 function resize() {
-  if (!socket) {
+  if (!socket || !socket.id) {
     return
   }
   canvas.width = window.innerWidth
@@ -530,7 +598,10 @@ function resize() {
 }
 
 function attack() {
-  if (!socket) {
+  if (!socket || !socket.id || !players || !players[socket.id]) {
+    return
+  }
+  if (!players[socket.id].ready) {
     return
   }
   if (!players[socket.id].inAttackState) {
@@ -539,6 +610,12 @@ function attack() {
 }
 
 function updateAttackAngle(event) {
+  if (!socket || !socket.id || !players || !players[socket.id]) {
+    return
+  }
+  if (!players[socket.id].ready) {
+    return
+  }
   xdiff = (event.clientX - halfScreenWidth)
   ydiff = (halfScreenHeight - event.clientY)
   newAttackAngle = Math.atan2(ydiff, xdiff)
@@ -565,45 +642,61 @@ function getRandomInt(max) {
 // Draw Functions
 
 function drawPlayer(player) {
-  if (!gameSpecsLoaded()) {
+  if (!gameSpecsLoaded() ) {
     return
   }
-  x = halfScreenWidth
-  y = halfScreenHeight
-  context.lineWidth = 5
-  context.fillStyle = 'rgba(255, 220, 178)'
-  context.beginPath()
-  context.arc(x, y, gameSpecs.playerRadius, 0, 2 * Math.PI)
-  context.closePath()
-  context.stroke()
-  context.fill()
-  context.lineWidth = 1
-  if (isInAttackState(player)) {
-    animateAttack(player, x, y)
+  if (!socket || !socket.id || !players || !players[socket.id] || !players[socket.id].ready) {
+    return
   }
-  else {
-    drawWeapon(player, x, y)
+  if (player.health <= 0) {
+    x = halfScreenWidth
+    y = halfScreenHeight
+    drawDeath(player, x, y)
+  } else {
+    x = halfScreenWidth
+    y = halfScreenHeight
+    context.lineWidth = 5
+    context.fillStyle = 'rgba(255, 220, 178)'
+    context.beginPath()
+    context.arc(x, y, gameSpecs.playerRadius, 0, 2 * Math.PI)
+    context.closePath()
+    context.stroke()
+    context.fill()
+    context.lineWidth = 1
+    if (isInAttackState(player)) {
+      animateAttack(player, x, y)
+    }
+    else {
+      drawWeapon(player, x, y)
+    }
+    context.lineWidth = 1
   }
-  context.lineWidth = 1
 }
 
 function drawEnemy(player) {
-  xdiff = players[socket.id].x - player.x
-  ydiff = players[socket.id].y - player.y
-  x = halfScreenWidth - xdiff
-  y = halfScreenHeight - ydiff
-  context.lineWidth = 5
-  context.fillStyle = 'black'
-  context.beginPath()
-  context.arc(x, y, gameSpecs.playerRadius, 0, 2 * Math.PI)
-  context.closePath()
-  context.stroke()
-  context.fill()
-  context.lineWidth = 1
-  if (isInAttackState(player)) {
-    animateAttack(player, x, y)
+  if (!player.ready) {
+    return
+  }
+  if (player.health <= 0) {
+    drawDeath(player, x, y)
   } else {
-    drawWeapon(player, x, y)
+    xdiff = players[socket.id].x - player.x
+    ydiff = players[socket.id].y - player.y
+    x = halfScreenWidth - xdiff
+    y = halfScreenHeight - ydiff
+    context.lineWidth = 5
+    context.fillStyle = 'rgba(255, 220, 178)'
+    context.beginPath()
+    context.arc(x, y, gameSpecs.playerRadius, 0, 2 * Math.PI)
+    context.closePath()
+    context.stroke()
+    context.fill()
+    context.lineWidth = 1
+    if (isInAttackState(player)) {
+      animateAttack(player, x, y)
+    } else {
+      drawWeapon(player, x, y)
+    }
   }
 }
 
@@ -629,6 +722,7 @@ function drawWall(wall) {
   newX = halfScreenWidth - xdiff
   newY = halfScreenHeight - ydiff
   context.fillStyle = "rgb(128, 128, 128)"
+  context.strokeStyle = 'black'
   context.lineWidth = 7
 
   context.beginPath();
@@ -823,6 +917,22 @@ function drawPistol(player, x, y) {
   context.fill()
 
   context.lineWidth = 1
+}
+
+function drawDeath(player, x, y) {
+  xdiff = players[socket.id].x - player.x
+  ydiff = players[socket.id].y - player.y
+  x = halfScreenWidth - xdiff
+  y = halfScreenHeight - ydiff
+  context.lineWidth = 5
+  context.fillStyle = 'black'
+  context.beginPath()
+  context.arc(x, y, gameSpecs.playerRadius, 0, 2 * Math.PI)
+  context.stroke()
+  context.fill()
+  context.drawImage(graveImage, x - 25, y - 27, 50, 50)
+  context.closePath()
+  context.lineWidth = 1  
 }
 
 function animateAttack(player, x, y) {
@@ -1130,6 +1240,8 @@ function drawStar(cx, cy, oRadius, iRadius, sides, strokeStyle, fillStyle) {
   context.stroke()
   context.fillStyle = fillStyle
   context.fill()
+  context.strokeStyle = 'black'
+  context.fillStyle = 'black'
     
 }
 

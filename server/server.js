@@ -20,15 +20,25 @@ app.get('/', function(req, res) {
 })
 
 io.on('connection', function(socket) {
-  console.log(socket.id + ' connected')
   sockets[socket.id] = socket
-
   players[socket.id] = makeNewPlayer(socket)
+
+  socket.on('set name', function(name) {
+    players[socket.id].name = name
+    players[socket.id].x = 450
+    players[socket.id].y = 450
+    players[socket.id].ready = true
+    socket.emit('ready')
+    console.log(name + ' connected')
+  })
 
   socket.emit('request screen size')
 
   socket.on('update position', function(id, x, y) {
     if (!isLegalMovement(id, x, y)) {
+      return
+    }
+    if (players[id].health <= 0) {
       return
     }
     x = isWithinArenaBoundsX(id, x)
@@ -47,6 +57,9 @@ io.on('connection', function(socket) {
   })
 
   socket.on('update attack angle', function(id, attackAngle) {
+    if (players[id].health <= 0) {
+      return
+    }
     if (id && attackAngle) {
       players[id].attackAngle = attackAngle
     }
@@ -58,6 +71,9 @@ io.on('connection', function(socket) {
   })
 
   socket.on('attack', function(id) {
+    if (players[id].health <= 0) {
+      return
+    }
     if (players[id].equippedWeapon == 'melee') {
       processMeleeAttack(id)
     }
@@ -70,6 +86,9 @@ io.on('connection', function(socket) {
   })
 
   socket.on('swap weapon', function(id, weapon) {
+    if (players[id].health <= 0) {
+      return
+    }
     var playerHasWeapon = false
     for (var i = 0; i < players[id].weapons.length; i++) {
       if (players[id].weapons[i] === weapon) {
@@ -95,13 +114,15 @@ io.on('connection', function(socket) {
 var makeNewPlayer = function(socket) {
   return {
     id: socket.id,
-    name: 'Dennis',
+    ready: false,
+    name: 'dennis',
     type: 'player',
     health: 100,
     materials: 0,
-    kill: 0,
-    x: 450,
-    y: 450,
+    kills: 0,
+    deaths: 0,
+    x: util.randomInRange(400, 450),
+    y: util.randomInRange(400, 450),
     halfScreenWidth: config.get('gameWidth') / 2,
     halfScreenHeight: config.get('gameHeight') / 2,
     attackAngle: 0,
@@ -109,7 +130,8 @@ var makeNewPlayer = function(socket) {
     weapons: ['melee', 'build', 'pistol'],
     lastAttack: new Date(1),
     lastAttackWeapon: '',
-    lastAttackDuration: 0
+    lastAttackDuration: 0,
+    lastDied: new Date(1)
   }
 }
 
@@ -464,6 +486,9 @@ var projectileIsInObject = function(projectile, object) {
 }
 
 var projectileIsInPlayer = function(projectile, player) {
+  if (!player.ready || player.health <= 0) {
+    return false;
+  }
   var centerDiff = Math.sqrt((projectile.x - player.x) * (projectile.x - player.x) + (projectile.y - player.y) * (projectile.y - player.y))
   if (centerDiff <= (config.get('playerRadius') + projectile.radius)) {
     return true;
@@ -627,11 +652,18 @@ var damageBush = function(projectileId, objectId) {
 }
 
 var damagePlayer = function(projectileId, playerId) {
+  if (players[playerId].health <= 0 ) {
+    return
+  }
   var newHealth = players[playerId].health - projectiles[projectileId].damage + 0.0
   if (newHealth > 0) {
     players[playerId].health = newHealth
   } else {
-    console.log("DEAD")
+    players[playerId].health = 0
+    players[playerId].deaths += 1
+    players[playerId].lastDied = new Date()
+    sockets[playerId].emit('dead')
+    players[projectiles[projectileId].sentBy].kills += 1
   }
 }
 
@@ -651,6 +683,22 @@ var sendGameUpdates = function() {
   }
 }
 
+var respawnPlayers = function() {
+  for (var id in players) {
+    if (players[id].health <= 0) {
+      var now = new Date()
+      if (now <= new Date(players[id].lastDied.getTime() + 3000)) {
+        return
+      }
+      players[id].health = 100
+      players[id].x = util.randomInRange(400, 450)
+      players[id].y = util.randomInRange(400, 450)
+      players[id].lastDied = now
+      sockets[id].emit('respawn')
+    }
+  }
+}
+
 var sendMapInfo = function() {
   for (var playerId in players) {
     var visibleObjects = {}
@@ -661,6 +709,65 @@ var sendMapInfo = function() {
     }
     sockets[playerId].emit('map objects', visibleObjects)
   }
+}
+
+var sendLeaderboardInfo = function() {
+  var topPlayers = ['none', 'none', 'none', 'none']
+  var currentMax = -1
+  var currentPlayer = 'none'
+  for (var playerId in players) {
+    if (players[playerId].ready && players[playerId].kills > currentMax) {
+      currentMax = players[playerId].kills
+      currentPlayer = playerId
+    }
+  }
+  if (currentPlayer != 'none') {
+    topPlayers[0] = currentPlayer
+  }
+
+  currentMax = -1
+  currentPlayer = 'none'
+  for (var playerId in players) {
+    if (players[playerId].ready && playerId != topPlayers[0] && players[playerId].kills > currentMax) {
+      currentMax = players[playerId].kills
+      currentPlayer = playerId
+    }
+  }
+  if (currentPlayer != 'none') {
+    topPlayers[1] = currentPlayer
+  }
+
+  currentMax = -1
+  currentPlayer = 'none'
+  for (var playerId in players) {
+    if (players[playerId].ready && playerId != topPlayers[0] && playerId != topPlayers[1] && players[playerId].kills > currentMax) {
+      currentMax = players[playerId].kills
+      currentPlayer = playerId
+    }
+  }
+  if (currentPlayer != 'none') {
+    topPlayers[2] = currentPlayer
+  }
+
+  currentMax = -1
+  currentPlayer = 'none'
+  for (var playerId in players) {
+    if (players[playerId].ready && playerId != topPlayers[0] && playerId != topPlayers[1] && playerId != topPlayers[2] && players[playerId].kills > currentMax) {
+      currentMax = players[playerId].kills
+      currentPlayer = playerId
+    }
+  }
+  if (currentPlayer != 'none') {
+    topPlayers[3] = currentPlayer
+  }
+
+  var topStats = ['none', 'none', 'none', 'none']
+  for (var i = 0; i < topStats.length; i++) {
+    if (players[topPlayers[i]]) {
+      topStats[i] = players[topPlayers[i]].name + ' (' + players[topPlayers[i]].kills + ')'
+    }
+  }
+  io.emit('leaderboard info', topStats)
 }
 
 var sendProjectiles = function() {
@@ -707,7 +814,9 @@ http.listen(7070, function(err){
   console.log('Listening on port 7070')
 })
 
+setInterval(respawnPlayers, 1000/ 60)
 setInterval(sendGameUpdates, 1000 / 60)
 setInterval(sendMapInfo, 1000 / 60)
 setInterval(sendProjectiles, 1000 / 60)
 setInterval(processProjectiles, 1000 / 60)
+setInterval(sendLeaderboardInfo, 300)
