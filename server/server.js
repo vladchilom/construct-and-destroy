@@ -199,32 +199,35 @@ var processBuild = function(id) {
     return
   }
   var xAxisWhichWall = (interceptChecker - getIntercept(players[id].x, players[id].y, Math.tan(-angle))) / Math.tan(-angle)
-  if ((angle > (3*Math.PI)/2 && angle < 2*Math.PI) || (angle > 0 && angle < Math.PI/2)) {
-    if (xAxisWhichWall > (xQuadrant + 1) * config.gridSpacing) {
-      addWall({x: (xQuadrant + 1) * config.gridSpacing - 12, y: (yQuadrant) * config.gridSpacing}, config.gridSpacing, 25)
-    }
-    else {
-      if (half) {
-        addWall({x: (xQuadrant * config.gridSpacing), y: (yQuadrant) * config.gridSpacing - 12}, 25, config.gridSpacing)
+  if (players[id].materials >= 10) {
+    players[id].materials = players[id].materials - 10
+    if ((angle > (3*Math.PI)/2 && angle < 2*Math.PI) || (angle > 0 && angle < Math.PI/2)) {
+      if (xAxisWhichWall > (xQuadrant + 1) * config.gridSpacing) {
+        addWall({x: (xQuadrant + 1) * config.gridSpacing - 12, y: (yQuadrant) * config.gridSpacing}, config.gridSpacing, 25)
       }
       else {
-        addWall({x: (xQuadrant * config.gridSpacing), y: (yQuadrant + 1) * config.gridSpacing - 12}, 25, config.gridSpacing)
+        if (half) {
+          addWall({x: (xQuadrant * config.gridSpacing), y: (yQuadrant) * config.gridSpacing - 12}, 25, config.gridSpacing)
+        }
+        else {
+          addWall({x: (xQuadrant * config.gridSpacing), y: (yQuadrant + 1) * config.gridSpacing - 12}, 25, config.gridSpacing)
+        }
       }
-    }
-  }
-  else {
-    if (xAxisWhichWall < (xQuadrant) * config.gridSpacing) {
-      addWall({x: (xQuadrant * config.gridSpacing) - 12, y: (yQuadrant) * config.gridSpacing}, config.gridSpacing, 25)
     }
     else {
-      if (half) {
-        addWall({x: (xQuadrant * config.gridSpacing), y: (yQuadrant) * config.gridSpacing - 12}, 25, config.gridSpacing)
+      if (xAxisWhichWall < (xQuadrant) * config.gridSpacing) {
+        addWall({x: (xQuadrant * config.gridSpacing) - 12, y: (yQuadrant) * config.gridSpacing}, config.gridSpacing, 25)
       }
       else {
-        addWall({x: (xQuadrant * config.gridSpacing), y: (yQuadrant + 1) * config.gridSpacing - 12}, 25, config.gridSpacing)
+        if (half) {
+          addWall({x: (xQuadrant * config.gridSpacing), y: (yQuadrant) * config.gridSpacing - 12}, 25, config.gridSpacing)
+        }
+        else {
+          addWall({x: (xQuadrant * config.gridSpacing), y: (yQuadrant + 1) * config.gridSpacing - 12}, 25, config.gridSpacing)
+        }
       }
-    }
 
+    }
   }
 }
 
@@ -290,9 +293,22 @@ var isLegalMovement = function(id, x, y) {
 }
 
 var isMovingIntoObject = function(id, x, y, ignoreId) {
-  if (ignoreId != 'none') {
+  // if (ignoreId == 'none') {
     for (var id in map) {
       var object = map[id]
+      if (object.type == 'armory') {
+        for (var i = 0; i < object.walls.length; i++) {
+          if ((x + config.get('playerRadius') > object.walls[i].x) && (x - config.get('playerRadius') < object.walls[i].x + object.walls[i].width) && (y - config.get('playerRadius') < object.walls[i].y + object.walls[i].height && (y + config.get('playerRadius') > object.walls[i].y))) {
+              return {status: true, object: object.walls[i]}
+          } 
+        }
+      }
+      else if (object.type == 'wall') {
+        // we on that "can't build walls on fences fortnite" status right now
+        if ((x + config.get('playerRadius') > object.x) && (x - config.get('playerRadius') < object.x + object.width) && (y - config.get('playerRadius') < object.y + object.height && (y + config.get('playerRadius') > object.y))) {
+          return {status: true, object: object}
+        }
+      }
       if (object.id != ignoreId) {
         var distance = Math.sqrt((object.x - x) * (object.x - x) + (object.y - y) * (object.y - y))
         if (distance <= object.boundary) {
@@ -300,15 +316,6 @@ var isMovingIntoObject = function(id, x, y, ignoreId) {
         }
       }
     }
-  } else {
-    for (var id in map) {
-      var object = map[id]
-      var distance = Math.sqrt((object.x - x) * (object.x - x) + (object.y - y) * (object.y - y))
-      if (distance <= object.boundary) {
-        return { status: true, object: object }
-      }
-    }
-  }
   return { status: false, object: undefined }
 }
 
@@ -327,98 +334,190 @@ var getIntercept = function(x, y, slope) {
 }
 
 var pushObjectOut = function(id, x, y, movingIntoObject) {
-  var movingLeft = x < players[id].x
-  var movingRight = x > players[id].x
-  var movingUp = y < players[id].y
-  var movingDown = y > players[id].y
+    var obj = movingIntoObject.object
+    var movingLeft = x < players[id].x
+    var movingRight = x > players[id].x
+    var movingUp = y < players[id].y
+    var movingDown = y > players[id].y
+    console.log(x, obj.width, players[id].x)
+  if (movingIntoObject.object.type == 'wall') {
+    if (x + config.get('playerRadius') > obj.x && x - config.get('playerRadius') < obj.x && y + config.get('playerRadius') > obj.y && y - config.get('playerRadius') < obj.y + obj.height) {
+      var newx = obj.x - config.get('playerRadius')
+      var newy = y  
+      console.log("right")
+    }
+    else if (x - config.get('playerRadius') < obj.x + obj.width && x + config.get('playerRadius') > obj.x + obj.width && y + config.get('playerRadius') > obj.y && y - config.get('playerRadius') < obj.y + obj.height) {
+      var newx = obj.x + obj.width + config.get('playerRadius')
+      var newy = y
+      console.log("left") 
+    }
+    if (y - config.get('playerRadius') < obj.y + obj.height && y - config.get('playerRadius') > obj.y + obj.height - 2*config.get('playerRadius') && (x + config.get('playerRadius') > obj.x && x - config.get('playerRadius') < obj.x + obj.width)) {
+      var newx = x
+      var newy = obj.y + obj.height + config.get('playerRadius')
+      console.log("up")
+      
 
-  if (movingUp && movingLeft) {
-    if (angle > (Math.PI / 4)) {
-      movingUp = false
     }
-    else {
-      movingLeft = false
+    else if (y + config.get('playerRadius') > obj.y && y + config.get('playerRadius') < obj.y + 2*config.get('playerRadius') && ((x + config.get('playerRadius') > obj.x && x - config.get('playerRadius') < obj.x + obj.width))) {
+     
+      var newx = x
+      var newy = obj.y - config.get('playerRadius')
+      console.log("down")
+      
     }
-  }
-  else if (movingUp && movingRight) {
-    if (angle > (3 * Math.PI / 4)) {
-      movingLeft = false
-    }
-    else {
-      movingUp = false
-    }
-  }
-  else if (movingDown && movingLeft) {
-    if (angle > (-1 * Math.PI / 4)) {
-      movingLeft = false
-    }
-    else {
-      movingDown = false
-    }
-  }
-  else if (movingDown && movingRight) {
-    if (angle > (-3 * Math.PI / 4)) {
-      movingDown = false
-    }
-    else {
-      movingRight = false
-    }
-  }
 
-  var angle = Math.atan2(players[id].y - movingIntoObject.object.y, players[id].x - movingIntoObject.object.x)
-  var slope = getSlope(players[id].x, players[id].y, x, y)
-  var intercept = getIntercept(players[id].x, players[id].y, slope)
-  var tangentDiff = Math.abs(((movingIntoObject.object.y - intercept) / slope) - movingIntoObject.object.x)
-  if (movingLeft || movingRight) {
-    var tangentDiff = Math.abs((slope * movingIntoObject.object.x + intercept) - movingIntoObject.object.y)
-  }
-  tangentDiff = tangentDiff / movingIntoObject.object.boundary
-  var angleIntensity = tangentDiff + 0.13
-  var angleSpeed = 0.1 / (movingIntoObject.object.boundary / 45.0) * angleIntensity
+    // if (x > obj.x && x < obj.x + obj.width && y > obj.y && y < obj.y + obj.height) {
+    //   console.log("OTHER ELSE")
+    //   var xQuadrant = Math.floor((players[id].x) / config.gridSpacing)
+    //   var yQuadrant = Math.floor((players[id].y) / config.gridSpacing)
+    //   var xmod = players[id].x % config.gridSpacing
+    //   var ymod = players[id].y % config.gridSpacing
+    //   console.log(xmod, ymod)
+    //   if (ymod < 25) {
+    //     var newy = players[id].y + 30
+    //   }
+    //   else if (ymod > 175) {
+    //     var newy = players[id].y - 30
+    //   }
+    //   else {
+    //     var newy = y
+    //   }
+    //   if (xmod < 30) {
+    //     var newx = players[id].x + 30
+    //   }
+    //   else if (xmod > 175) {
+    //     var newx = players[id].x - 30
+    //   }
+    //   else {
+    //     var newx = x
+    //   }
+    // }
+    // else {
 
-  if (movingUp) {
-    if (players[id].x < movingIntoObject.object.x) {
-      var newx = Math.round(movingIntoObject.object.x + movingIntoObject.object.boundary * Math.cos(angle + angleSpeed))
-      var newy = Math.round(movingIntoObject.object.y + movingIntoObject.object.boundary * Math.sin(angle + angleSpeed))
-    }
-    else {
-      var newx = Math.round(movingIntoObject.object.x + movingIntoObject.object.boundary * Math.cos(angle - angleSpeed))
-      var newy = Math.round(movingIntoObject.object.y + movingIntoObject.object.boundary * Math.sin(angle - angleSpeed))
-    }
+    // }
+    // console.log("wall")
+    // console.log(movingLeft, movingRight, movingUp, movingDown)
+    // if (movingLeft) {
+    //   var newx = Math.round(movingIntoObject.object.x + movingIntoObject.object.width + config.get('playerRadius'))
+    //   var newy = y
+    //   console.log(newx, "left", movingIntoObject.object.x)
+    // }
+    // else if (movingRight) {
+    //   var newx = Math.round(movingIntoObject.object.x - config.get('playerRadius'))
+    //   var newy = y
+
+    //   console.log(newx, "right", movingIntoObject.object.x)
+    // }
+
+    // if (movingUp) {
+    //   var newy = Math.round(movingIntoObject.object.y + movingIntoObject.object.height + config.get('playerRadius'))
+    //   var newx = players[id].x
+    //   console.log(newy, "up", movingIntoObject.object.y)
+
+    // }
+    // else if (movingDown) {
+    //   var newy = Math.round(movingIntoObject.object.y - config.get('playerRadius'))
+    //   var newx = players[id].x
+
+    //   console.log(newy, "down", movingIntoObject.object.y)
+
+    // }
   }
-  else if (movingDown) {
-    if (players[id].x < movingIntoObject.object.x) {
-      var newx = Math.round(movingIntoObject.object.x + movingIntoObject.object.boundary * Math.cos(angle - angleSpeed))
-      var newy = Math.round(movingIntoObject.object.y + movingIntoObject.object.boundary * Math.sin(angle - angleSpeed))
+  
+
+  else {
+    var movingLeft = x < players[id].x
+    var movingRight = x > players[id].x
+    var movingUp = y < players[id].y
+    var movingDown = y > players[id].y
+    if (movingUp && movingLeft) {
+      if (angle > (Math.PI / 4)) {
+        movingUp = false
+      }
+      else {
+        movingLeft = false
+      }
     }
-    else {
-      var newx = Math.round(movingIntoObject.object.x + movingIntoObject.object.boundary * Math.cos(angle + angleSpeed))
-      var newy = Math.round(movingIntoObject.object.y + movingIntoObject.object.boundary * Math.sin(angle + angleSpeed))
+    else if (movingUp && movingRight) {
+      if (angle > (3 * Math.PI / 4)) {
+        movingLeft = false
+      }
+      else {
+        movingUp = false
+      }
     }
-  }
-  else if (movingLeft) {
-    if (players[id].y < movingIntoObject.object.y) {
-      var newx = Math.round(movingIntoObject.object.x + movingIntoObject.object.boundary * Math.cos(angle - angleSpeed))
-      var newy = Math.round(movingIntoObject.object.y + movingIntoObject.object.boundary * Math.sin(angle - angleSpeed))
+    else if (movingDown && movingLeft) {
+      if (angle > (-1 * Math.PI / 4)) {
+        movingLeft = false
+      }
+      else {
+        movingDown = false
+      }
     }
-    else {
-      var newx = Math.round(movingIntoObject.object.x + movingIntoObject.object.boundary * Math.cos(angle + angleSpeed))
-      var newy = Math.round(movingIntoObject.object.y + movingIntoObject.object.boundary * Math.sin(angle + angleSpeed))
+    else if (movingDown && movingRight) {
+      if (angle > (-3 * Math.PI / 4)) {
+        movingDown = false
+      }
+      else {
+        movingRight = false
+      }
     }
-  }
-  else if (movingRight) {
-    if (players[id].y < movingIntoObject.object.y) {
-      var newx = Math.round(movingIntoObject.object.x + movingIntoObject.object.boundary * Math.cos(angle + angleSpeed))
-      var newy = Math.round(movingIntoObject.object.y + movingIntoObject.object.boundary * Math.sin(angle + angleSpeed))
+    var angle = Math.atan2(players[id].y - movingIntoObject.object.y, players[id].x - movingIntoObject.object.x)
+    var slope = getSlope(players[id].x, players[id].y, x, y)
+    var intercept = getIntercept(players[id].x, players[id].y, slope)
+    var tangentDiff = Math.abs(((movingIntoObject.object.y - intercept) / slope) - movingIntoObject.object.x)
+    if (movingLeft || movingRight) {
+      var tangentDiff = Math.abs((slope * movingIntoObject.object.x + intercept) - movingIntoObject.object.y)
     }
-    else {
-      var newx = Math.round(movingIntoObject.object.x + movingIntoObject.object.boundary * Math.cos(angle - angleSpeed))
-      var newy = Math.round(movingIntoObject.object.y + movingIntoObject.object.boundary * Math.sin(angle - angleSpeed))
+    tangentDiff = tangentDiff / movingIntoObject.object.boundary
+    var angleIntensity = tangentDiff + 0.13
+    var angleSpeed = 0.1 / (movingIntoObject.object.boundary / 45.0) * angleIntensity
+
+    if (movingUp) {
+      if (players[id].x < movingIntoObject.object.x) {
+        var newx = Math.round(movingIntoObject.object.x + movingIntoObject.object.boundary * Math.cos(angle + angleSpeed))
+        var newy = Math.round(movingIntoObject.object.y + movingIntoObject.object.boundary * Math.sin(angle + angleSpeed))
+      }
+      else {
+        var newx = Math.round(movingIntoObject.object.x + movingIntoObject.object.boundary * Math.cos(angle - angleSpeed))
+        var newy = Math.round(movingIntoObject.object.y + movingIntoObject.object.boundary * Math.sin(angle - angleSpeed))
+      }
+    }
+    else if (movingDown) {
+      if (players[id].x < movingIntoObject.object.x) {
+        var newx = Math.round(movingIntoObject.object.x + movingIntoObject.object.boundary * Math.cos(angle - angleSpeed))
+        var newy = Math.round(movingIntoObject.object.y + movingIntoObject.object.boundary * Math.sin(angle - angleSpeed))
+      }
+      else {
+        var newx = Math.round(movingIntoObject.object.x + movingIntoObject.object.boundary * Math.cos(angle + angleSpeed))
+        var newy = Math.round(movingIntoObject.object.y + movingIntoObject.object.boundary * Math.sin(angle + angleSpeed))
+      }
+    }
+    else if (movingLeft) {
+      if (players[id].y < movingIntoObject.object.y) {
+        var newx = Math.round(movingIntoObject.object.x + movingIntoObject.object.boundary * Math.cos(angle - angleSpeed))
+        var newy = Math.round(movingIntoObject.object.y + movingIntoObject.object.boundary * Math.sin(angle - angleSpeed))
+      }
+      else {
+        var newx = Math.round(movingIntoObject.object.x + movingIntoObject.object.boundary * Math.cos(angle + angleSpeed))
+        var newy = Math.round(movingIntoObject.object.y + movingIntoObject.object.boundary * Math.sin(angle + angleSpeed))
+      }
+    }
+    else if (movingRight) {
+      if (players[id].y < movingIntoObject.object.y) {
+        var newx = Math.round(movingIntoObject.object.x + movingIntoObject.object.boundary * Math.cos(angle + angleSpeed))
+        var newy = Math.round(movingIntoObject.object.y + movingIntoObject.object.boundary * Math.sin(angle + angleSpeed))
+      }
+      else {
+        var newx = Math.round(movingIntoObject.object.x + movingIntoObject.object.boundary * Math.cos(angle - angleSpeed))
+        var newy = Math.round(movingIntoObject.object.y + movingIntoObject.object.boundary * Math.sin(angle - angleSpeed))
+      }
     }
   }
   var movingIntoObject = isMovingIntoObject(id, newx, newy, movingIntoObject.object.id)
   if (!movingIntoObject.status) {
     if (isWithinArenaBounds(id, newx, newy)) {
+      //console.log(newx, newy)
       return { x: newx, y: newy }
     }
   }
