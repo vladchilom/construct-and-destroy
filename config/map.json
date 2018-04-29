@@ -1,1521 +1,1519 @@
 {
-    "c769bab8-5c3b-4ca5-93be-34a2625eff34":
-    {
-        "id": "c769bab8-5c3b-4ca5-93be-34a2625eff34",
-        "type": "tree",
-        "x": 250,
-        "y": 400,
-        "maxHealth": 60,
-        "currentHealth": 60,
-        "oRadius": 72,
-        "iRadius": 82,
-        "sides": 13,
-        "maxBoundary": 48.33333333333333,
-        "boundary": 48.33333333333333,
-        "visibleRadius": 82
-    },
-
-    "46a21499-8b33-43e7-ba4b-0cf48b9988ac":
-    {
-        "id": "46a21499-8b33-43e7-ba4b-0cf48b9988ac",
-        "type": "tree",
-        "x": 500,
-        "y": 600,
-        "maxHealth": 60,
-        "currentHealth": 60,
-        "oRadius": 88,
-        "iRadius": 98,
-        "sides": 13,
-        "maxBoundary": 53.666666666666664,
-        "boundary": 53.666666666666664,
-        "visibleRadius": 98
-    },
-
-    "daf40a62-2b6d-4cb9-998e-a34618a939c1":
-    {
-        "id": "daf40a62-2b6d-4cb9-998e-a34618a939c1",
-        "type": "tree",
-        "x": 100,
-        "y": 200,
-        "maxHealth": 60,
-        "currentHealth": 60,
-        "oRadius": 76,
-        "iRadius": 86,
-        "sides": 10,
-        "maxBoundary": 49.66666666666667,
-        "boundary": 49.66666666666667,
-        "visibleRadius": 86
-    },
-
-    "0000e659-7f3d-4f35-a6a4-a3f267732019":
-    {
-        "id": "0000e659-7f3d-4f35-a6a4-a3f267732019",
-        "type": "tree",
-        "x": 400,
-        "y": 180,
-        "maxHealth": 60,
-        "currentHealth": 60,
-        "oRadius": 70,
-        "iRadius": 80,
-        "sides": 10,
-        "maxBoundary": 47.66666666666667,
-        "boundary": 47.66666666666667,
-        "visibleRadius": 80
-    },
-
-    "e0f56cc1-9e38-4673-b4fc-b806e3197d71":
-    {
-        "id": "e0f56cc1-9e38-4673-b4fc-b806e3197d71",
-        "type": "tree",
-        "x": 600,
-        "y": 900,
-        "maxHealth": 60,
-        "currentHealth": 60,
-        "oRadius": 84,
-        "iRadius": 94,
-        "sides": 10,
-        "maxBoundary": 52.33333333333333,
-        "boundary": 52.33333333333333,
-        "visibleRadius": 94
-    },
-
-    "75edd285-bfb6-454c-bdb4-cff6dbba4259":
-    {
-        "id": "75edd285-bfb6-454c-bdb4-cff6dbba4259",
-        "type": "tree",
-        "x": 1300,
-        "y": 300,
-        "maxHealth": 60,
-        "currentHealth": 60,
-        "oRadius": 95,
-        "iRadius": 105,
-        "sides": 13,
-        "maxBoundary": 56,
-        "boundary": 56,
-        "visibleRadius": 105
-    },
-
-    "53a388c3-9541-41db-86fe-a86e1f33d660":
-    {
-        "id": "53a388c3-9541-41db-86fe-a86e1f33d660",
-        "type": "tree",
-        "x": 950,
-        "y": 320,
-        "maxHealth": 60,
-        "currentHealth": 60,
-        "oRadius": 85,
-        "iRadius": 95,
-        "sides": 11,
-        "maxBoundary": 52.66666666666667,
-        "boundary": 52.66666666666667,
-        "visibleRadius": 95
-    },
-
-    "644b6920-8642-4a51-b6a4-1aedf2eb2491":
-    {
-        "id": "644b6920-8642-4a51-b6a4-1aedf2eb2491",
-        "type": "tree",
-        "x": 1400,
-        "y": 3600,
-        "maxHealth": 60,
-        "currentHealth": 60,
-        "oRadius": 80,
-        "iRadius": 90,
-        "sides": 13,
-        "maxBoundary": 51,
-        "boundary": 51,
-        "visibleRadius": 90
-    },
-
-    "4484a167-6469-4278-bff9-dd6efd333068":
-    {
-        "id": "4484a167-6469-4278-bff9-dd6efd333068",
-        "type": "tree",
-        "x": 1650,
-        "y": 1000,
-        "maxHealth": 60,
-        "currentHealth": 60,
-        "oRadius": 86,
-        "iRadius": 96,
-        "sides": 11,
-        "maxBoundary": 53,
-        "boundary": 53,
-        "visibleRadius": 96
-    },
-
-    "f6b72673-7b8e-443b-b916-525357e5a501":
-    {
-        "id": "f6b72673-7b8e-443b-b916-525357e5a501",
-        "type": "tree",
-        "x": 3500,
-        "y": 2500,
-        "maxHealth": 60,
-        "currentHealth": 60,
-        "oRadius": 96,
-        "iRadius": 106,
-        "sides": 12,
-        "maxBoundary": 56.333333333333336,
-        "boundary": 56.333333333333336,
-        "visibleRadius": 106
-    },
-
-    "f69bc35b-f210-4f0f-b041-f063f2530110":
-    {
-        "id": "f69bc35b-f210-4f0f-b041-f063f2530110",
-        "type": "bush",
-        "x": 350,
-        "y": 1500,
-        "maxHealth": 30,
-        "currentHealth": 30,
-        "oRadius": 40,
-        "iRadius": 42,
-        "sides": 19,
-        "maxBoundary": 64,
-        "boundary": 64,
-        "visibleRadius": 64
-    },
-
-    "122c863e-d4b4-463f-a88d-87e886fa74a9":
-    {
-        "id": "122c863e-d4b4-463f-a88d-87e886fa74a9",
-        "type": "bush",
-        "x": 350,
-        "y": 4000,
-        "maxHealth": 30,
-        "currentHealth": 30,
-        "oRadius": 40,
-        "iRadius": 42,
-        "sides": 16,
-        "maxBoundary": 64,
-        "boundary": 64,
-        "visibleRadius": 64
-    },
-
-    "fd1da172-ee65-4d13-84ad-c62677717ca3":
-    {
-        "id": "fd1da172-ee65-4d13-84ad-c62677717ca3",
-        "type": "bush",
-        "x": 600,
-        "y": 3500,
-        "maxHealth": 30,
-        "currentHealth": 30,
-        "oRadius": 40,
-        "iRadius": 42,
-        "sides": 16,
-        "maxBoundary": 64,
-        "boundary": 64,
-        "visibleRadius": 64
-    },
-
-    "0976822c-9d36-4dc6-9375-2f86f2c3f601":
-    {
-        "id": "0976822c-9d36-4dc6-9375-2f86f2c3f601",
-        "type": "bush",
-        "x": 4000,
-        "y": 1500,
-        "maxHealth": 30,
-        "currentHealth": 30,
-        "oRadius": 40,
-        "iRadius": 42,
-        "sides": 18,
-        "maxBoundary": 64,
-        "boundary": 64,
-        "visibleRadius": 64
-    },
-    "5d84dbd0-1da0-4285-984d-72ac436a88ae":
-    {
-        "id": "5d84dbd0-1da0-4285-984d-72ac436a88ae",
-        "type": "bush",
-        "x": 1500,
-        "y": 2250,
-        "maxHealth": 30,
-        "currentHealth": 30,
-        "oRadius": 40,
-        "iRadius": 42,
-        "sides": 18,
-        "maxBoundary": 64,
-        "boundary": 64,
-        "visibleRadius": 64
-    },
-
-
-    "e5b62c06-7810-430d-8f10-da4c5e2aeb75":
-    {
-        "id": "e5b62c06-7810-430d-8f10-da4c5e2aeb75",
-        "type": "bush",
-        "x": 530,
-        "y": 3600,
-        "maxHealth": 30,
-        "currentHealth": 30,
-        "oRadius": 40,
-        "iRadius": 42,
-        "sides": 16,
-        "maxBoundary": 64,
-        "boundary": 64,
-        "visibleRadius": 64
-    },
-
-    "fdce106f-2bee-4a45-9335-379226d64ad1":
-    {
-        "id": "fdce106f-2bee-4a45-9335-379226d64ad1",
-        "type": "rock",
-        "x": 700,
-        "y": 400,
-        "maxHealth": 90,
-        "currentHealth": 90,
-        "radius": 137,
-        "maxBoundary": 159,
-        "boundary": 159,
-        "visibleRadius": 137
-    },
-
-    "f5400fa4-7c59-49cd-9837-73e3b1b57ee5":
-    {
-        "id": "f5400fa4-7c59-49cd-9837-73e3b1b57ee5",
-        "type": "rock",
-        "x": 2500,
-        "y": 455,
-        "maxHealth": 90,
-        "currentHealth": 90,
-        "radius": 139,
-        "maxBoundary": 161,
-        "boundary": 161,
-        "visibleRadius": 139
-    },
-
-    "9a77d99c-1f42-47ae-9342-91dd0010b1d4":
-    {
-        "id": "9a77d99c-1f42-47ae-9342-91dd0010b1d4",
-        "type": "rock",
-        "x": 1500,
-        "y": 360,
-        "maxHealth": 90,
-        "currentHealth": 90,
-        "radius": 133,
-        "maxBoundary": 155,
-        "boundary": 155,
-        "visibleRadius": 133
-    },
-
-    "ebdd3d00-f09d-4f65-8b0c-20d0e9725670":
-    {
-        "id": "ebdd3d00-f09d-4f65-8b0c-20d0e9725670",
-        "type": "rock",
-        "x": 600,
-        "y": 1650,
-        "maxHealth": 90,
-        "currentHealth": 90,
-        "radius": 149,
-        "maxBoundary": 171,
-        "boundary": 171,
-        "visibleRadius": 149
-    },
-
-    "081899bb-46b9-476b-a37e-ed6cdf50d0db":
-    {
-        "id": "081899bb-46b9-476b-a37e-ed6cdf50d0db",
-        "type": "rock",
-        "x": 600,
-        "y": 3200,
-        "maxHealth": 90,
-        "currentHealth": 90,
-        "radius": 146,
-        "maxBoundary": 168,
-        "boundary": 168,
-        "visibleRadius": 146
-    },
-
-    "bfaf9a66-f1b9-41f1-876d-84f5d5f6118e":
-    {
-        "id": "bfaf9a66-f1b9-41f1-876d-84f5d5f6118e",
-        "type": "rock",
-        "x": 2500,
-        "y": 1600,
-        "maxHealth": 90,
-        "currentHealth": 90,
-        "radius": 149,
-        "maxBoundary": 171,
-        "boundary": 171,
-        "visibleRadius": 149
-    },
-
-    "647aa0d7-c6bf-4d4c-a186-6da0f34ea6ec":
-    {
-        "id": "647aa0d7-c6bf-4d4c-a186-6da0f34ea6ec",
-        "type": "rock",
-        "x": 2000,
-        "y": 2000,
-        "maxHealth": 90,
-        "currentHealth": 90,
-        "radius": 129,
-        "maxBoundary": 151,
-        "boundary": 151,
-        "visibleRadius": 129
-    },
-
-    "63e63512-7883-430d-8538-5e0c3a92cd28":
-    {
-        "id": "63e63512-7883-430d-8538-5e0c3a92cd28",
-        "type": "bush",
-        "x": 990,
-        "y": 735,
-        "maxHealth": 30,
-        "currentHealth": 30,
-        "oRadius": 40,
-        "iRadius": 42,
-        "sides": 16,
-        "maxBoundary": 64,
-        "boundary": 64,
-        "visibleRadius": 64
-    },
-
-    "31a467c4-5149-47e3-90a5-3eab5c1d796b":
-    {
-        "id": "31a467c4-5149-47e3-90a5-3eab5c1d796b",
-        "type": "tree",
-        "x": 1230,
-        "y": 990,
-        "maxHealth": 60,
-        "currentHealth": 60,
-        "oRadius": 83,
-        "iRadius": 93,
-        "sides": 11,
-        "maxBoundary": 52,
-        "boundary": 52,
-        "visibleRadius": 93
-    },
-
-    "0087cebf-49f1-4833-8699-ef7d7cf6401f":
-    {
-        "id": "0087cebf-49f1-4833-8699-ef7d7cf6401f",
-        "type": "tree",
-        "x": 1005,
-        "y": 1425,
-        "maxHealth": 60,
-        "currentHealth": 60,
-        "oRadius": 79,
-        "iRadius": 89,
-        "sides": 12,
-        "maxBoundary": 50.66666666666667,
-        "boundary": 50.66666666666667,
-        "visibleRadius": 89
-    },
-
-    "10de6a82-93bc-49ea-a997-5ea22ab61e33":
-    {
-        "id": "10de6a82-93bc-49ea-a997-5ea22ab61e33",
-        "type": "rock",
-        "x": 1380,
-        "y": 1440,
-        "maxHealth": 90,
-        "currentHealth": 90,
-        "radius": 149,
-        "maxBoundary": 171,
-        "boundary": 171,
-        "visibleRadius": 149
-    },
-
-    "50288cf2-3c79-48f2-aa38-7da0f313446d":
-    {
-        "id": "50288cf2-3c79-48f2-aa38-7da0f313446d",
-        "type": "tree",
-        "x": 1980,
-        "y": 945,
-        "maxHealth": 60,
-        "currentHealth": 60,
-        "oRadius": 85,
-        "iRadius": 95,
-        "sides": 13,
-        "maxBoundary": 52.66666666666667,
-        "boundary": 52.66666666666667,
-        "visibleRadius": 95
-    },
-
-    "17bf734b-2784-4d56-94fd-eca37a1eaace":
-    {
-        "id": "17bf734b-2784-4d56-94fd-eca37a1eaace",
-        "type": "tree",
-        "x": 1965,
-        "y": 675,
-        "maxHealth": 60,
-        "currentHealth": 60,
-        "oRadius": 72,
-        "iRadius": 82,
-        "sides": 11,
-        "maxBoundary": 48.33333333333333,
-        "boundary": 48.33333333333333,
-        "visibleRadius": 82
-    },
-
-    "0c5f79f2-6942-4a87-a09b-c5b8f4140110":
-    {
-        "id": "0c5f79f2-6942-4a87-a09b-c5b8f4140110",
-        "type": "rock",
-        "x": 2250,
-        "y": 240,
-        "maxHealth": 90,
-        "currentHealth": 90,
-        "radius": 147,
-        "maxBoundary": 169,
-        "boundary": 169,
-        "visibleRadius": 147
-    },
-
-    "0093b18c-8e3a-4d94-9403-bd223ae93daf":
-    {
-        "id": "0093b18c-8e3a-4d94-9403-bd223ae93daf",
-        "type": "bush",
-        "x": 2925,
-        "y": 705,
-        "maxHealth": 30,
-        "currentHealth": 30,
-        "oRadius": 40,
-        "iRadius": 42,
-        "sides": 17,
-        "maxBoundary": 64,
-        "boundary": 64,
-        "visibleRadius": 64
-    },
-
-    "4319efa1-fa88-448c-83d0-8849b9139692":
-    {
-        "id": "4319efa1-fa88-448c-83d0-8849b9139692",
-        "type": "bush",
-        "x": 3225,
-        "y": 510,
-        "maxHealth": 30,
-        "currentHealth": 30,
-        "oRadius": 40,
-        "iRadius": 42,
-        "sides": 15,
-        "maxBoundary": 64,
-        "boundary": 64,
-        "visibleRadius": 64
-    },
-
-    "7de36010-4dc7-462c-abb1-8c9fcb1770d9":
-    {
-        "id": "7de36010-4dc7-462c-abb1-8c9fcb1770d9",
-        "type": "tree",
-        "x": 3615,
-        "y": 360,
-        "maxHealth": 60,
-        "currentHealth": 60,
-        "oRadius": 88,
-        "iRadius": 98,
-        "sides": 11,
-        "maxBoundary": 53.666666666666664,
-        "boundary": 53.666666666666664,
-        "visibleRadius": 98
-    },
-
-    "ee8ab11e-0d3d-4054-8350-5b83560ada75":
-    {
-        "id": "ee8ab11e-0d3d-4054-8350-5b83560ada75",
-        "type": "tree",
-        "x": 3990,
-        "y": 390,
-        "maxHealth": 60,
-        "currentHealth": 60,
-        "oRadius": 71,
-        "iRadius": 81,
-        "sides": 13,
-        "maxBoundary": 48,
-        "boundary": 48,
-        "visibleRadius": 81
-    },
-
-    "c373b07e-c9cd-4554-8248-ea58284d5671":
-    {
-        "id": "c373b07e-c9cd-4554-8248-ea58284d5671",
-        "type": "tree",
-        "x": 4290,
-        "y": 360,
-        "maxHealth": 60,
-        "currentHealth": 60,
-        "oRadius": 79,
-        "iRadius": 89,
-        "sides": 13,
-        "maxBoundary": 50.66666666666667,
-        "boundary": 50.66666666666667,
-        "visibleRadius": 89
-    },
-    "37d9ecba-7805-4ec0-a79b-4738a777a622":
-    {
-        "id": "37d9ecba-7805-4ec0-a79b-4738a777a622",
-        "type": "tree",
-        "x": 2730,
-        "y": 1275,
-        "maxHealth": 60,
-        "currentHealth": 60,
-        "oRadius": 79,
-        "iRadius": 89,
-        "sides": 12,
-        "maxBoundary": 50.66666666666667,
-        "boundary": 50.66666666666667,
-        "visibleRadius": 89
-    },
-
-    "48c07f34-618e-4f61-95e8-c1065841bc2b":
-    {
-        "id": "48c07f34-618e-4f61-95e8-c1065841bc2b",
-        "type": "rock",
-        "x": 2490,
-        "y": 1020,
-        "maxHealth": 90,
-        "currentHealth": 90,
-        "radius": 149,
-        "maxBoundary": 171,
-        "boundary": 171,
-        "visibleRadius": 149
-    },
-
-    "f82b0372-9a11-4ba7-82ab-b51b35a93282":
-    {
-        "id": "f82b0372-9a11-4ba7-82ab-b51b35a93282",
-        "type": "rock",
-        "x": 2100,
-        "y": 1470,
-        "maxHealth": 90,
-        "currentHealth": 90,
-        "radius": 146,
-        "maxBoundary": 168,
-        "boundary": 168,
-        "visibleRadius": 146
-    },
-
-    "99b7c51d-9e67-4491-930d-b4f32443fdd7":
-    {
-        "id": "99b7c51d-9e67-4491-930d-b4f32443fdd7",
-        "type": "tree",
-        "x": 1350,
-        "y": 1965,
-        "maxHealth": 60,
-        "currentHealth": 60,
-        "oRadius": 95,
-        "iRadius": 105,
-        "sides": 11,
-        "maxBoundary": 56,
-        "boundary": 56,
-        "visibleRadius": 105
-    },
-
-    "9028b390-eb3a-411f-8593-00f07cd6f261":
-    {
-        "id": "9028b390-eb3a-411f-8593-00f07cd6f261",
-        "type": "bush",
-        "x": 1095,
-        "y": 1785,
-        "maxHealth": 30,
-        "currentHealth": 30,
-        "oRadius": 40,
-        "iRadius": 42,
-        "sides": 16,
-        "maxBoundary": 64,
-        "boundary": 64,
-        "visibleRadius": 64
-    },
-
-    "32465c81-2501-4bbb-b6e1-d42fc1c98d66":
-    {
-        "id": "32465c81-2501-4bbb-b6e1-d42fc1c98d66",
-        "type": "bush",
-        "x": 1710,
-        "y": 1380,
-        "maxHealth": 30,
-        "currentHealth": 30,
-        "oRadius": 40,
-        "iRadius": 42,
-        "sides": 18,
-        "maxBoundary": 64,
-        "boundary": 64,
-        "visibleRadius": 64
-    },
-
-    "e8fe83f6-8fba-47af-834e-e1644bbbf627":
-    {
-        "id": "e8fe83f6-8fba-47af-834e-e1644bbbf627",
-        "type": "tree",
-        "x": 2145,
-        "y": 1200,
-        "maxHealth": 60,
-        "currentHealth": 60,
-        "oRadius": 89,
-        "iRadius": 99,
-        "sides": 10,
-        "maxBoundary": 54,
-        "boundary": 54,
-        "visibleRadius": 99
-    },
-
-    "28a51fde-8293-4fde-a681-33f204c15cbd":
-    {
-        "id": "28a51fde-8293-4fde-a681-33f204c15cbd",
-        "type": "tree",
-        "x": 1845,
-        "y": 315,
-        "maxHealth": 60,
-        "currentHealth": 60,
-        "oRadius": 89,
-        "iRadius": 99,
-        "sides": 10,
-        "maxBoundary": 54,
-        "boundary": 54,
-        "visibleRadius": 99
-    },
-
-    "d0ca7686-5296-448c-8aa0-8f6d172e85e7":
-    {
-        "id": "d0ca7686-5296-448c-8aa0-8f6d172e85e7",
-        "type": "tree",
-        "x": 375,
-        "y": 2445,
-        "maxHealth": 60,
-        "currentHealth": 60,
-        "oRadius": 83,
-        "iRadius": 93,
-        "sides": 11,
-        "maxBoundary": 52,
-        "boundary": 52,
-        "visibleRadius": 93
-    },
-
-    "010548e8-039a-439d-ba6b-4adf6ff1ed50":
-    {
-        "id": "010548e8-039a-439d-ba6b-4adf6ff1ed50",
-        "type": "rock",
-        "x": 630,
-        "y": 2715,
-        "maxHealth": 90,
-        "currentHealth": 90,
-        "radius": 141,
-        "maxBoundary": 163,
-        "boundary": 163,
-        "visibleRadius": 141
-    },
-
-    "517816e2-5d57-4d09-a3a6-3fa118287056":
-    {
-        "id": "517816e2-5d57-4d09-a3a6-3fa118287056",
-        "type": "rock",
-        "x": 1215,
-        "y": 2520,
-        "maxHealth": 90,
-        "currentHealth": 90,
-        "radius": 146,
-        "maxBoundary": 168,
-        "boundary": 168,
-        "visibleRadius": 146
-    },
-
-    "3d45624e-cbe7-4632-95d7-5d9be7ef516b":
-    {
-        "id": "3d45624e-cbe7-4632-95d7-5d9be7ef516b",
-        "type": "tree",
-        "x": 1200,
-        "y": 3105,
-        "maxHealth": 60,
-        "currentHealth": 60,
-        "oRadius": 80,
-        "iRadius": 90,
-        "sides": 11,
-        "maxBoundary": 51,
-        "boundary": 51,
-        "visibleRadius": 90
-    },
-
-    "fa97c56a-5eb5-41f4-9d64-773d8780585a":
-    {
-        "id": "fa97c56a-5eb5-41f4-9d64-773d8780585a",
-        "type": "tree",
-        "x": 885,
-        "y": 3720,
-        "maxHealth": 60,
-        "currentHealth": 60,
-        "oRadius": 82,
-        "iRadius": 92,
-        "sides": 11,
-        "maxBoundary": 51.66666666666667,
-        "boundary": 51.66666666666667,
-        "visibleRadius": 92
-    },
-
-    "7f8fc882-5af9-47f0-8710-810c969f6390":
-    {
-        "id": "7f8fc882-5af9-47f0-8710-810c969f6390",
-        "type": "rock",
-        "x": 90,
-        "y": 4365,
-        "maxHealth": 90,
-        "currentHealth": 90,
-        "radius": 134,
-        "maxBoundary": 156,
-        "boundary": 156,
-        "visibleRadius": 156
-    },
-
-    "6999b87e-5fc5-49f0-a68b-121a685e8833":
-    {
-        "id": "6999b87e-5fc5-49f0-a68b-121a685e8833",
-        "type": "bush",
-        "x": 270,
-        "y": 3420,
-        "maxHealth": 30,
-        "currentHealth": 30,
-        "oRadius": 40,
-        "iRadius": 42,
-        "sides": 15,
-        "maxBoundary": 64,
-        "boundary": 64,
-        "visibleRadius": 64
-    },
-
-    "ccd43c34-5848-4f9e-8f7e-4219806d9cdd":
-    {
-        "id": "ccd43c34-5848-4f9e-8f7e-4219806d9cdd",
-        "type": "rock",
-        "x": 1080,
-        "y": 3405,
-        "maxHealth": 90,
-        "currentHealth": 90,
-        "radius": 128,
-        "maxBoundary": 150,
-        "boundary": 150,
-        "visibleRadius": 128
-    },
-
-    "3e115ab8-8f99-47aa-ac1f-8a5f87e205d7":
-    {
-        "id": "3e115ab8-8f99-47aa-ac1f-8a5f87e205d7",
-        "type": "tree",
-        "x": 1710,
-        "y": 3105,
-        "maxHealth": 60,
-        "currentHealth": 60,
-        "oRadius": 84,
-        "iRadius": 94,
-        "sides": 12,
-        "maxBoundary": 52.33333333333333,
-        "boundary": 52.33333333333333,
-        "visibleRadius": 94
-    },
-
-    "616cfafd-2afd-4710-a783-b364a428a9aa":
-    {
-        "id": "616cfafd-2afd-4710-a783-b364a428a9aa",
-        "type": "tree",
-        "x": 1605,
-        "y": 2700,
-        "maxHealth": 60,
-        "currentHealth": 60,
-        "oRadius": 95,
-        "iRadius": 105,
-        "sides": 12,
-        "maxBoundary": 56,
-        "boundary": 56,
-        "visibleRadius": 105
-    },
-
-    "93fd3628-20a6-4291-bac6-93be18d63a43":
-    {
-        "id": "93fd3628-20a6-4291-bac6-93be18d63a43",
-        "type": "tree",
-        "x": 2160,
-        "y": 2430,
-        "maxHealth": 60,
-        "currentHealth": 60,
-        "oRadius": 81,
-        "iRadius": 91,
-        "sides": 12,
-        "maxBoundary": 51.33333333333333,
-        "boundary": 51.33333333333333,
-        "visibleRadius": 91
-    },
-
-    "be331101-46b4-4f32-bc26-fc25eaadb7fb":
-    {
-        "id": "be331101-46b4-4f32-bc26-fc25eaadb7fb",
-        "type": "bush",
-        "x": 2475,
-        "y": 2865,
-        "maxHealth": 30,
-        "currentHealth": 30,
-        "oRadius": 40,
-        "iRadius": 42,
-        "sides": 19,
-        "maxBoundary": 64,
-        "boundary": 64,
-        "visibleRadius": 64
-    },
-
-    "d9161555-f62e-4144-a7bd-0b3bfc0d2b6d":
-    {
-        "id": "d9161555-f62e-4144-a7bd-0b3bfc0d2b6d",
-        "type": "bush",
-        "x": 2610,
-        "y": 2325,
-        "maxHealth": 30,
-        "currentHealth": 30,
-        "oRadius": 40,
-        "iRadius": 42,
-        "sides": 15,
-        "maxBoundary": 64,
-        "boundary": 64,
-        "visibleRadius": 64
-    },
-
-    "14705ae4-2b37-4d44-a6a4-700f747d0b7b":
-    {
-        "id": "14705ae4-2b37-4d44-a6a4-700f747d0b7b",
-        "type": "bush",
-        "x": 2895,
-        "y": 1995,
-        "maxHealth": 30,
-        "currentHealth": 30,
-        "oRadius": 40,
-        "iRadius": 42,
-        "sides": 18,
-        "maxBoundary": 64,
-        "boundary": 64,
-        "visibleRadius": 64
-    },
-
-    "61602d9c-8312-480b-b963-66606e9d1f06":
-    {
-        "id": "61602d9c-8312-480b-b963-66606e9d1f06",
-        "type": "bush",
-        "x": 3345,
-        "y": 2025,
-        "maxHealth": 30,
-        "currentHealth": 30,
-        "oRadius": 40,
-        "iRadius": 42,
-        "sides": 19,
-        "maxBoundary": 64,
-        "boundary": 64,
-        "visibleRadius": 64
-    },
-
-    "31367fde-a709-4cd8-8b2b-ec47f76bc60d":
-    {
-        "id": "31367fde-a709-4cd8-8b2b-ec47f76bc60d",
-        "type": "tree",
-        "x": 3795,
-        "y": 1890,
-        "maxHealth": 60,
-        "currentHealth": 60,
-        "oRadius": 85,
-        "iRadius": 95,
-        "sides": 12,
-        "maxBoundary": 52.66666666666667,
-        "boundary": 52.66666666666667,
-        "visibleRadius": 95
-    },
-
-    "8d751d86-b23f-4514-b9c4-37c0c6dda1dd":
-    {
-        "id": "8d751d86-b23f-4514-b9c4-37c0c6dda1dd",
-        "type": "tree",
-        "x": 3960,
-        "y": 2295,
-        "maxHealth": 60,
-        "currentHealth": 60,
-        "oRadius": 72,
-        "iRadius": 82,
-        "sides": 10,
-        "maxBoundary": 48.33333333333333,
-        "boundary": 48.33333333333333,
-        "visibleRadius": 82
-    },
-
-    "525a48cd-312b-4220-85d1-ae47a7bf2966":
-    {
-        "id": "525a48cd-312b-4220-85d1-ae47a7bf2966",
-        "type": "bush",
-        "x": 3810,
-        "y": 2790,
-        "maxHealth": 30,
-        "currentHealth": 30,
-        "oRadius": 40,
-        "iRadius": 42,
-        "sides": 18,
-        "maxBoundary": 64,
-        "boundary": 64,
-        "visibleRadius": 64
-    },
-
-    "62486f5b-6163-4eb6-94d3-32431d16aa5c":
-    {
-        "id": "62486f5b-6163-4eb6-94d3-32431d16aa5c",
-        "type": "tree",
-        "x": 3015,
-        "y": 3030,
-        "maxHealth": 60,
-        "currentHealth": 60,
-        "oRadius": 89,
-        "iRadius": 99,
-        "sides": 11,
-        "maxBoundary": 54,
-        "boundary": 54,
-        "visibleRadius": 99
-    },
-
-    "0db3d35a-6bbd-4137-8b66-e8170b882314":
-    {
-        "id": "0db3d35a-6bbd-4137-8b66-e8170b882314",
-        "type": "rock",
-        "x": 2925,
-        "y": 2670,
-        "maxHealth": 90,
-        "currentHealth": 90,
-        "radius": 130,
-        "maxBoundary": 152,
-        "boundary": 152,
-        "visibleRadius": 130
-    },
-
-    "d01f0afb-164d-452b-b822-29da644f978e":
-    {
-        "id": "d01f0afb-164d-452b-b822-29da644f978e",
-        "type": "rock",
-        "x": 3030,
-        "y": 2310,
-        "maxHealth": 90,
-        "currentHealth": 90,
-        "radius": 132,
-        "maxBoundary": 154,
-        "boundary": 154,
-        "visibleRadius": 132
-    },
-
-    "065082b4-7d6f-466c-87f2-2e5880f0b725":
-    {
-        "id": "065082b4-7d6f-466c-87f2-2e5880f0b725",
-        "type": "tree",
-        "x": 2490,
-        "y": 2010,
-        "maxHealth": 60,
-        "currentHealth": 60,
-        "oRadius": 76,
-        "iRadius": 86,
-        "sides": 12,
-        "maxBoundary": 49.66666666666667,
-        "boundary": 49.66666666666667,
-        "visibleRadius": 86
-    },
-
-    "f87f78c7-514e-40ff-9b35-0623dc93b8e4":
-    {
-        "id": "f87f78c7-514e-40ff-9b35-0623dc93b8e4",
-        "type": "tree",
-        "x": 2040,
-        "y": 2985,
-        "maxHealth": 60,
-        "currentHealth": 60,
-        "oRadius": 88,
-        "iRadius": 98,
-        "sides": 10,
-        "maxBoundary": 53.666666666666664,
-        "boundary": 53.666666666666664,
-        "visibleRadius": 98
-    },
-
-    "0b585b13-f066-4555-978b-09fe5d1b7cd1":
-    {
-        "id": "0b585b13-f066-4555-978b-09fe5d1b7cd1",
-        "type": "rock",
-        "x": 2235,
-        "y": 3375,
-        "maxHealth": 90,
-        "currentHealth": 90,
-        "radius": 131,
-        "maxBoundary": 153,
-        "boundary": 153,
-        "visibleRadius": 131
-    },
-
-    "e27a90be-0872-47f3-b5e1-3478ade47f2a":
-    {
-        "id": "e27a90be-0872-47f3-b5e1-3478ade47f2a",
-        "type": "tree",
-        "x": 1785,
-        "y": 3780,
-        "maxHealth": 60,
-        "currentHealth": 60,
-        "oRadius": 77,
-        "iRadius": 87,
-        "sides": 13,
-        "maxBoundary": 50,
-        "boundary": 50,
-        "visibleRadius": 87
-    },
-
-    "4356dd6c-ae5d-4e72-9550-77d2ad22e46c":
-    {
-        "id": "4356dd6c-ae5d-4e72-9550-77d2ad22e46c",
-        "type": "tree",
-        "x": 1890,
-        "y": 4395,
-        "maxHealth": 60,
-        "currentHealth": 60,
-        "oRadius": 79,
-        "iRadius": 89,
-        "sides": 13,
-        "maxBoundary": 50.66666666666667,
-        "boundary": 50.66666666666667,
-        "visibleRadius": 89
-    },
-
-    "3f92d5b1-4b7c-429b-992c-b1740a3f7f7c":
-    {
-        "id": "3f92d5b1-4b7c-429b-992c-b1740a3f7f7c",
-        "type": "tree",
-        "x": 2475,
-        "y": 4125,
-        "maxHealth": 60,
-        "currentHealth": 60,
-        "oRadius": 70,
-        "iRadius": 80,
-        "sides": 12,
-        "maxBoundary": 47.66666666666667,
-        "boundary": 47.66666666666667,
-        "visibleRadius": 80
-    },
-
-    "90a2c316-9562-46dc-9953-2afd4e863439":
-    {
-        "id": "90a2c316-9562-46dc-9953-2afd4e863439",
-        "type": "tree",
-        "x": 2730,
-        "y": 3690,
-        "maxHealth": 60,
-        "currentHealth": 60,
-        "oRadius": 91,
-        "iRadius": 101,
-        "sides": 13,
-        "maxBoundary": 54.666666666666664,
-        "boundary": 54.666666666666664,
-        "visibleRadius": 101
-    },
-
-    "34ef0a00-a8e4-4be1-9fc5-1d5eeb0beae8":
-    {
-        "id": "34ef0a00-a8e4-4be1-9fc5-1d5eeb0beae8",
-        "type": "tree",
-        "x": 4005,
-        "y": 3645,
-        "maxHealth": 60,
-        "currentHealth": 60,
-        "oRadius": 78,
-        "iRadius": 88,
-        "sides": 13,
-        "maxBoundary": 50.33333333333333,
-        "boundary": 50.33333333333333,
-        "visibleRadius": 88
-    },
-
-    "7c2df584-b511-4929-a839-4f91d7607fba":
-    {
-        "id": "7c2df584-b511-4929-a839-4f91d7607fba",
-        "type": "tree",
-        "x": 4020,
-        "y": 3120,
-        "maxHealth": 60,
-        "currentHealth": 60,
-        "oRadius": 90,
-        "iRadius": 100,
-        "sides": 10,
-        "maxBoundary": 54.333333333333336,
-        "boundary": 54.333333333333336,
-        "visibleRadius": 100
-    },
-
-    "d1991523-4e15-4994-9ea9-33cdb4ccb67b":
-    {
-        "id": "d1991523-4e15-4994-9ea9-33cdb4ccb67b",
-        "type": "tree",
-        "x": 4245,
-        "y": 2670,
-        "maxHealth": 60,
-        "currentHealth": 60,
-        "oRadius": 85,
-        "iRadius": 95,
-        "sides": 12,
-        "maxBoundary": 52.66666666666667,
-        "boundary": 52.66666666666667,
-        "visibleRadius": 95
-    },
-
-    "46cc47c3-69b2-4ea6-b16a-7c6a45c4dfba":
-    {
-        "id": "46cc47c3-69b2-4ea6-b16a-7c6a45c4dfba",
-        "type": "bush",
-        "x": 4245,
-        "y": 2070,
-        "maxHealth": 30,
-        "currentHealth": 30,
-        "oRadius": 40,
-        "iRadius": 42,
-        "sides": 18,
-        "maxBoundary": 64,
-        "boundary": 64,
-        "visibleRadius": 64
-    },
-
-    "dec55dcc-f6a9-4e28-94d8-063c6a8542c5":
-    {
-        "id": "dec55dcc-f6a9-4e28-94d8-063c6a8542c5",
-        "type": "tree",
-        "x": 4245,
-        "y": 1620,
-        "maxHealth": 60,
-        "currentHealth": 60,
-        "oRadius": 77,
-        "iRadius": 87,
-        "sides": 13,
-        "maxBoundary": 50,
-        "boundary": 50,
-        "visibleRadius": 87
-    },
-
-    "48c6cae0-b14e-48b8-98e1-29293f0afeb7":
-    {
-        "id": "48c6cae0-b14e-48b8-98e1-29293f0afeb7",
-        "type": "tree",
-        "x": 4305,
-        "y": 975,
-        "maxHealth": 60,
-        "currentHealth": 60,
-        "oRadius": 81,
-        "iRadius": 91,
-        "sides": 11,
-        "maxBoundary": 51.33333333333333,
-        "boundary": 51.33333333333333,
-        "visibleRadius": 91
-    },
-
-    "e39ce548-0173-415d-87bb-a2a60609dd7d":
-    {
-        "id": "e39ce548-0173-415d-87bb-a2a60609dd7d",
-        "type": "tree",
-        "x": 825,
-        "y": 2055,
-        "maxHealth": 60,
-        "currentHealth": 60,
-        "oRadius": 76,
-        "iRadius": 86,
-        "sides": 13,
-        "maxBoundary": 49.66666666666667,
-        "boundary": 49.66666666666667,
-        "visibleRadius": 86
-    },
-
-    "ad7fd535-1607-4447-a080-d70103cfbc2f":
-    {
-        "id": "ad7fd535-1607-4447-a080-d70103cfbc2f",
-        "type": "bush",
-        "x": 300,
-        "y": 1980,
-        "maxHealth": 30,
-        "currentHealth": 30,
-        "oRadius": 40,
-        "iRadius": 42,
-        "sides": 16,
-        "maxBoundary": 64,
-        "boundary": 64,
-        "visibleRadius": 64
-    },
-
-    "5fc7473e-d6d9-499a-860b-3b6e2dec033b":
-    {
-        "id": "5fc7473e-d6d9-499a-860b-3b6e2dec033b",
-        "type": "bush",
-        "x": 105,
-        "y": 1410,
-        "maxHealth": 30,
-        "currentHealth": 30,
-        "oRadius": 40,
-        "iRadius": 42,
-        "sides": 15,
-        "maxBoundary": 64,
-        "boundary": 64,
-        "visibleRadius": 64
-    },
-
-    "ee686919-f02a-4085-8f7f-535b34ea0141":
-    {
-        "id": "ee686919-f02a-4085-8f7f-535b34ea0141",
-        "type": "tree",
-        "x": 90,
-        "y": 1155,
-        "maxHealth": 60,
-        "currentHealth": 60,
-        "oRadius": 81,
-        "iRadius": 91,
-        "sides": 10,
-        "maxBoundary": 51.33333333333333,
-        "boundary": 51.33333333333333,
-        "visibleRadius": 91
-    },
-
-    "91d3e2fa-5984-447c-ad9d-d3cd2bda8d3c":
-    {
-        "id": "91d3e2fa-5984-447c-ad9d-d3cd2bda8d3c",
-        "type": "tree",
-        "x": 135,
-        "y": 825,
-        "maxHealth": 60,
-        "currentHealth": 60,
-        "oRadius": 85,
-        "iRadius": 95,
-        "sides": 10,
-        "maxBoundary": 52.66666666666667,
-        "boundary": 52.66666666666667,
-        "visibleRadius": 95
-    },
-
-    "9346e3e6-64fe-46b7-8e29-191653207705":
-    {
-        "id": "9346e3e6-64fe-46b7-8e29-191653207705",
-        "type": "tree",
-        "x": 1395,
-        "y": 675,
-        "maxHealth": 60,
-        "currentHealth": 60,
-        "oRadius": 77,
-        "iRadius": 87,
-        "sides": 13,
-        "maxBoundary": 50,
-        "boundary": 50,
-        "visibleRadius": 87
-    },
-
-    "24822a02-729f-42ad-b8e4-7e842cd971c7":
-    {
-        "id": "24822a02-729f-42ad-b8e4-7e842cd971c7",
-        "type": "bush",
-        "x": 2880,
-        "y": 65,
-        "maxHealth": 30,
-        "currentHealth": 30,
-        "oRadius": 40,
-        "iRadius": 42,
-        "sides": 19,
-        "maxBoundary": 64,
-        "boundary": 64,
-        "visibleRadius": 64
-    },
-
-    "e8f7a5fc-1839-43c3-b392-2902c097c17a":
-    {
-        "id": "e8f7a5fc-1839-43c3-b392-2902c097c17a",
-        "type": "tree",
-        "x": 3555,
-        "y": 50,
-        "maxHealth": 60,
-        "currentHealth": 60,
-        "oRadius": 84,
-        "iRadius": 94,
-        "sides": 11,
-        "maxBoundary": 52.33333333333333,
-        "boundary": 52.33333333333333,
-        "visibleRadius": 94
-    },
-
-    "3f4bb538-e340-4729-aa5c-7ae6237475a2":
-    {
-        "id": "3f4bb538-e340-4729-aa5c-7ae6237475a2",
-        "type": "tree",
-        "x": 3225,
-        "y": 4265,
-        "maxHealth": 60,
-        "currentHealth": 60,
-        "oRadius": 87,
-        "iRadius": 97,
-        "sides": 13,
-        "maxBoundary": 53.333333333333336,
-        "boundary": 53.333333333333336,
-        "visibleRadius": 97
-    },
-
-    "vlad-chilom-wont-notice":
-    {
-        "id": "vlad-chilom-wont-notice",
-        "type": "tree",
-        "x": 2580,
-        "y": 4475,
-        "maxHealth": 60,
-        "currentHealth": 60,
-        "oRadius": 72,
-        "iRadius": 82,
-        "sides": 11,
-        "maxBoundary": 48.33333333333333,
-        "boundary": 48.33333333333333,
-        "visibleRadius": 82
-    },
-
-    "53c19577-5279-45ad-9695-a4640e9e6b0c":
-    {
-        "id": "53c19577-5279-45ad-9695-a4640e9e6b0c",
-        "type": "rock",
-        "x": 1710,
-        "y": 4130,
-        "maxHealth": 90,
-        "currentHealth": 90,
-        "radius": 123,
-        "maxBoundary": 145,
-        "boundary": 145,
-        "visibleRadius": 123
-    },
-
-    "ef738d4e-5de4-448e-8bd4-ad16645dda16":
-    {
-        "id": "ef738d4e-5de4-448e-8bd4-ad16645dda16",
-        "type": "armory",
+  "c769bab8-5c3b-4ca5-93be-34a2625eff34": {
+    "id": "c769bab8-5c3b-4ca5-93be-34a2625eff34",
+    "type": "tree",
+    "x": 250,
+    "y": 400,
+    "maxHealth": 60,
+    "currentHealth": 60,
+    "oRadius": 72,
+    "iRadius": 82,
+    "sides": 13,
+    "maxBoundary": 48.333333333333,
+    "boundary": 48.333333333333,
+    "visibleRadius": 82
+  },
+  "53c19577-5279-2309825125": {
+    "id": "53c19577-5279-2309825125",
+    "type": "tree",
+    "x": 4300,
+    "y": 4300,
+    "maxHealth": 60,
+    "currentHealth": 60,
+    "oRadius": 72,
+    "iRadius": 82,
+    "sides": 13,
+    "maxBoundary": 48.333333333333,
+    "boundary": 48.333333333333,
+    "visibleRadius": 82
+  },
+  "53c19577-5279-1231255551": {
+    "id": "53c19577-5279-1231255551",
+    "type": "tree",
+    "x": 4100,
+    "y": 4300,
+    "maxHealth": 60,
+    "currentHealth": 60,
+    "oRadius": 72,
+    "iRadius": 82,
+    "sides": 13,
+    "maxBoundary": 48.333333333333,
+    "boundary": 48.333333333333,
+    "visibleRadius": 82
+  },
+  "46a21499-8b33-43e7-ba4b-0cf48b9988ac": {
+    "id": "46a21499-8b33-43e7-ba4b-0cf48b9988ac",
+    "type": "tree",
+    "x": 500,
+    "y": 600,
+    "maxHealth": 60,
+    "currentHealth": 60,
+    "oRadius": 88,
+    "iRadius": 98,
+    "sides": 13,
+    "maxBoundary": 53.666666666667,
+    "boundary": 53.666666666667,
+    "visibleRadius": 98
+  },
+  "daf40a62-2b6d-4cb9-998e-a34618a939c1": {
+    "id": "daf40a62-2b6d-4cb9-998e-a34618a939c1",
+    "type": "tree",
+    "x": 100,
+    "y": 200,
+    "maxHealth": 60,
+    "currentHealth": 60,
+    "oRadius": 76,
+    "iRadius": 86,
+    "sides": 10,
+    "maxBoundary": 49.666666666667,
+    "boundary": 49.666666666667,
+    "visibleRadius": 86
+  },
+  "0000e659-7f3d-4f35-a6a4-a3f267732019": {
+    "id": "0000e659-7f3d-4f35-a6a4-a3f267732019",
+    "type": "tree",
+    "x": 400,
+    "y": 180,
+    "maxHealth": 60,
+    "currentHealth": 60,
+    "oRadius": 70,
+    "iRadius": 80,
+    "sides": 10,
+    "maxBoundary": 47.666666666667,
+    "boundary": 47.666666666667,
+    "visibleRadius": 80
+  },
+  "e0f56cc1-9e38-4673-b4fc-b806e3197d71": {
+    "id": "e0f56cc1-9e38-4673-b4fc-b806e3197d71",
+    "type": "tree",
+    "x": 600,
+    "y": 900,
+    "maxHealth": 60,
+    "currentHealth": 60,
+    "oRadius": 84,
+    "iRadius": 94,
+    "sides": 10,
+    "maxBoundary": 52.333333333333,
+    "boundary": 52.333333333333,
+    "visibleRadius": 94
+  },
+  "75edd285-bfb6-454c-bdb4-cff6dbba4259": {
+    "id": "75edd285-bfb6-454c-bdb4-cff6dbba4259",
+    "type": "tree",
+    "x": 1300,
+    "y": 300,
+    "maxHealth": 60,
+    "currentHealth": 60,
+    "oRadius": 95,
+    "iRadius": 105,
+    "sides": 13,
+    "maxBoundary": 56,
+    "boundary": 56,
+    "visibleRadius": 105
+  },
+  "53a388c3-9541-41db-86fe-a86e1f33d660": {
+    "id": "53a388c3-9541-41db-86fe-a86e1f33d660",
+    "type": "tree",
+    "x": 950,
+    "y": 320,
+    "maxHealth": 60,
+    "currentHealth": 60,
+    "oRadius": 85,
+    "iRadius": 95,
+    "sides": 11,
+    "maxBoundary": 52.666666666667,
+    "boundary": 52.666666666667,
+    "visibleRadius": 95
+  },
+  "644b6920-8642-4a51-b6a4-1aedf2eb2491": {
+    "id": "644b6920-8642-4a51-b6a4-1aedf2eb2491",
+    "type": "tree",
+    "x": 1400,
+    "y": 3600,
+    "maxHealth": 60,
+    "currentHealth": 60,
+    "oRadius": 80,
+    "iRadius": 90,
+    "sides": 13,
+    "maxBoundary": 51,
+    "boundary": 51,
+    "visibleRadius": 90
+  },
+  "4484a167-6469-4278-bff9-dd6efd333068": {
+    "id": "4484a167-6469-4278-bff9-dd6efd333068",
+    "type": "tree",
+    "x": 1650,
+    "y": 1000,
+    "maxHealth": 60,
+    "currentHealth": 60,
+    "oRadius": 86,
+    "iRadius": 96,
+    "sides": 11,
+    "maxBoundary": 53,
+    "boundary": 53,
+    "visibleRadius": 96
+  },
+  "f6b72673-7b8e-443b-b916-525357e5a501": {
+    "id": "f6b72673-7b8e-443b-b916-525357e5a501",
+    "type": "tree",
+    "x": 3500,
+    "y": 2500,
+    "maxHealth": 60,
+    "currentHealth": 60,
+    "oRadius": 96,
+    "iRadius": 106,
+    "sides": 12,
+    "maxBoundary": 56.333333333333,
+    "boundary": 56.333333333333,
+    "visibleRadius": 106
+  },
+  "f69bc35b-f210-4f0f-b041-f063f2530110": {
+    "id": "f69bc35b-f210-4f0f-b041-f063f2530110",
+    "type": "bush",
+    "x": 350,
+    "y": 1500,
+    "maxHealth": 30,
+    "currentHealth": 30,
+    "oRadius": 40,
+    "iRadius": 42,
+    "sides": 19,
+    "maxBoundary": 64,
+    "boundary": 64,
+    "visibleRadius": 64
+  },
+  "122c863e-d4b4-463f-a88d-87e886fa74a9": {
+    "id": "122c863e-d4b4-463f-a88d-87e886fa74a9",
+    "type": "bush",
+    "x": 350,
+    "y": 4000,
+    "maxHealth": 30,
+    "currentHealth": 30,
+    "oRadius": 40,
+    "iRadius": 42,
+    "sides": 16,
+    "maxBoundary": 64,
+    "boundary": 64,
+    "visibleRadius": 64
+  },
+  "fd1da172-ee65-4d13-84ad-c62677717ca3": {
+    "id": "fd1da172-ee65-4d13-84ad-c62677717ca3",
+    "type": "bush",
+    "x": 600,
+    "y": 3500,
+    "maxHealth": 30,
+    "currentHealth": 30,
+    "oRadius": 40,
+    "iRadius": 42,
+    "sides": 16,
+    "maxBoundary": 64,
+    "boundary": 64,
+    "visibleRadius": 64
+  },
+  "0976822c-9d36-4dc6-9375-2f86f2c3f601": {
+    "id": "0976822c-9d36-4dc6-9375-2f86f2c3f601",
+    "type": "bush",
+    "x": 4000,
+    "y": 1500,
+    "maxHealth": 30,
+    "currentHealth": 30,
+    "oRadius": 40,
+    "iRadius": 42,
+    "sides": 18,
+    "maxBoundary": 64,
+    "boundary": 64,
+    "visibleRadius": 64
+  },
+  "5d84dbd0-1da0-4285-984d-72ac436a88ae": {
+    "id": "5d84dbd0-1da0-4285-984d-72ac436a88ae",
+    "type": "bush",
+    "x": 1500,
+    "y": 2250,
+    "maxHealth": 30,
+    "currentHealth": 30,
+    "oRadius": 40,
+    "iRadius": 42,
+    "sides": 18,
+    "maxBoundary": 64,
+    "boundary": 64,
+    "visibleRadius": 64
+  },
+  "e5b62c06-7810-430d-8f10-da4c5e2aeb75": {
+    "id": "e5b62c06-7810-430d-8f10-da4c5e2aeb75",
+    "type": "bush",
+    "x": 530,
+    "y": 3600,
+    "maxHealth": 30,
+    "currentHealth": 30,
+    "oRadius": 40,
+    "iRadius": 42,
+    "sides": 16,
+    "maxBoundary": 64,
+    "boundary": 64,
+    "visibleRadius": 64
+  },
+  "fdce106f-2bee-4a45-9335-379226d64ad1": {
+    "id": "fdce106f-2bee-4a45-9335-379226d64ad1",
+    "type": "rock",
+    "x": 700,
+    "y": 400,
+    "maxHealth": 90,
+    "currentHealth": 90,
+    "radius": 137,
+    "maxBoundary": 159,
+    "boundary": 159,
+    "visibleRadius": 137
+  },
+  "f5400fa4-7c59-49cd-9837-73e3b1b57ee5": {
+    "id": "f5400fa4-7c59-49cd-9837-73e3b1b57ee5",
+    "type": "rock",
+    "x": 2500,
+    "y": 455,
+    "maxHealth": 90,
+    "currentHealth": 90,
+    "radius": 139,
+    "maxBoundary": 161,
+    "boundary": 161,
+    "visibleRadius": 139
+  },
+  "9a77d99c-1f42-47ae-9342-91dd0010b1d4": {
+    "id": "9a77d99c-1f42-47ae-9342-91dd0010b1d4",
+    "type": "rock",
+    "x": 1500,
+    "y": 360,
+    "maxHealth": 90,
+    "currentHealth": 90,
+    "radius": 133,
+    "maxBoundary": 155,
+    "boundary": 155,
+    "visibleRadius": 133
+  },
+  "ebdd3d00-f09d-4f65-8b0c-20d0e9725670": {
+    "id": "ebdd3d00-f09d-4f65-8b0c-20d0e9725670",
+    "type": "rock",
+    "x": 600,
+    "y": 1650,
+    "maxHealth": 90,
+    "currentHealth": 90,
+    "radius": 149,
+    "maxBoundary": 171,
+    "boundary": 171,
+    "visibleRadius": 149
+  },
+  "081899bb-46b9-476b-a37e-ed6cdf50d0db": {
+    "id": "081899bb-46b9-476b-a37e-ed6cdf50d0db",
+    "type": "rock",
+    "x": 600,
+    "y": 3200,
+    "maxHealth": 90,
+    "currentHealth": 90,
+    "radius": 146,
+    "maxBoundary": 168,
+    "boundary": 168,
+    "visibleRadius": 146
+  },
+  "bfaf9a66-f1b9-41f1-876d-84f5d5f6118e": {
+    "id": "bfaf9a66-f1b9-41f1-876d-84f5d5f6118e",
+    "type": "rock",
+    "x": 2500,
+    "y": 1600,
+    "maxHealth": 90,
+    "currentHealth": 90,
+    "radius": 149,
+    "maxBoundary": 171,
+    "boundary": 171,
+    "visibleRadius": 149
+  },
+  "647aa0d7-c6bf-4d4c-a186-6da0f34ea6ec": {
+    "id": "647aa0d7-c6bf-4d4c-a186-6da0f34ea6ec",
+    "type": "rock",
+    "x": 2000,
+    "y": 2000,
+    "maxHealth": 90,
+    "currentHealth": 90,
+    "radius": 129,
+    "maxBoundary": 151,
+    "boundary": 151,
+    "visibleRadius": 129
+  },
+  "63e63512-7883-430d-8538-5e0c3a92cd28": {
+    "id": "63e63512-7883-430d-8538-5e0c3a92cd28",
+    "type": "bush",
+    "x": 990,
+    "y": 735,
+    "maxHealth": 30,
+    "currentHealth": 30,
+    "oRadius": 40,
+    "iRadius": 42,
+    "sides": 16,
+    "maxBoundary": 64,
+    "boundary": 64,
+    "visibleRadius": 64
+  },
+  "31a467c4-5149-47e3-90a5-3eab5c1d796b": {
+    "id": "31a467c4-5149-47e3-90a5-3eab5c1d796b",
+    "type": "tree",
+    "x": 1230,
+    "y": 990,
+    "maxHealth": 60,
+    "currentHealth": 60,
+    "oRadius": 83,
+    "iRadius": 93,
+    "sides": 11,
+    "maxBoundary": 52,
+    "boundary": 52,
+    "visibleRadius": 93
+  },
+  "0087cebf-49f1-4833-8699-ef7d7cf6401f": {
+    "id": "0087cebf-49f1-4833-8699-ef7d7cf6401f",
+    "type": "tree",
+    "x": 1005,
+    "y": 1425,
+    "maxHealth": 60,
+    "currentHealth": 60,
+    "oRadius": 79,
+    "iRadius": 89,
+    "sides": 12,
+    "maxBoundary": 50.666666666667,
+    "boundary": 50.666666666667,
+    "visibleRadius": 89
+  },
+  "10de6a82-93bc-49ea-a997-5ea22ab61e33": {
+    "id": "10de6a82-93bc-49ea-a997-5ea22ab61e33",
+    "type": "rock",
+    "x": 1380,
+    "y": 1440,
+    "maxHealth": 90,
+    "currentHealth": 90,
+    "radius": 149,
+    "maxBoundary": 171,
+    "boundary": 171,
+    "visibleRadius": 149
+  },
+  "50288cf2-3c79-48f2-aa38-7da0f313446d": {
+    "id": "50288cf2-3c79-48f2-aa38-7da0f313446d",
+    "type": "tree",
+    "x": 1980,
+    "y": 945,
+    "maxHealth": 60,
+    "currentHealth": 60,
+    "oRadius": 85,
+    "iRadius": 95,
+    "sides": 13,
+    "maxBoundary": 52.666666666667,
+    "boundary": 52.666666666667,
+    "visibleRadius": 95
+  },
+  "17bf734b-2784-4d56-94fd-eca37a1eaace": {
+    "id": "17bf734b-2784-4d56-94fd-eca37a1eaace",
+    "type": "tree",
+    "x": 1965,
+    "y": 675,
+    "maxHealth": 60,
+    "currentHealth": 60,
+    "oRadius": 72,
+    "iRadius": 82,
+    "sides": 11,
+    "maxBoundary": 48.333333333333,
+    "boundary": 48.333333333333,
+    "visibleRadius": 82
+  },
+  "0c5f79f2-6942-4a87-a09b-c5b8f4140110": {
+    "id": "0c5f79f2-6942-4a87-a09b-c5b8f4140110",
+    "type": "rock",
+    "x": 2250,
+    "y": 240,
+    "maxHealth": 90,
+    "currentHealth": 90,
+    "radius": 147,
+    "maxBoundary": 169,
+    "boundary": 169,
+    "visibleRadius": 147
+  },
+  "0093b18c-8e3a-4d94-9403-bd223ae93daf": {
+    "id": "0093b18c-8e3a-4d94-9403-bd223ae93daf",
+    "type": "bush",
+    "x": 2925,
+    "y": 705,
+    "maxHealth": 30,
+    "currentHealth": 30,
+    "oRadius": 40,
+    "iRadius": 42,
+    "sides": 17,
+    "maxBoundary": 64,
+    "boundary": 64,
+    "visibleRadius": 64
+  },
+  "4319efa1-fa88-448c-83d0-8849b9139692": {
+    "id": "4319efa1-fa88-448c-83d0-8849b9139692",
+    "type": "bush",
+    "x": 3225,
+    "y": 510,
+    "maxHealth": 30,
+    "currentHealth": 30,
+    "oRadius": 40,
+    "iRadius": 42,
+    "sides": 15,
+    "maxBoundary": 64,
+    "boundary": 64,
+    "visibleRadius": 64
+  },
+  "7de36010-4dc7-462c-abb1-8c9fcb1770d9": {
+    "id": "7de36010-4dc7-462c-abb1-8c9fcb1770d9",
+    "type": "tree",
+    "x": 3615,
+    "y": 360,
+    "maxHealth": 60,
+    "currentHealth": 60,
+    "oRadius": 88,
+    "iRadius": 98,
+    "sides": 11,
+    "maxBoundary": 53.666666666667,
+    "boundary": 53.666666666667,
+    "visibleRadius": 98
+  },
+  "ee8ab11e-0d3d-4054-8350-5b83560ada75": {
+    "id": "ee8ab11e-0d3d-4054-8350-5b83560ada75",
+    "type": "tree",
+    "x": 3990,
+    "y": 390,
+    "maxHealth": 60,
+    "currentHealth": 60,
+    "oRadius": 71,
+    "iRadius": 81,
+    "sides": 13,
+    "maxBoundary": 48,
+    "boundary": 48,
+    "visibleRadius": 81
+  },
+  "c373b07e-c9cd-4554-8248-ea58284d5671": {
+    "id": "c373b07e-c9cd-4554-8248-ea58284d5671",
+    "type": "tree",
+    "x": 4290,
+    "y": 360,
+    "maxHealth": 60,
+    "currentHealth": 60,
+    "oRadius": 79,
+    "iRadius": 89,
+    "sides": 13,
+    "maxBoundary": 50.666666666667,
+    "boundary": 50.666666666667,
+    "visibleRadius": 89
+  },
+  "37d9ecba-7805-4ec0-a79b-4738a777a622": {
+    "id": "37d9ecba-7805-4ec0-a79b-4738a777a622",
+    "type": "tree",
+    "x": 2730,
+    "y": 1275,
+    "maxHealth": 60,
+    "currentHealth": 60,
+    "oRadius": 79,
+    "iRadius": 89,
+    "sides": 12,
+    "maxBoundary": 50.666666666667,
+    "boundary": 50.666666666667,
+    "visibleRadius": 89
+  },
+  "48c07f34-618e-4f61-95e8-c1065841bc2b": {
+    "id": "48c07f34-618e-4f61-95e8-c1065841bc2b",
+    "type": "rock",
+    "x": 2490,
+    "y": 1020,
+    "maxHealth": 90,
+    "currentHealth": 90,
+    "radius": 149,
+    "maxBoundary": 171,
+    "boundary": 171,
+    "visibleRadius": 149
+  },
+  "f82b0372-9a11-4ba7-82ab-b51b35a93282": {
+    "id": "f82b0372-9a11-4ba7-82ab-b51b35a93282",
+    "type": "rock",
+    "x": 2100,
+    "y": 1470,
+    "maxHealth": 90,
+    "currentHealth": 90,
+    "radius": 146,
+    "maxBoundary": 168,
+    "boundary": 168,
+    "visibleRadius": 146
+  },
+  "99b7c51d-9e67-4491-930d-b4f32443fdd7": {
+    "id": "99b7c51d-9e67-4491-930d-b4f32443fdd7",
+    "type": "tree",
+    "x": 1350,
+    "y": 1965,
+    "maxHealth": 60,
+    "currentHealth": 60,
+    "oRadius": 95,
+    "iRadius": 105,
+    "sides": 11,
+    "maxBoundary": 56,
+    "boundary": 56,
+    "visibleRadius": 105
+  },
+  "9028b390-eb3a-411f-8593-00f07cd6f261": {
+    "id": "9028b390-eb3a-411f-8593-00f07cd6f261",
+    "type": "bush",
+    "x": 1095,
+    "y": 1785,
+    "maxHealth": 30,
+    "currentHealth": 30,
+    "oRadius": 40,
+    "iRadius": 42,
+    "sides": 16,
+    "maxBoundary": 64,
+    "boundary": 64,
+    "visibleRadius": 64
+  },
+  "32465c81-2501-4bbb-b6e1-d42fc1c98d66": {
+    "id": "32465c81-2501-4bbb-b6e1-d42fc1c98d66",
+    "type": "bush",
+    "x": 1710,
+    "y": 1380,
+    "maxHealth": 30,
+    "currentHealth": 30,
+    "oRadius": 40,
+    "iRadius": 42,
+    "sides": 18,
+    "maxBoundary": 64,
+    "boundary": 64,
+    "visibleRadius": 64
+  },
+  "e8fe83f6-8fba-47af-834e-e1644bbbf627": {
+    "id": "e8fe83f6-8fba-47af-834e-e1644bbbf627",
+    "type": "tree",
+    "x": 2145,
+    "y": 1200,
+    "maxHealth": 60,
+    "currentHealth": 60,
+    "oRadius": 89,
+    "iRadius": 99,
+    "sides": 10,
+    "maxBoundary": 54,
+    "boundary": 54,
+    "visibleRadius": 99
+  },
+  "28a51fde-8293-4fde-a681-33f204c15cbd": {
+    "id": "28a51fde-8293-4fde-a681-33f204c15cbd",
+    "type": "tree",
+    "x": 1845,
+    "y": 315,
+    "maxHealth": 60,
+    "currentHealth": 60,
+    "oRadius": 89,
+    "iRadius": 99,
+    "sides": 10,
+    "maxBoundary": 54,
+    "boundary": 54,
+    "visibleRadius": 99
+  },
+  "d0ca7686-5296-448c-8aa0-8f6d172e85e7": {
+    "id": "d0ca7686-5296-448c-8aa0-8f6d172e85e7",
+    "type": "tree",
+    "x": 375,
+    "y": 2445,
+    "maxHealth": 60,
+    "currentHealth": 60,
+    "oRadius": 83,
+    "iRadius": 93,
+    "sides": 11,
+    "maxBoundary": 52,
+    "boundary": 52,
+    "visibleRadius": 93
+  },
+  "010548e8-039a-439d-ba6b-4adf6ff1ed50": {
+    "id": "010548e8-039a-439d-ba6b-4adf6ff1ed50",
+    "type": "rock",
+    "x": 630,
+    "y": 2715,
+    "maxHealth": 90,
+    "currentHealth": 90,
+    "radius": 141,
+    "maxBoundary": 163,
+    "boundary": 163,
+    "visibleRadius": 141
+  },
+  "517816e2-5d57-4d09-a3a6-3fa118287056": {
+    "id": "517816e2-5d57-4d09-a3a6-3fa118287056",
+    "type": "rock",
+    "x": 1215,
+    "y": 2520,
+    "maxHealth": 90,
+    "currentHealth": 90,
+    "radius": 146,
+    "maxBoundary": 168,
+    "boundary": 168,
+    "visibleRadius": 146
+  },
+  "3d45624e-cbe7-4632-95d7-5d9be7ef516b": {
+    "id": "3d45624e-cbe7-4632-95d7-5d9be7ef516b",
+    "type": "tree",
+    "x": 1200,
+    "y": 3105,
+    "maxHealth": 60,
+    "currentHealth": 60,
+    "oRadius": 80,
+    "iRadius": 90,
+    "sides": 11,
+    "maxBoundary": 51,
+    "boundary": 51,
+    "visibleRadius": 90
+  },
+  "fa97c56a-5eb5-41f4-9d64-773d8780585a": {
+    "id": "fa97c56a-5eb5-41f4-9d64-773d8780585a",
+    "type": "tree",
+    "x": 885,
+    "y": 3720,
+    "maxHealth": 60,
+    "currentHealth": 60,
+    "oRadius": 82,
+    "iRadius": 92,
+    "sides": 11,
+    "maxBoundary": 51.666666666667,
+    "boundary": 51.666666666667,
+    "visibleRadius": 92
+  },
+  "7f8fc882-5af9-47f0-8710-810c969f6390": {
+    "id": "7f8fc882-5af9-47f0-8710-810c969f6390",
+    "type": "rock",
+    "x": 90,
+    "y": 4365,
+    "maxHealth": 90,
+    "currentHealth": 90,
+    "radius": 134,
+    "maxBoundary": 156,
+    "boundary": 156,
+    "visibleRadius": 156
+  },
+  "6999b87e-5fc5-49f0-a68b-121a685e8833": {
+    "id": "6999b87e-5fc5-49f0-a68b-121a685e8833",
+    "type": "bush",
+    "x": 270,
+    "y": 3420,
+    "maxHealth": 30,
+    "currentHealth": 30,
+    "oRadius": 40,
+    "iRadius": 42,
+    "sides": 15,
+    "maxBoundary": 64,
+    "boundary": 64,
+    "visibleRadius": 64
+  },
+  "ccd43c34-5848-4f9e-8f7e-4219806d9cdd": {
+    "id": "ccd43c34-5848-4f9e-8f7e-4219806d9cdd",
+    "type": "rock",
+    "x": 1080,
+    "y": 3405,
+    "maxHealth": 90,
+    "currentHealth": 90,
+    "radius": 128,
+    "maxBoundary": 150,
+    "boundary": 150,
+    "visibleRadius": 128
+  },
+  "3e115ab8-8f99-47aa-ac1f-8a5f87e205d7": {
+    "id": "3e115ab8-8f99-47aa-ac1f-8a5f87e205d7",
+    "type": "tree",
+    "x": 1710,
+    "y": 3105,
+    "maxHealth": 60,
+    "currentHealth": 60,
+    "oRadius": 84,
+    "iRadius": 94,
+    "sides": 12,
+    "maxBoundary": 52.333333333333,
+    "boundary": 52.333333333333,
+    "visibleRadius": 94
+  },
+  "616cfafd-2afd-4710-a783-b364a428a9aa": {
+    "id": "616cfafd-2afd-4710-a783-b364a428a9aa",
+    "type": "tree",
+    "x": 1605,
+    "y": 2700,
+    "maxHealth": 60,
+    "currentHealth": 60,
+    "oRadius": 95,
+    "iRadius": 105,
+    "sides": 12,
+    "maxBoundary": 56,
+    "boundary": 56,
+    "visibleRadius": 105
+  },
+  "93fd3628-20a6-4291-bac6-93be18d63a43": {
+    "id": "93fd3628-20a6-4291-bac6-93be18d63a43",
+    "type": "tree",
+    "x": 2160,
+    "y": 2430,
+    "maxHealth": 60,
+    "currentHealth": 60,
+    "oRadius": 81,
+    "iRadius": 91,
+    "sides": 12,
+    "maxBoundary": 51.333333333333,
+    "boundary": 51.333333333333,
+    "visibleRadius": 91
+  },
+  "be331101-46b4-4f32-bc26-fc25eaadb7fb": {
+    "id": "be331101-46b4-4f32-bc26-fc25eaadb7fb",
+    "type": "bush",
+    "x": 2475,
+    "y": 2865,
+    "maxHealth": 30,
+    "currentHealth": 30,
+    "oRadius": 40,
+    "iRadius": 42,
+    "sides": 19,
+    "maxBoundary": 64,
+    "boundary": 64,
+    "visibleRadius": 64
+  },
+  "d9161555-f62e-4144-a7bd-0b3bfc0d2b6d": {
+    "id": "d9161555-f62e-4144-a7bd-0b3bfc0d2b6d",
+    "type": "bush",
+    "x": 2610,
+    "y": 2325,
+    "maxHealth": 30,
+    "currentHealth": 30,
+    "oRadius": 40,
+    "iRadius": 42,
+    "sides": 15,
+    "maxBoundary": 64,
+    "boundary": 64,
+    "visibleRadius": 64
+  },
+  "14705ae4-2b37-4d44-a6a4-700f747d0b7b": {
+    "id": "14705ae4-2b37-4d44-a6a4-700f747d0b7b",
+    "type": "bush",
+    "x": 2895,
+    "y": 1995,
+    "maxHealth": 30,
+    "currentHealth": 30,
+    "oRadius": 40,
+    "iRadius": 42,
+    "sides": 18,
+    "maxBoundary": 64,
+    "boundary": 64,
+    "visibleRadius": 64
+  },
+  "61602d9c-8312-480b-b963-66606e9d1f06": {
+    "id": "61602d9c-8312-480b-b963-66606e9d1f06",
+    "type": "bush",
+    "x": 3345,
+    "y": 2025,
+    "maxHealth": 30,
+    "currentHealth": 30,
+    "oRadius": 40,
+    "iRadius": 42,
+    "sides": 19,
+    "maxBoundary": 64,
+    "boundary": 64,
+    "visibleRadius": 64
+  },
+  "31367fde-a709-4cd8-8b2b-ec47f76bc60d": {
+    "id": "31367fde-a709-4cd8-8b2b-ec47f76bc60d",
+    "type": "tree",
+    "x": 3795,
+    "y": 1890,
+    "maxHealth": 60,
+    "currentHealth": 60,
+    "oRadius": 85,
+    "iRadius": 95,
+    "sides": 12,
+    "maxBoundary": 52.666666666667,
+    "boundary": 52.666666666667,
+    "visibleRadius": 95
+  },
+  "8d751d86-b23f-4514-b9c4-37c0c6dda1dd": {
+    "id": "8d751d86-b23f-4514-b9c4-37c0c6dda1dd",
+    "type": "tree",
+    "x": 3960,
+    "y": 2295,
+    "maxHealth": 60,
+    "currentHealth": 60,
+    "oRadius": 72,
+    "iRadius": 82,
+    "sides": 10,
+    "maxBoundary": 48.333333333333,
+    "boundary": 48.333333333333,
+    "visibleRadius": 82
+  },
+  "525a48cd-312b-4220-85d1-ae47a7bf2966": {
+    "id": "525a48cd-312b-4220-85d1-ae47a7bf2966",
+    "type": "bush",
+    "x": 3810,
+    "y": 2790,
+    "maxHealth": 30,
+    "currentHealth": 30,
+    "oRadius": 40,
+    "iRadius": 42,
+    "sides": 18,
+    "maxBoundary": 64,
+    "boundary": 64,
+    "visibleRadius": 64
+  },
+  "62486f5b-6163-4eb6-94d3-32431d16aa5c": {
+    "id": "62486f5b-6163-4eb6-94d3-32431d16aa5c",
+    "type": "tree",
+    "x": 3015,
+    "y": 3030,
+    "maxHealth": 60,
+    "currentHealth": 60,
+    "oRadius": 89,
+    "iRadius": 99,
+    "sides": 11,
+    "maxBoundary": 54,
+    "boundary": 54,
+    "visibleRadius": 99
+  },
+  "0db3d35a-6bbd-4137-8b66-e8170b882314": {
+    "id": "0db3d35a-6bbd-4137-8b66-e8170b882314",
+    "type": "rock",
+    "x": 2925,
+    "y": 2670,
+    "maxHealth": 90,
+    "currentHealth": 90,
+    "radius": 130,
+    "maxBoundary": 152,
+    "boundary": 152,
+    "visibleRadius": 130
+  },
+  "d01f0afb-164d-452b-b822-29da644f978e": {
+    "id": "d01f0afb-164d-452b-b822-29da644f978e",
+    "type": "rock",
+    "x": 3030,
+    "y": 2310,
+    "maxHealth": 90,
+    "currentHealth": 90,
+    "radius": 132,
+    "maxBoundary": 154,
+    "boundary": 154,
+    "visibleRadius": 132
+  },
+  "065082b4-7d6f-466c-87f2-2e5880f0b725": {
+    "id": "065082b4-7d6f-466c-87f2-2e5880f0b725",
+    "type": "tree",
+    "x": 2490,
+    "y": 2010,
+    "maxHealth": 60,
+    "currentHealth": 60,
+    "oRadius": 76,
+    "iRadius": 86,
+    "sides": 12,
+    "maxBoundary": 49.666666666667,
+    "boundary": 49.666666666667,
+    "visibleRadius": 86
+  },
+  "f87f78c7-514e-40ff-9b35-0623dc93b8e4": {
+    "id": "f87f78c7-514e-40ff-9b35-0623dc93b8e4",
+    "type": "tree",
+    "x": 2040,
+    "y": 2985,
+    "maxHealth": 60,
+    "currentHealth": 60,
+    "oRadius": 88,
+    "iRadius": 98,
+    "sides": 10,
+    "maxBoundary": 53.666666666667,
+    "boundary": 53.666666666667,
+    "visibleRadius": 98
+  },
+  "0b585b13-f066-4555-978b-09fe5d1b7cd1": {
+    "id": "0b585b13-f066-4555-978b-09fe5d1b7cd1",
+    "type": "rock",
+    "x": 2235,
+    "y": 3375,
+    "maxHealth": 90,
+    "currentHealth": 90,
+    "radius": 131,
+    "maxBoundary": 153,
+    "boundary": 153,
+    "visibleRadius": 131
+  },
+  "e27a90be-0872-47f3-b5e1-3478ade47f2a": {
+    "id": "e27a90be-0872-47f3-b5e1-3478ade47f2a",
+    "type": "tree",
+    "x": 1785,
+    "y": 3780,
+    "maxHealth": 60,
+    "currentHealth": 60,
+    "oRadius": 77,
+    "iRadius": 87,
+    "sides": 13,
+    "maxBoundary": 50,
+    "boundary": 50,
+    "visibleRadius": 87
+  },
+  "4356dd6c-ae5d-4e72-9550-77d2ad22e46c": {
+    "id": "4356dd6c-ae5d-4e72-9550-77d2ad22e46c",
+    "type": "tree",
+    "x": 1890,
+    "y": 4395,
+    "maxHealth": 60,
+    "currentHealth": 60,
+    "oRadius": 79,
+    "iRadius": 89,
+    "sides": 13,
+    "maxBoundary": 50.666666666667,
+    "boundary": 50.666666666667,
+    "visibleRadius": 89
+  },
+  "3f92d5b1-4b7c-429b-992c-b1740a3f7f7c": {
+    "id": "3f92d5b1-4b7c-429b-992c-b1740a3f7f7c",
+    "type": "tree",
+    "x": 2475,
+    "y": 4125,
+    "maxHealth": 60,
+    "currentHealth": 60,
+    "oRadius": 70,
+    "iRadius": 80,
+    "sides": 12,
+    "maxBoundary": 47.666666666667,
+    "boundary": 47.666666666667,
+    "visibleRadius": 80
+  },
+  "90a2c316-9562-46dc-9953-2afd4e863439": {
+    "id": "90a2c316-9562-46dc-9953-2afd4e863439",
+    "type": "tree",
+    "x": 2730,
+    "y": 3690,
+    "maxHealth": 60,
+    "currentHealth": 60,
+    "oRadius": 91,
+    "iRadius": 101,
+    "sides": 13,
+    "maxBoundary": 54.666666666667,
+    "boundary": 54.666666666667,
+    "visibleRadius": 101
+  },
+  "34ef0a00-a8e4-4be1-9fc5-1d5eeb0beae8": {
+    "id": "34ef0a00-a8e4-4be1-9fc5-1d5eeb0beae8",
+    "type": "tree",
+    "x": 4005,
+    "y": 3645,
+    "maxHealth": 60,
+    "currentHealth": 60,
+    "oRadius": 78,
+    "iRadius": 88,
+    "sides": 13,
+    "maxBoundary": 50.333333333333,
+    "boundary": 50.333333333333,
+    "visibleRadius": 88
+  },
+  "7c2df584-b511-4929-a839-4f91d7607fba": {
+    "id": "7c2df584-b511-4929-a839-4f91d7607fba",
+    "type": "tree",
+    "x": 4020,
+    "y": 3120,
+    "maxHealth": 60,
+    "currentHealth": 60,
+    "oRadius": 90,
+    "iRadius": 100,
+    "sides": 10,
+    "maxBoundary": 54.333333333333,
+    "boundary": 54.333333333333,
+    "visibleRadius": 100
+  },
+  "d1991523-4e15-4994-9ea9-33cdb4ccb67b": {
+    "id": "d1991523-4e15-4994-9ea9-33cdb4ccb67b",
+    "type": "tree",
+    "x": 4245,
+    "y": 2670,
+    "maxHealth": 60,
+    "currentHealth": 60,
+    "oRadius": 85,
+    "iRadius": 95,
+    "sides": 12,
+    "maxBoundary": 52.666666666667,
+    "boundary": 52.666666666667,
+    "visibleRadius": 95
+  },
+  "46cc47c3-69b2-4ea6-b16a-7c6a45c4dfba": {
+    "id": "46cc47c3-69b2-4ea6-b16a-7c6a45c4dfba",
+    "type": "bush",
+    "x": 4245,
+    "y": 2070,
+    "maxHealth": 30,
+    "currentHealth": 30,
+    "oRadius": 40,
+    "iRadius": 42,
+    "sides": 18,
+    "maxBoundary": 64,
+    "boundary": 64,
+    "visibleRadius": 64
+  },
+  "dec55dcc-f6a9-4e28-94d8-063c6a8542c5": {
+    "id": "dec55dcc-f6a9-4e28-94d8-063c6a8542c5",
+    "type": "tree",
+    "x": 4245,
+    "y": 1620,
+    "maxHealth": 60,
+    "currentHealth": 60,
+    "oRadius": 77,
+    "iRadius": 87,
+    "sides": 13,
+    "maxBoundary": 50,
+    "boundary": 50,
+    "visibleRadius": 87
+  },
+  "48c6cae0-b14e-48b8-98e1-29293f0afeb7": {
+    "id": "48c6cae0-b14e-48b8-98e1-29293f0afeb7",
+    "type": "tree",
+    "x": 4305,
+    "y": 975,
+    "maxHealth": 60,
+    "currentHealth": 60,
+    "oRadius": 81,
+    "iRadius": 91,
+    "sides": 11,
+    "maxBoundary": 51.333333333333,
+    "boundary": 51.333333333333,
+    "visibleRadius": 91
+  },
+  "e39ce548-0173-415d-87bb-a2a60609dd7d": {
+    "id": "e39ce548-0173-415d-87bb-a2a60609dd7d",
+    "type": "tree",
+    "x": 825,
+    "y": 2055,
+    "maxHealth": 60,
+    "currentHealth": 60,
+    "oRadius": 76,
+    "iRadius": 86,
+    "sides": 13,
+    "maxBoundary": 49.666666666667,
+    "boundary": 49.666666666667,
+    "visibleRadius": 86
+  },
+  "ad7fd535-1607-4447-a080-d70103cfbc2f": {
+    "id": "ad7fd535-1607-4447-a080-d70103cfbc2f",
+    "type": "bush",
+    "x": 300,
+    "y": 1980,
+    "maxHealth": 30,
+    "currentHealth": 30,
+    "oRadius": 40,
+    "iRadius": 42,
+    "sides": 16,
+    "maxBoundary": 64,
+    "boundary": 64,
+    "visibleRadius": 64
+  },
+  "5fc7473e-d6d9-499a-860b-3b6e2dec033b": {
+    "id": "5fc7473e-d6d9-499a-860b-3b6e2dec033b",
+    "type": "bush",
+    "x": 105,
+    "y": 1410,
+    "maxHealth": 30,
+    "currentHealth": 30,
+    "oRadius": 40,
+    "iRadius": 42,
+    "sides": 15,
+    "maxBoundary": 64,
+    "boundary": 64,
+    "visibleRadius": 64
+  },
+  "ee686919-f02a-4085-8f7f-535b34ea0141": {
+    "id": "ee686919-f02a-4085-8f7f-535b34ea0141",
+    "type": "tree",
+    "x": 90,
+    "y": 1155,
+    "maxHealth": 60,
+    "currentHealth": 60,
+    "oRadius": 81,
+    "iRadius": 91,
+    "sides": 10,
+    "maxBoundary": 51.333333333333,
+    "boundary": 51.333333333333,
+    "visibleRadius": 91
+  },
+  "91d3e2fa-5984-447c-ad9d-d3cd2bda8d3c": {
+    "id": "91d3e2fa-5984-447c-ad9d-d3cd2bda8d3c",
+    "type": "tree",
+    "x": 135,
+    "y": 825,
+    "maxHealth": 60,
+    "currentHealth": 60,
+    "oRadius": 85,
+    "iRadius": 95,
+    "sides": 10,
+    "maxBoundary": 52.666666666667,
+    "boundary": 52.666666666667,
+    "visibleRadius": 95
+  },
+  "9346e3e6-64fe-46b7-8e29-191653207705": {
+    "id": "9346e3e6-64fe-46b7-8e29-191653207705",
+    "type": "tree",
+    "x": 1395,
+    "y": 675,
+    "maxHealth": 60,
+    "currentHealth": 60,
+    "oRadius": 77,
+    "iRadius": 87,
+    "sides": 13,
+    "maxBoundary": 50,
+    "boundary": 50,
+    "visibleRadius": 87
+  },
+  "24822a02-729f-42ad-b8e4-7e842cd971c7": {
+    "id": "24822a02-729f-42ad-b8e4-7e842cd971c7",
+    "type": "bush",
+    "x": 2880,
+    "y": 65,
+    "maxHealth": 30,
+    "currentHealth": 30,
+    "oRadius": 40,
+    "iRadius": 42,
+    "sides": 19,
+    "maxBoundary": 64,
+    "boundary": 64,
+    "visibleRadius": 64
+  },
+  "e8f7a5fc-1839-43c3-b392-2902c097c17a": {
+    "id": "e8f7a5fc-1839-43c3-b392-2902c097c17a",
+    "type": "tree",
+    "x": 3555,
+    "y": 50,
+    "maxHealth": 60,
+    "currentHealth": 60,
+    "oRadius": 84,
+    "iRadius": 94,
+    "sides": 11,
+    "maxBoundary": 52.333333333333,
+    "boundary": 52.333333333333,
+    "visibleRadius": 94
+  },
+  "3f4bb538-e340-4729-aa5c-7ae6237475a2": {
+    "id": "3f4bb538-e340-4729-aa5c-7ae6237475a2",
+    "type": "tree",
+    "x": 3225,
+    "y": 4265,
+    "maxHealth": 60,
+    "currentHealth": 60,
+    "oRadius": 87,
+    "iRadius": 97,
+    "sides": 13,
+    "maxBoundary": 53.333333333333,
+    "boundary": 53.333333333333,
+    "visibleRadius": 97
+  },
+  "vlad-chilom-wont-notice": {
+    "id": "vlad-chilom-wont-notice",
+    "type": "tree",
+    "x": 2580,
+    "y": 4475,
+    "maxHealth": 60,
+    "currentHealth": 60,
+    "oRadius": 72,
+    "iRadius": 82,
+    "sides": 11,
+    "maxBoundary": 48.333333333333,
+    "boundary": 48.333333333333,
+    "visibleRadius": 82
+  },
+  "53c19577-5279-45ad-9695-a4640e9e6b0c": {
+    "id": "53c19577-5279-45ad-9695-a4640e9e6b0c",
+    "type": "rock",
+    "x": 1710,
+    "y": 4130,
+    "maxHealth": 90,
+    "currentHealth": 90,
+    "radius": 123,
+    "maxBoundary": 145,
+    "boundary": 145,
+    "visibleRadius": 123
+  },
+  "53c19577-5279-45ad-9695-47981234": {
+    "id": "53c19577-5279-45ad-9695-47981234",
+    "type": "rock",
+    "x": 4710,
+    "y": 4730,
+    "maxHealth": 90,
+    "currentHealth": 90,
+    "radius": 123,
+    "maxBoundary": 145,
+    "boundary": 145,
+    "visibleRadius": 123
+  },
+  "53c19577-5279-45ad-9695-198345": {
+    "id": "53c19577-5279-45ad-9695-198345",
+    "type": "rock",
+    "x": 4910,
+    "y": 3030,
+    "maxHealth": 90,
+    "currentHealth": 90,
+    "radius": 123,
+    "maxBoundary": 145,
+    "boundary": 145,
+    "visibleRadius": 123
+  },
+  "53c19577-5279-45ad-5325-146753": {
+    "id": "53c19577-5279-45ad-5325-146753",
+    "type": "rock",
+    "x": 4810,
+    "y": 1700,
+    "maxHealth": 90,
+    "currentHealth": 90,
+    "radius": 123,
+    "maxBoundary": 145,
+    "boundary": 145,
+    "visibleRadius": 123
+  },
+  "53c19577-5279-ou34923141234": {
+    "id": "53c19577-5279-ou34923141234",
+    "type": "bush",
+    "x": 2500,
+    "y": 4800,
+    "maxHealth": 30,
+    "currentHealth": 30,
+    "oRadius": 40,
+    "iRadius": 42,
+    "sides": 16,
+    "maxBoundary": 64,
+    "boundary": 64,
+    "visibleRadius": 64
+  },
+  "53c19577-5279-ou349231411111": {
+    "id": "53c19577-5279-ou349231411111",
+    "type": "bush",
+    "x": 2900,
+    "y": 4820,
+    "maxHealth": 30,
+    "currentHealth": 30,
+    "oRadius": 40,
+    "iRadius": 42,
+    "sides": 16,
+    "maxBoundary": 64,
+    "boundary": 64,
+    "visibleRadius": 64
+  },
+  "53c19577-5279-98237450923": {
+    "id": "53c19577-5279-98237450923",
+    "type": "bush",
+    "x": 3800,
+    "y": 4920,
+    "maxHealth": 30,
+    "currentHealth": 30,
+    "oRadius": 40,
+    "iRadius": 42,
+    "sides": 16,
+    "maxBoundary": 64,
+    "boundary": 64,
+    "visibleRadius": 64
+  },
+  "53c19577-5279-98237452333": {
+    "id": "53c19577-5279-98237452333",
+    "type": "bush",
+    "x": 4800,
+    "y": 4000,
+    "maxHealth": 30,
+    "currentHealth": 30,
+    "oRadius": 40,
+    "iRadius": 42,
+    "sides": 16,
+    "maxBoundary": 64,
+    "boundary": 64,
+    "visibleRadius": 64
+  },
+  "53c19577-5279-a897234532": {
+    "id": "53c19577-5279-a897234532",
+    "type": "bush",
+    "x": 4800,
+    "y": 3500,
+    "maxHealth": 30,
+    "currentHealth": 30,
+    "oRadius": 40,
+    "iRadius": 42,
+    "sides": 16,
+    "maxBoundary": 64,
+    "boundary": 64,
+    "visibleRadius": 64
+  },
+  "53c19577-5279-98742362": {
+    "id": "53c19577-5279-98742362",
+    "type": "bush",
+    "x": 4800,
+    "y": 1500,
+    "maxHealth": 30,
+    "currentHealth": 30,
+    "oRadius": 40,
+    "iRadius": 42,
+    "sides": 16,
+    "maxBoundary": 64,
+    "boundary": 64,
+    "visibleRadius": 64
+  },
+  "53c19577-5279-3opiw98eg1": {
+    "id": "53c19577-5279-3opiw98eg1",
+    "type": "bush",
+    "x": 4900,
+    "y": 800,
+    "maxHealth": 30,
+    "currentHealth": 30,
+    "oRadius": 40,
+    "iRadius": 42,
+    "sides": 16,
+    "maxBoundary": 64,
+    "boundary": 64,
+    "visibleRadius": 64
+  },
+  "53c19577-5279-5329ujsdfs": {
+    "id": "53c19577-5279-5329ujsdfs",
+    "type": "bush",
+    "x": 4900,
+    "y": 100,
+    "maxHealth": 30,
+    "currentHealth": 30,
+    "oRadius": 40,
+    "iRadius": 42,
+    "sides": 16,
+    "maxBoundary": 64,
+    "boundary": 64,
+    "visibleRadius": 64
+  },
+  "ef738d4e-5de4-448e-8bd4-ad16645dda16": {
+    "id": "ef738d4e-5de4-448e-8bd4-ad16645dda16",
+    "type": "armory",
+    "x": 3120,
+    "y": 2979,
+    "height": 1005,
+    "width": 750,
+    "thickness": 27,
+    "orientation": "vertical",
+    "visibleRadius": 1024,
+    "walls": [
+      {
         "x": 3120,
         "y": 2979,
-        "height": 1005,
-        "width": 750,
-        "thickness": 27,
-        "orientation": "vertical",
-        "visibleRadius": 1024,
-
-        "walls": [
-        {
-            "x": 3120,
-            "y": 2979,
-            "width": 27,
-            "height": 1005
-        },
-        {
-            "x": 3120,
-            "y": 2979,
-            "width": 250,
-            "height": 27
-        },
-        {
-            "x": 3620,
-            "y": 2979,
-            "width": 250,
-            "height": 27
-        },
-        {
-            "x": 3843,
-            "y": 2979,
-            "width": 27,
-            "height": 1005
-        },
-        {
-            "x": 3120,
-            "y": 3957,
-            "width": 250,
-            "height": 27
-        },
-        {
-            "x": 3620,
-            "y": 3957,
-            "width": 250,
-            "height": 27
-        }]
-    },
-    "6b7911ce-7ae5-43a6-82d2-85c30b893463": {
-            "id": "6b7911ce-7ae5-43a6-82d2-85c30b893463",
-            "type": "armory",
-            "x": 2980,
-            "y": 699,
-            "height": 750,
-            "width": 1005,
-            "thickness": 27,
-            "orientation": "horizontal",
-            "thickness": 27,    
-            "visibleRadius": 1024,
-
-            "walls": [
-                {
-                    "x": 2980,
-                    "y": 699,
-                    "width": 1005,
-                    "height": 27
-                },
-                {
-                    "x": 2980,
-                    "y": 699,
-                    "width": 27,
-                    "height": 250
-                },
-                {
-                    "x": 2980,
-                    "y": 1199,
-                    "width": 27,
-                    "height": 250
-                },
-                {
-                    "x": 2980,
-                    "y": 1422,
-                    "width": 1005,
-                    "height": 27
-                },
-                {
-                    "x": 3958,
-                    "y": 699,
-                    "width": 27,
-                    "height": 250
-                },
-                {
-                    "x": 3958,
-                    "y": 1199,
-                    "width": 27,
-                    "height": 250
-                }
-            ]
-        },
-        "bbf8baca-4440-4a47-b63d-f1d07f143c2c": {
-            "id": "bbf8baca-4440-4a47-b63d-f1d07f143c2c",
-            "type": "armory",
-            "x": 624,
-            "y": 3854,
-            "height": 1005,
-            "width": 750,
-            "walls": [
-                {
-                    "x": 624,
-                    "y": 3854,
-                    "width": 27,
-                    "height": 1005
-                },
-                {
-                    "x": 624,
-                    "y": 3854,
-                    "width": 250,
-                    "height": 27
-                },
-                {
-                    "x": 1124,
-                    "y": 3854,
-                    "width": 250,
-                    "height": 27
-                },
-                {
-                    "x": 1347,
-                    "y": 3854,
-                    "width": 27,
-                    "height": 1005
-                },
-                {
-                    "x": 624,
-                    "y": 4832,
-                    "width": 250,
-                    "height": 27
-                },
-                {
-                    "x": 1124,
-                    "y": 4832,
-                    "width": 250,
-                    "height": 27
-                }
-            ],
-            "orientation": "vertical",        
-            "visibleRadius": 1024,
-            "thickness": 27
-        }
+        "width": 27,
+        "height": 1005
+      },
+      {
+        "x": 3120,
+        "y": 2979,
+        "width": 250,
+        "height": 27
+      },
+      {
+        "x": 3620,
+        "y": 2979,
+        "width": 250,
+        "height": 27
+      },
+      {
+        "x": 3843,
+        "y": 2979,
+        "width": 27,
+        "height": 1005
+      },
+      {
+        "x": 3120,
+        "y": 3957,
+        "width": 250,
+        "height": 27
+      },
+      {
+        "x": 3620,
+        "y": 3957,
+        "width": 250,
+        "height": 27
+      }
+    ]
+  },
+  "6b7911ce-7ae5-43a6-82d2-85c30b893463": {
+    "id": "6b7911ce-7ae5-43a6-82d2-85c30b893463",
+    "type": "armory",
+    "x": 2980,
+    "y": 699,
+    "height": 750,
+    "width": 1005,
+    "thickness": 27,
+    "orientation": "horizontal",
+    "visibleRadius": 1024,
+    "walls": [
+      {
+        "x": 2980,
+        "y": 699,
+        "width": 1005,
+        "height": 27
+      },
+      {
+        "x": 2980,
+        "y": 699,
+        "width": 27,
+        "height": 250
+      },
+      {
+        "x": 2980,
+        "y": 1199,
+        "width": 27,
+        "height": 250
+      },
+      {
+        "x": 2980,
+        "y": 1422,
+        "width": 1005,
+        "height": 27
+      },
+      {
+        "x": 3958,
+        "y": 699,
+        "width": 27,
+        "height": 250
+      },
+      {
+        "x": 3958,
+        "y": 1199,
+        "width": 27,
+        "height": 250
+      }
+    ]
+  },
+  "bbf8baca-4440-4a47-b63d-f1d07f143c2c": {
+    "id": "bbf8baca-4440-4a47-b63d-f1d07f143c2c",
+    "type": "armory",
+    "x": 624,
+    "y": 3854,
+    "height": 1005,
+    "width": 750,
+    "walls": [
+      {
+        "x": 624,
+        "y": 3854,
+        "width": 27,
+        "height": 1005
+      },
+      {
+        "x": 624,
+        "y": 3854,
+        "width": 250,
+        "height": 27
+      },
+      {
+        "x": 1124,
+        "y": 3854,
+        "width": 250,
+        "height": 27
+      },
+      {
+        "x": 1347,
+        "y": 3854,
+        "width": 27,
+        "height": 1005
+      },
+      {
+        "x": 624,
+        "y": 4832,
+        "width": 250,
+        "height": 27
+      },
+      {
+        "x": 1124,
+        "y": 4832,
+        "width": 250,
+        "height": 27
+      }
+    ],
+    "orientation": "vertical",
+    "visibleRadius": 1024,
+    "thickness": 27
+  }
 }

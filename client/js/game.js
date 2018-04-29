@@ -3,7 +3,7 @@ var Position = require('./Position')
 var Map = require('./Map')
 var Player = require('./Player')
 
-setInterval(drawHUDMiniMap, 1000)
+//setInterval(drawHUDMiniMap, 1000)
 
 $(() => {
   //showLoadingDiv()
@@ -436,7 +436,6 @@ function drawHUDMiniMap() {
   context.strokeRect(minimapX, minimapY, minimapWidth, minimapHeight)
   context.fillRect(minimapX, minimapY, minimapWidth, minimapHeight)
   context.drawImage(minimapImage, minimapX, minimapY, minimapWidth, minimapHeight)
-
   context.closePath()
 
   var playerXRelative = (players[socket.id].x / gameSpecs.gameWidth) * minimapWidth + minimapX
@@ -459,17 +458,19 @@ function drawHUDMiniMap() {
   //   for (id in gameSpecs.minimap) {
   //     var objectXRelative = (gameSpecs.minimap[id].x / gameSpecs.gameWidth) * minimapWidth + minimapX
   //     var objectYRelative = (gameSpecs.minimap[id].y / gameSpecs.gameHeight) * minimapHeight + minimapY
-  //     console.log(objectXRelative, objectYRelative)
   //     context.beginPath()
   //     if (gameSpecs.minimap[id].type == 'tree') {
   //       context.fillStyle = 'green'
-  //       context.arc(objectXRelative, objectYRelative, 2, 0, 2 * Math.PI)
+  //       context.arc(objectXRelative, objectYRelative, 8, 0, 2 * Math.PI)
   //     } else if (gameSpecs.minimap[id].type == 'bush') {
   //       context.fillStyle = 'lightgreen'
-  //       context.arc(objectXRelative, objectYRelative, 1, 0, 2 * Math.PI)
+  //       context.arc(objectXRelative, objectYRelative, 4, 0, 2 * Math.PI)
   //     } else if (gameSpecs.minimap[id].type == 'rock') {
   //       context.fillStyle = 'lightgray'
-  //       context.arc(objectXRelative, objectYRelative, 3, 0, 2 * Math.PI)
+  //       context.arc(objectXRelative, objectYRelative, 12, 0, 2 * Math.PI)
+  //     } else if (gameSpecs.minimap[id].type == 'armory') {
+  //       var miniarmory = gameSpecs.minimap[id]
+  //       drawMiniArmory(miniarmory)
   //     }
   //     context.closePath()
   //     context.stroke()
@@ -905,6 +906,18 @@ function drawBush(bush) {
 
 }
 
+function drawMiniArmory(armory) {
+  newX = armory.x
+  newY = armory.y
+  context.fillStyle = "rgb(206, 119, 51)"
+  context.beginPath()
+  context.fillRect(newX, newY, armory.width, armory.height)
+  context.closePath()
+  drawMiniArmoryWallLines(armory)
+  for(var i = 0; i < armory.walls.length; i++) {
+    drawMiniArmoryWall(armory.walls[i])
+  }
+}
 
 function drawArmory(armory) {
   xdiff = players[socket.id].x - armory.x
@@ -921,6 +934,17 @@ function drawArmory(armory) {
     drawArmoryWall(armory.walls[i])
   }
 }
+
+function drawMiniArmoryWall(wall) {
+  newX = wall.x
+  newY = wall.y
+  context.fillStyle = "rgb(128, 128, 128)"
+  context.beginPath();
+  context.rect(newX, newY, wall.width, wall.height)
+  context.closePath()
+  context.fill()
+}
+
 function drawArmoryWall(wall) {
   xdiff = players[socket.id].x - wall.x
   ydiff = players[socket.id].y - wall.y
@@ -931,8 +955,8 @@ function drawArmoryWall(wall) {
   context.rect(newX, newY, wall.width, wall.height)
   context.closePath()
   context.fill()
-
 }
+
 function drawTiles(armory) {
   xdiff = players[socket.id].x - armory.x
   ydiff = players[socket.id].y - armory.y
@@ -962,8 +986,65 @@ function drawTiles(armory) {
     }
     moduloLine = (moduloLine + 1) % 4
   }
-
 }
+
+function drawMiniArmoryWallLines(armory) { 
+  newX = armory.x
+  newY = armory.y
+  context.strokeStyle = "#000"
+
+  if (armory.orientation == "horizontal") {
+    context.beginPath()
+    context.lineWidth = 10
+    context.moveTo(newX, newY)
+    context.lineTo(newX + armory.width, newY)
+    context.lineTo(newX + armory.width, newY + (armory.height / 3))
+    context.lineTo(newX + armory.width - armory.thickness, newY + (armory.height / 3))
+    context.lineTo(newX + armory.width - armory.thickness, newY + armory.thickness)
+    context.lineTo(newX + armory.thickness, newY + armory.thickness)
+    context.lineTo(newX + armory.thickness, newY + (armory.height / 3))
+    context.lineTo(newX, newY + (armory.height / 3))
+    context.lineTo(newX, newY - 3)
+    context.stroke()
+    context.beginPath()
+    context.moveTo(newX + armory.width, newY + armory.height)
+    context.lineTo(newX, newY + armory.height)
+    context.lineTo(newX, newY + (2 * armory.height / 3))
+    context.lineTo(newX + armory.thickness, newY + (2 * armory.height / 3))
+    context.lineTo(newX + armory.thickness, newY + armory.height - armory.thickness)
+    context.lineTo(newX + armory.width - armory.thickness, newY + armory.height - armory.thickness)
+    context.lineTo(newX + armory.width - armory.thickness, newY + (2 * armory.height / 3))
+    context.lineTo(newX + armory.width, newY + (2 * armory.height / 3))
+    context.closePath()
+    context.stroke()
+  }
+  else if (armory.orientation == "vertical"){
+    context.beginPath()
+    context.lineWidth = 7
+    context.moveTo(newX, newY)
+    context.lineTo(newX + (armory.width / 3), newY)
+    context.lineTo(newX + (armory.width / 3), newY + armory.thickness)
+    context.lineTo(newX + (armory.thickness), newY + armory.thickness)
+    context.lineTo(newX + armory.thickness, newY + armory.height - armory.thickness)
+    context.lineTo(newX + (armory.width / 3), newY + armory.height - armory.thickness)
+    context.lineTo(newX + (armory.width / 3), newY + armory.height)
+    context.lineTo(newX, newY + armory.height)
+    context.closePath()
+    context.stroke()
+    context.beginPath()
+    context.moveTo(newX + armory.width, newY)
+    context.lineTo(newX + (2 * armory.width / 3), newY)
+    context.lineTo(newX + (2 * armory.width / 3), newY + armory.thickness)
+    context.lineTo(newX + armory.width - armory.thickness, newY + armory.thickness)
+    context.lineTo(newX + armory.width - armory.thickness, newY + armory.height - armory.thickness)
+    context.lineTo(newX + (2 * armory.width / 3), newY + armory.height - armory.thickness)
+    context.lineTo(newX + (2 * armory.width / 3), newY + armory.height)
+    context.lineTo(newX + armory.width, newY + armory.height)
+    context.closePath()
+    context.stroke()
+  }
+}
+
 function drawArmoryWallLines(armory) { 
   xdiff = players[socket.id].x - armory.x
   ydiff = players[socket.id].y - armory.y
