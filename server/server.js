@@ -161,6 +161,7 @@ var processPistol = function(id) {
 
 function addWall(coords, height, width) {
   var uuid = uuidv4()
+  var visibleRadius = Math.max(height, width)
   map[uuid] = {
     id: uuid,
     type: 'wall',
@@ -168,7 +169,7 @@ function addWall(coords, height, width) {
     y: coords.y,
     maxhealth: 120,
     currenthealth: 120,
-    visibleRadius: 512,
+    visibleRadius: visibleRadius,
     height: height,
     width: width,
     disabled: false,
@@ -366,12 +367,10 @@ var pushObjectOut = function(id, x, y, movingIntoObject) {
     }
 
     // if (x > obj.x && x < obj.x + obj.width && y > obj.y && y < obj.y + obj.height) {
-    //   console.log("OTHER ELSE")
     //   var xQuadrant = Math.floor((players[id].x) / config.gridSpacing)
     //   var yQuadrant = Math.floor((players[id].y) / config.gridSpacing)
     //   var xmod = players[id].x % config.gridSpacing
     //   var ymod = players[id].y % config.gridSpacing
-    //   console.log(xmod, ymod)
     //   if (ymod < 25) {
     //     var newy = players[id].y + 30
     //   }
@@ -394,31 +393,25 @@ var pushObjectOut = function(id, x, y, movingIntoObject) {
     // else {
 
     // }
-    // console.log("wall")
-    // console.log(movingLeft, movingRight, movingUp, movingDown)
     // if (movingLeft) {
     //   var newx = Math.round(movingIntoObject.object.x + movingIntoObject.object.width + config.get('playerRadius'))
     //   var newy = y
-    //   console.log(newx, "left", movingIntoObject.object.x)
     // }
     // else if (movingRight) {
     //   var newx = Math.round(movingIntoObject.object.x - config.get('playerRadius'))
     //   var newy = y
 
-    //   console.log(newx, "right", movingIntoObject.object.x)
     // }
 
     // if (movingUp) {
     //   var newy = Math.round(movingIntoObject.object.y + movingIntoObject.object.height + config.get('playerRadius'))
     //   var newx = players[id].x
-    //   console.log(newy, "up", movingIntoObject.object.y)
 
     // }
     // else if (movingDown) {
     //   var newy = Math.round(movingIntoObject.object.y - config.get('playerRadius'))
     //   var newx = players[id].x
 
-    //   console.log(newy, "down", movingIntoObject.object.y)
 
     // }
   }
