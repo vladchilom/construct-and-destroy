@@ -174,7 +174,6 @@ function addWall(coords, height, width) {
     width: width,
     disabled: false,
     currentHealth: 50
-
   }
 }
 
@@ -658,15 +657,14 @@ var damageArmoryWall = function(projectileId, armoryObjectId, index) {
     map[armoryObjectId].walls[index].width = 0
     map[armoryObjectId].walls[index].height = 0
     map[armoryObjectId].walls[index].disabled = true
-
-
   }
-
 }
+
 var damageWall = function(projectileId, objectId) {
   var newHealth = map[objectId].currentHealth - projectiles[projectileId].damage + 0.0
+  map[objectId].lastDamaged = new Date()
   if (newHealth > 0) {
-   map[objectId].currentHealth = newHealth
+    map[objectId].currentHealth = newHealth
   }
   else {
     map[objectId].currentHealth = newHealth
@@ -675,8 +673,6 @@ var damageWall = function(projectileId, objectId) {
     map[objectId].width = 0
     map[objectId].height = 0
     map[objectId].disabled = true
-
-
   }
 
 }

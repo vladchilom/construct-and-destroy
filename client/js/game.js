@@ -34,7 +34,7 @@ var graveImage
 
 var pistolSound
 var punchSound
-var damageObject
+var damageObjectSound
 var buildSound
 var moveSound
 var swapToPistolSound
@@ -161,7 +161,7 @@ function setupClientServerCommunication() {
 function loadSounds() {
   pistolSound = new Audio('../sound/pistolSound.wav')
   punchSound = new Audio('../sound/punchSound.flac')
-  damageObject = new Audio('../sound/damageObject.wav')
+  damageObjectSound = new Audio('../sound/damageObject.wav')
   buildSound = new Audio('../sound/buildSound.wav')
   moveSound = new Audio('../sound/moveSound.wav')
   swapToPistolSound = new Audio('../sound/swapToPistolSound.wav')
@@ -769,14 +769,14 @@ function drawWall(wall) {
     context.fillStyle = "rgb(128, 128, 128)"
     context.strokeStyle = 'black'
     context.lineWidth = 7
-
     context.beginPath();
     context.rect(newX, newY, wall.width, wall.height)
-
     context.closePath()
     context.stroke()
-
     context.fill()
+    if (new Date(new Date(wall.lastDamaged).getTime() + 100) >= new Date()) {
+      damageObjectSound.play()
+    }
   }
 }
 
@@ -1053,7 +1053,7 @@ function drawRock(rock) {
   context.fill()
   context.lineWidth = 1
   if (new Date(new Date(rock.lastDamaged).getTime() + 100) >= new Date()) {
-    damageObject.play()
+    damageObjectSound.play()
   }
 }
 
@@ -1066,7 +1066,7 @@ function drawBush(bush) {
   drawStar(newX, newY, (bush.oRadius * 3)/4, (bush.iRadius * 3) / 4, bush.sides, 'green', 'green')
   drawStar(newX, newY, bush.oRadius/2, bush.iRadius/2, bush.sides, 'lightgreen', 'lightgreen')
   if (new Date(new Date(bush.lastDamaged).getTime() + 100) >= new Date()) {
-    damageObject.play()
+    damageObjectSound.play()
   }
 }
 
@@ -1310,7 +1310,7 @@ function drawTree(tree) {
     drawStar(newX, newY, tree.oRadius, tree.iRadius, tree.sides, 'green', 'rgba(0,80,0,.9)')
     drawStar(newX, newY, (tree.oRadius/3), (tree.iRadius/3), tree.sides, 'rgb(73, 51, 0)', 'rgb(84, 51, 0)')
     if (new Date(new Date(tree.lastDamaged).getTime() + 100) >= new Date()) {
-      damageObject.play()
+      damageObjectSound.play()
     }
   }
 }
