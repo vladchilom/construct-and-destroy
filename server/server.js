@@ -168,7 +168,7 @@ function addWall(coords, height, width) {
     x: coords.x,
     y: coords.y,
     maxhealth: 120,
-    currenthealth: 120,
+    currentHealth: 120,
     visibleRadius: visibleRadius,
     height: height,
     width: width,

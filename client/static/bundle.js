@@ -102,6 +102,7 @@ var moveSound
 var swapToPistolSound
 var swapToBuildSound
 var swapToPunchSound
+var emptyMaterialsSound
 
 var players
 var trees = []
@@ -229,6 +230,7 @@ function loadSounds() {
   swapToPistolSound = new Audio('../sound/swapToPistolSound.wav')
   swapToBuildSound = new Audio('../sound/swapToBuildSound.flac')
   swapToPunchSound = new Audio('../sound/swapToPunchSound.wav')
+  emptyMaterialsSound = new Audio('../sound/emptyMaterials.wav')
 }
 
 function loadImages() {
@@ -699,6 +701,13 @@ function attack() {
     return
   }
   if (!players[socket.id].inAttackState) {
+    if (players[socket.id].equippedWeapon == 'build') {
+      if (players[socket.id].materials >= 10) {
+        buildSound.play()
+      } else {
+        emptyMaterialsSound.play()
+      }
+    }
     socket.emit('attack', socket.id)
   }
 }
@@ -828,7 +837,8 @@ function drawWall(wall) {
     ydiff = players[socket.id].y - wall.y
     newX = halfScreenWidth - xdiff
     newY = halfScreenHeight - ydiff
-    context.fillStyle = "rgb(128, 128, 128)"
+    opacity = wall.currentHealth / 50.0
+    context.fillStyle = 'rgb(128, 128, 128, ' + opacity + ')'
     context.strokeStyle = 'black'
     context.lineWidth = 7
     context.beginPath();
@@ -1049,7 +1059,6 @@ function animateAttack(player, x, y) {
     animateMeleeAttack(player, x, y)
   }
   if (player.lastAttackWeapon == 'build') {
-    buildSound.play()
     animateBuild(player, x, y)
   }
   if (player.lastAttackWeapon == 'pistol') {
@@ -1135,7 +1144,7 @@ function drawBush(bush) {
 function drawMiniArmory(armory) {
   newX = armory.x
   newY = armory.y
-  context.fillStyle = "rgb(206, 119, 51)"
+  context.fillStyle = 'rgb(206, 119, 51)'
   context.beginPath()
   context.fillRect(newX, newY, armory.width, armory.height)
   context.closePath()
@@ -1150,7 +1159,7 @@ function drawArmory(armory) {
   ydiff = players[socket.id].y - armory.y
   newX = halfScreenWidth - xdiff
   newY = halfScreenHeight - ydiff
-  context.fillStyle = "rgb(206, 119, 51)"
+  context.fillStyle = 'rgb(206, 119, 51)'
   context.beginPath()
   context.fillRect(newX, newY, armory.width, armory.height)
   context.closePath()
@@ -1166,7 +1175,7 @@ function drawArmory(armory) {
 function drawMiniArmoryWall(wall) {
   newX = wall.x
   newY = wall.y
-  context.fillStyle = "rgb(128, 128, 128)"
+  context.fillStyle = 'rgb(128, 128, 128)'
   context.beginPath();
   context.rect(newX, newY, wall.width, wall.height)
   context.closePath()
@@ -1178,7 +1187,7 @@ function drawArmoryWall(wall) {
   ydiff = players[socket.id].y - wall.y
   newX = halfScreenWidth - xdiff
   newY = halfScreenHeight - ydiff
-  context.fillStyle = "rgb(128, 128, 128)"
+  context.fillStyle = 'rgb(128, 128, 128)'
   context.beginPath();
   context.rect(newX, newY, wall.width, wall.height)
   context.closePath()
@@ -1200,7 +1209,7 @@ function drawTiles(armory) {
 
     for (var j = 0; j < armory.width - 100; j += 100) {
       context.beginPath()
-      context.strokeStyle = "#723E1C"
+      context.strokeStyle = '#723E1C'
       context.lineWidth = 0.5
       context.moveTo(newX + j + ((moduloLine % 4) * 40), newY + i)
       if (i + 75 > armory.height) {
@@ -1219,9 +1228,9 @@ function drawTiles(armory) {
 function drawMiniArmoryWallLines(armory) { 
   newX = armory.x
   newY = armory.y
-  context.strokeStyle = "#000"
+  context.strokeStyle = '#000'
 
-  if (armory.orientation == "horizontal") {
+  if (armory.orientation == 'horizontal') {
     context.beginPath()
     context.lineWidth = 10
     context.moveTo(newX, newY)
@@ -1246,7 +1255,7 @@ function drawMiniArmoryWallLines(armory) {
     context.closePath()
     context.stroke()
   }
-  else if (armory.orientation == "vertical"){
+  else if (armory.orientation == 'vertical'){
     context.beginPath()
     context.lineWidth = 7
     context.moveTo(newX, newY)
@@ -1278,9 +1287,9 @@ function drawArmoryWallLines(armory) {
   ydiff = players[socket.id].y - armory.y
   newX = halfScreenWidth - xdiff
   newY = halfScreenHeight - ydiff
-  context.strokeStyle = "#000"
+  context.strokeStyle = '#000'
 
-  if (armory.orientation == "horizontal") {
+  if (armory.orientation == 'horizontal') {
     context.beginPath()
     context.lineWidth = 10
     context.moveTo(newX, newY)
@@ -1305,7 +1314,7 @@ function drawArmoryWallLines(armory) {
     context.closePath()
     context.stroke()
   }
-  else if (armory.orientation == "vertical"){
+  else if (armory.orientation == 'vertical'){
     context.beginPath()
     context.lineWidth = 7
     context.moveTo(newX, newY)
