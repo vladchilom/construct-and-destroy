@@ -347,17 +347,14 @@ var pushObjectOut = function(id, x, y, movingIntoObject) {
     if (x + config.get('playerRadius') > obj.x && x - config.get('playerRadius') < obj.x && y + config.get('playerRadius') > obj.y && y - config.get('playerRadius') < obj.y + obj.height) {
       var newx = obj.x - config.get('playerRadius')
       var newy = y  
-      console.log("right")
     }
     else if (x - config.get('playerRadius') < obj.x + obj.width && x + config.get('playerRadius') > obj.x + obj.width && y + config.get('playerRadius') > obj.y && y - config.get('playerRadius') < obj.y + obj.height) {
       var newx = obj.x + obj.width + config.get('playerRadius')
       var newy = y
-      console.log("left") 
     }
     if (y - config.get('playerRadius') < obj.y + obj.height && y - config.get('playerRadius') > obj.y + obj.height - 2*config.get('playerRadius') && (x + config.get('playerRadius') > obj.x && x - config.get('playerRadius') < obj.x + obj.width)) {
       var newx = x
       var newy = obj.y + obj.height + config.get('playerRadius')
-      console.log("up")
       
 
     }
@@ -365,7 +362,6 @@ var pushObjectOut = function(id, x, y, movingIntoObject) {
      
       var newx = x
       var newy = obj.y - config.get('playerRadius')
-      console.log("down")
       
     }
 
@@ -520,7 +516,6 @@ var pushObjectOut = function(id, x, y, movingIntoObject) {
   var movingIntoObject = isMovingIntoObject(id, newx, newy, movingIntoObject.object.id)
   if (!movingIntoObject.status) {
     if (isWithinArenaBounds(id, newx, newy)) {
-      //console.log(newx, newy)
       return { x: newx, y: newy }
     }
   }
@@ -570,6 +565,19 @@ var objectIsVisible = function(object, player) {
     if ((object.x - object.visibleRadius) <= (player.x + player.halfScreenWidth)) {
       if ((object.y + object.visibleRadius) >= (player.y - player.halfScreenHeight)) {
         if ((object.y - object.visibleRadius) <= (player.y + player.halfScreenHeight)) {
+          return true
+        }
+      }
+    }
+  }
+  return false
+}
+
+var projectileIsVisible = function(projectile, player) {
+  if ((projectile.x + projectile.radius) >= (player.x - player.halfScreenWidth)) {
+    if ((projectile.x - projectile.radius) <= (player.x + player.halfScreenWidth)) {
+      if ((projectile.y + projectile.radius) >= (player.y - player.halfScreenHeight)) {
+        if ((projectile.y - projectile.radius) <= (player.y + player.halfScreenHeight)) {
           return true
         }
       }
@@ -937,7 +945,15 @@ var sendLeaderboardInfo = function() {
 }
 
 var sendProjectiles = function() {
-  io.emit('projectiles', projectiles)
+  for (var playerId in players) {
+    var visibleProjectiles = {}
+    for (var projectileId in projectiles) {
+      if (projectileIsVisible(projectiles[projectileId], players[playerId])) {
+        visibleProjectiles[projectileId] = projectiles[projectileId]
+      }
+    }
+    sockets[playerId].emit('projectiles', visibleProjectiles)
+  }
 }
 
 var processProjectiles = function() {
@@ -957,7 +973,6 @@ var processProjectiles = function() {
           }
         }
         else if (projectileIsInObject(projectiles[projectileId], map[objectId])) {
-          console.log("True")
           damageObject(projectileId, objectId)
           delete projectiles[projectileId]
           projectileDeleted = true
