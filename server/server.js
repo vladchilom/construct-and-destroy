@@ -170,7 +170,10 @@ function addWall(coords, height, width) {
     currenthealth: 120,
     visibleRadius: 512,
     height: height,
-    width: width
+    width: width,
+    disabled: false,
+    currentHealth: 50
+
   }
 }
 
@@ -226,6 +229,7 @@ var processBuild = function(id) {
           addWall({x: (xQuadrant * config.gridSpacing), y: (yQuadrant + 1) * config.gridSpacing - 12}, 25, config.gridSpacing)
         }
       }
+
 
     }
   }
@@ -339,7 +343,6 @@ var pushObjectOut = function(id, x, y, movingIntoObject) {
     var movingRight = x > players[id].x
     var movingUp = y < players[id].y
     var movingDown = y > players[id].y
-    console.log(x, obj.width, players[id].x)
   if (movingIntoObject.object.type == 'wall') {
     if (x + config.get('playerRadius') > obj.x && x - config.get('playerRadius') < obj.x && y + config.get('playerRadius') > obj.y && y - config.get('playerRadius') < obj.y + obj.height) {
       var newx = obj.x - config.get('playerRadius')
@@ -576,16 +579,23 @@ var objectIsVisible = function(object, player) {
 }
 
 var projectileIsInObject = function(projectile, object) {
-  var boundary = object.boundary
-  if (projectile.type == 'melee') {
-    boundary = boundary - config.get('playerRadius')
-  }
-  var centerDiff = Math.sqrt((projectile.x - object.x) * (projectile.x - object.x) + (projectile.y - object.y) * (projectile.y - object.y))
-  if (centerDiff >= Math.abs(boundary - projectile.radius)) {
-    if (centerDiff <= (boundary + projectile.radius)) {
-      return true;
+  if (object.type == 'wall') {    
+    if ((projectile.x + projectile.radius > object.x) && (projectile.x - projectile.radius < object.x + object.width) && (projectile.y - projectile.radius < object.y + object.height && (projectile.y + projectile.radius > object.y))) {
+      return true;        
     }
   }
+  else {
+    var boundary = object.boundary
+    if (projectile.type == 'melee') {
+      boundary = boundary - config.get('playerRadius')
+    }
+    var centerDiff = Math.sqrt((projectile.x - object.x) * (projectile.x - object.x) + (projectile.y - object.y) * (projectile.y - object.y))
+    if (centerDiff >= Math.abs(boundary - projectile.radius)) {
+      if (centerDiff <= (boundary + projectile.radius)) {
+        return true;
+      }
+    }
+  } 
   return false;
 }
 
@@ -624,6 +634,44 @@ var damageObject = function(projectileId, objectId) {
   if (map[objectId].type == 'bush') {
     damageBush(projectileId, objectId)
   }
+  if (map[objectId].type == 'wall') {
+    damageWall(projectileId, objectId)
+  }
+}
+
+var damageArmoryWall = function(projectileId, armoryObjectId, index) {
+  var newHealth = map[armoryObjectId].walls[index].currentHealth - projectiles[projectileId].damage + 0.0
+  if (newHealth > 0) {
+   map[armoryObjectId].walls[index].currentHealth = newHealth
+  }
+  else {
+    map[armoryObjectId].walls[index].currentHealth = newHealth
+    map[armoryObjectId].walls[index].x = 0
+    map[armoryObjectId].walls[index].y = 0
+    map[armoryObjectId].walls[index].width = 0
+    map[armoryObjectId].walls[index].height = 0
+    map[armoryObjectId].walls[index].disabled = true
+
+
+  }
+
+}
+var damageWall = function(projectileId, objectId) {
+  var newHealth = map[objectId].currentHealth - projectiles[projectileId].damage + 0.0
+  if (newHealth > 0) {
+   map[objectId].currentHealth = newHealth
+  }
+  else {
+    map[objectId].currentHealth = newHealth
+    map[objectId].x = 0
+    map[objectId].y = 0
+    map[objectId].width = 0
+    map[objectId].height = 0
+    map[objectId].disabled = true
+
+
+  }
+
 }
 
 var damageTree = function(projectileId, objectId) {
@@ -889,9 +937,21 @@ var sendProjectiles = function() {
 var processProjectiles = function() {
   for (var projectileId in projectiles) {
     var projectileDeleted = false
+    loop1:
     for (var objectId in map) {
       if (map[objectId].type != 'grave') {
-        if (projectileIsInObject(projectiles[projectileId], map[objectId])) {
+        if (map[objectId].type == 'armory') {
+          for (var i = 0; i < map[objectId].walls.length; i++) {
+            if (projectileIsInObject(projectiles[projectileId], map[objectId].walls[i])) {
+              damageArmoryWall(projectileId, objectId, i)
+              delete projectiles[projectileId]
+              projectileDeleted = true
+              break loop1;
+            }
+          }
+        }
+        else if (projectileIsInObject(projectiles[projectileId], map[objectId])) {
+          console.log("True")
           damageObject(projectileId, objectId)
           delete projectiles[projectileId]
           projectileDeleted = true
@@ -914,6 +974,12 @@ var processProjectiles = function() {
     if (!projectileDeleted && projectileExpired(projectiles[projectileId])) {
       delete projectiles[projectileId]
       break
+    }
+    if (!projectileDeleted) {
+      if (projectiles[projectileId].x < 0 || projectiles[projectileId].x > config.get('gameWidth') || projectiles[projectileId].y < 0 || projectiles[projectileId].y > config.get('gameHeight'))  {
+        delete projectiles[projectileId]
+        break
+      }
     }
     if (!projectileDeleted) {
       moveProjectile(projectileId)

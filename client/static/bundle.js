@@ -823,21 +823,23 @@ function isInAttackState(player) {
 }
 
 function drawWall(wall) {
-  xdiff = players[socket.id].x - wall.x
-  ydiff = players[socket.id].y - wall.y
-  newX = halfScreenWidth - xdiff
-  newY = halfScreenHeight - ydiff
-  context.fillStyle = "rgb(128, 128, 128)"
-  context.strokeStyle = 'black'
-  context.lineWidth = 7
+  if (wall.disabled == false) {
+    xdiff = players[socket.id].x - wall.x
+    ydiff = players[socket.id].y - wall.y
+    newX = halfScreenWidth - xdiff
+    newY = halfScreenHeight - ydiff
+    context.fillStyle = "rgb(128, 128, 128)"
+    context.strokeStyle = 'black'
+    context.lineWidth = 7
 
-  context.beginPath();
-  context.rect(newX, newY, wall.width, wall.height)
+    context.beginPath();
+    context.rect(newX, newY, wall.width, wall.height)
 
-  context.closePath()
-  context.stroke()
+    context.closePath()
+    context.stroke()
 
-  context.fill()
+    context.fill()
+  }
 }
 
 function animateBuild(player, x, y) {
@@ -1155,7 +1157,9 @@ function drawArmory(armory) {
   drawTiles(armory)
   drawArmoryWallLines(armory)
   for(var i = 0; i < armory.walls.length; i++) {
-    drawArmoryWall(armory.walls[i])
+    if (armory.walls[i].disabled == false) {
+      drawArmoryWall(armory.walls[i])
+    }
   }
 }
 
