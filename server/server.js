@@ -614,6 +614,12 @@ var projectileExpired = function(projectile) {
   if (projectile.speed == 0) {
     return true
   }
+  if ((projectile.x - projectile.radius) < 0 || (projectile.x + projectile.radius) > config.get('gameWidth')) {
+    return true
+  }
+  if ((projectile.y - projectile.radius) < 0 || (projectile.y + projectile.radius) > config.get('gameHeight')) {
+    return true
+  }
   return false
 }
 
@@ -974,12 +980,6 @@ var processProjectiles = function() {
     if (!projectileDeleted && projectileExpired(projectiles[projectileId])) {
       delete projectiles[projectileId]
       break
-    }
-    if (!projectileDeleted) {
-      if (projectiles[projectileId].x < 0 || projectiles[projectileId].x > config.get('gameWidth') || projectiles[projectileId].y < 0 || projectiles[projectileId].y > config.get('gameHeight'))  {
-        delete projectiles[projectileId]
-        break
-      }
     }
     if (!projectileDeleted) {
       moveProjectile(projectileId)
