@@ -202,36 +202,62 @@ var processBuild = function(id) {
     return
   }
   var xAxisWhichWall = (interceptChecker - getIntercept(players[id].x, players[id].y, Math.tan(-angle))) / Math.tan(-angle)
-  if (players[id].materials >= 10) {
-    players[id].materials = players[id].materials - 10
-    if ((angle > (3*Math.PI)/2 && angle < 2*Math.PI) || (angle > 0 && angle < Math.PI/2)) {
-      if (xAxisWhichWall > (xQuadrant + 1) * config.gridSpacing) {
-        addWall({x: (xQuadrant + 1) * config.gridSpacing - 12, y: (yQuadrant) * config.gridSpacing}, config.gridSpacing, 25)
-      }
-      else {
-        if (half) {
-          addWall({x: (xQuadrant * config.gridSpacing), y: (yQuadrant) * config.gridSpacing - 12}, 25, config.gridSpacing)
+    if (players[id].materials >= 10) {
+      if (((angle > (3*Math.PI)/2 && angle < 2*Math.PI) || (angle > 0 && angle < Math.PI/2)) && (xAxisWhichWall > (xQuadrant + 1) * config.gridSpacing)) {
+        console.log("RightSide", xAxisWhichWall, (xQuadrant + 1) * config.gridSpacing, angle/Math.PI + "pi", getIntercept(players[id].x, players[id].y, Math.tan(angle)))
+        for (var objectId in map) {
+          var object = map[objectId]
+          if (object.type == 'wall') {
+            if (object.x == ((xQuadrant + 1) * config.gridSpacing) - 12 && object.y == (yQuadrant) * config.gridSpacing && object.width == 25 && object.height == config.gridSpacing) {
+              return
+            }
+          }
         }
-        else {
-          addWall({x: (xQuadrant * config.gridSpacing), y: (yQuadrant + 1) * config.gridSpacing - 12}, 25, config.gridSpacing)
-        }
+        players[id].materials = players[id].materials - 10
+
+        addWall({x: ((xQuadrant + 1) * config.gridSpacing) - 12, y: (yQuadrant) * config.gridSpacing}, config.gridSpacing, 25)
       }
-    }
-    else {
-      if (xAxisWhichWall < (xQuadrant) * config.gridSpacing) {
+      else if ((angle > (Math.PI/2) && angle < (3*Math.PI/2)) && (xAxisWhichWall < (xQuadrant) * config.gridSpacing)) {
+        for (var objectId in map) {
+          var object = map[objectId]
+          if (object.type == 'wall') {
+            if (object.x == (xQuadrant * config.gridSpacing) - 12 && object.y == (yQuadrant) * config.gridSpacing && object.width == 25 && object.height == config.gridSpacing) {
+              return
+            }
+          }
+        }
+        players[id].materials = players[id].materials - 10
+
         addWall({x: (xQuadrant * config.gridSpacing) - 12, y: (yQuadrant) * config.gridSpacing}, config.gridSpacing, 25)
+        console.log("Left")
+      }
+      else if (half) {
+        for (var objectId in map) {
+          var object = map[objectId]
+          if (object.type == 'wall') {
+            if (object.x == (xQuadrant * config.gridSpacing) && object.y == ((yQuadrant) * config.gridSpacing) - 12 && object.width == config.gridSpacing && object.height == 25) {
+              return
+            }
+          }
+        }
+        players[id].materials = players[id].materials - 10
+
+        addWall({x: (xQuadrant * config.gridSpacing), y: (yQuadrant) * config.gridSpacing - 12}, 25, config.gridSpacing)
+        console.log("Up")
       }
       else {
-        if (half) {
-          addWall({x: (xQuadrant * config.gridSpacing), y: (yQuadrant) * config.gridSpacing - 12}, 25, config.gridSpacing)
+        for (var objectId in map) {
+          var object = map[objectId]
+          if (object.type == 'wall') {
+            if (object.x == (xQuadrant * config.gridSpacing) && object.y == (yQuadrant + 1) * config.gridSpacing - 12 && object.width == config.gridSpacing && object.height == 25) {
+              return
+            }
+          }
         }
-        else {
-          addWall({x: (xQuadrant * config.gridSpacing), y: (yQuadrant + 1) * config.gridSpacing - 12}, 25, config.gridSpacing)
-        }
+        players[id].materials = players[id].materials - 10
+        addWall({x: (xQuadrant * config.gridSpacing), y: (yQuadrant + 1) * config.gridSpacing - 12}, 25, config.gridSpacing)
+        console.log("Down")
       }
-
-
-    }
   }
 }
 
